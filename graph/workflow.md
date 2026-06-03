@@ -18,6 +18,14 @@ Confirmed defaults for responses, questions, and collaboration flow.
 
 - When strengthening an artifact, do not force facts into an arbitrary classification or safety frame. First follow the concept boundaries and terms the user uses.
 
+## Autonomous Progress
+
+- Do not wait for permission after forming a reasonable working hypothesis.
+- If the AI can judge the options directly, do not hand the choice back to the user.
+- Ask only when the core must be reset, external information is required, or the choice is irreversible.
+- When blocked, finish the parts the AI can do and narrow the remaining question.
+- If a direction loses the agreed important thing, call it a failure path and switch to a better path.
+
 ## Execution Path
 
 - When a specified execution path fails, do not rationalize another route with phrases like "bypass" or "proceed instead."

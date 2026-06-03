@@ -34,7 +34,7 @@ At the end of non-trivial work, check:
 4. Is it clear enough to add as a confirmed rule in the responsible document?
 5. Does it conflict with existing confirmed documents, or make any existing content stale?
 
-If the wiki was edited, use the checks in `tools.md` for empty documents, duplication, and stale wording.
+If the wiki was edited, check for empty documents, duplication, stale wording, and broken links where relevant. `commands.md` may list repeated commands, but this document owns the requirement to check.
 
 Record major structural changes or changes spanning multiple documents in `changelog.md`. Do not repeat detailed rule text there.
 
@@ -62,7 +62,7 @@ Create a new document only when one of the following is true:
 
 Filenames follow these rules:
 
-- `index.md`, `policy.md`, and `tools.md` are fixed operating anchors.
+- `index.md` and `policy.md` are fixed operating anchors.
 - Other documents default to short English noun forms, while user-specified names or tool names remain as-is.
 - Separate words with hyphens.
 - Do not put particles or explanatory sentences in filenames.

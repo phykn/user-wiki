@@ -6,6 +6,9 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 - Updated `index.md` and `tools.md` so reading and check locations use the new `graph/` structure.
 - Added root `README.md` as the repository-facing entrypoint.
 - Refined English wording after the graph translation pass.
+- Split autonomous AI guidance so `intuition.md` owns judgment criteria and `workflow.md` owns progress habits.
+- Replaced `tools.md` with `commands.md` so repeated commands stay separate from wiki policy.
+- Rewrote `intuition.md` in natural English while preserving its judgment role.
 
 ## 2026-06-02
 

@@ -25,7 +25,7 @@ Current documents:
 - [[code]]: Confirmed principles for code edits, refactoring, and tests.
 - [[docs]]: Confirmed structure and wording standards for documents, wikis, prompts, and work instructions.
 - [[theory]]: Current interpretation used to better align answers with the user.
-- [[tools]]: Tools and check commands for wiki operations.
+- [[commands]]: Repeated commands for checking and maintaining the wiki.
 - [[changelog]]: Wiki change record.
 
 Document creation and update rules follow [[policy]].
