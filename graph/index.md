@@ -9,7 +9,7 @@ This wiki starts from a minimal document set and accumulates only preferences th
 
 For non-trivial work:
 
-1. Read [[intuition]] first to frame the problem center, iteration, and response structure.
+1. Read [[intuition]] first to frame what matters and the judgment criteria for the work.
 2. Read [[policy]] to check update rules and document boundaries.
 3. Read only the pages related to the current task.
 4. Apply confirmed preferences as defaults.
@@ -19,7 +19,7 @@ For non-trivial work:
 
 Current documents:
 
-- [[intuition]]: Higher-level judgment sense for making answers and work clearer.
+- [[intuition]]: Higher-level judgment criteria for preserving what matters and making ambiguous work concrete enough to judge.
 - [[policy]]: Operating contract for wiki updates, boundaries, and priority.
 - [[workflow]]: Confirmed defaults for responses, questions, and collaboration.
 - [[code]]: Confirmed principles for code edits, refactoring, and tests.
