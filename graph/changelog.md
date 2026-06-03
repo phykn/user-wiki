@@ -1,0 +1,19 @@
+Record only major user-wiki structural changes. Detailed rule text belongs in the responsible document.
+
+## 2026-06-03
+
+- Made the root `AGENTS.md` the user-wiki bootstrap entrypoint, and moved the actual wiki document nodes under the `graph/` folder.
+- Updated `index.md` and `tools.md` so reading and check locations use the new `graph/` structure.
+- Added root `README.md` as the repository-facing entrypoint.
+- Refined English wording after the graph translation pass.
+
+## 2026-06-02
+
+- Reorganized the wiki around general defaults.
+- Organized the current core flow into `intuition.md`, `policy.md`, `workflow.md`, `code.md`, `docs.md`, `theory.md`, and `tools.md`.
+- Deleted `candidate-preferences.md` and removed the operating path for separately storing unconfirmed candidates.
+
+## 2026-05-30
+
+- Created the initial user-wiki structure and update loop.
+- Strengthened the connection for finding and checking the user-wiki from Desktop/CLI.

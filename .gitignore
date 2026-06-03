@@ -1,0 +1,9 @@
+# Local Obsidian vault state
+.obsidian/
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.bak
