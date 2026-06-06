@@ -2,26 +2,11 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 
 ## 2026-06-06
 
-- Added reader-fit rules for documents: write for what the reader can see, judge, and do next instead of displaying everything the AI knows.
-- Extended that reader-fit rule into general workflow, coding, and proposals: ask or propose only where it changes the next action.
-- Added a completion-reporting rule that explains the original problem, why the change was made, how it resolves the problem, and what verified it.
-- Clarified that concrete verification evidence is preferred over purely logical assurance in completion reports.
-- Clarified that when verification cannot be run, the report should say so and explain the strongest available static reasoning plus remaining risk.
-- Clarified that in-scope structural problems should be fixed as part of the work, while unrelated cleanup stays out of scope.
-- Broadened structural cleanup guidance so adjacent files, sections, entrypoints, and role boundaries are cleaned when they share the same structural cause.
-- Added guidance to expand beyond a narrow request when the request exposes a better whole structure and a local fix would preserve the wrong shape.
-- Clarified that justified structural expansion should proceed without a separate permission stop, then be explained and verified in the report.
-- Clarified that when evidence contradicts the current plan, the plan should be revised and work should continue on the better path without a separate approval stop.
-- Clarified that counterexamples weakening the current result should be incorporated immediately instead of reported as later follow-ups.
-- Added a boundary for large counterexamples: first separate the completed current task from the new task they create, then briefly name the earlier hypothesis, plan, or recheck point that let them appear.
-- Clarified how the required `user-wiki update:` line works when higher-priority system citations or machine-readable blocks must follow it, and strengthened repeated verification commands.
-- Clarified that `AGENTS.md` -> `graph/index.md` is the canonical route and that missing root `index.md` / `CORE.md` files should not be narrated as a problem.
-- Added a workflow rule that wiki guidance should affect the actual working hypothesis, edit choice, review standard, or answer shape rather than only being reported as read.
-- Strengthened wiki-application guidance so confirmed preferences should change the actual answer or work shape instead of fading into generic AI behavior.
-- Clarified that the wiki's target is autonomous work in the user's way, not tone matching or generic personalization.
-- Reflected the user's preferred evidence-driven explanation pattern across the judgment anchor and document-writing rules without copying domain-specific example content.
-- Added guidance for applying this wiki to another Git repository through target-repo entrypoints rather than copying wiki content wholesale, and made `workflow.md` required for that path.
-- Clarified that project-common preferences surfaced during target-repository work should update the source user-wiki when writable, or be reported as pending when not writable, with an explicit `user-wiki update:` final line.
+- Clarified canonical route and cross-repository application: `AGENTS.md` -> `graph/index.md`, no root `index.md` / `CORE.md`, target-repo entrypoints first, required `workflow.md`, and explicit source-wiki update reporting.
+- Added the autonomous-work target: the wiki should make AI work in the user's way, not merely match tone or report that pages were read.
+- Strengthened response and evidence standards: problem-first completion reports, concrete verification evidence, explicit static reasoning when verification cannot run, and reader-fit explanations.
+- Refined question, proposal, and autonomy rules: ask only when the answer changes the next action, choose AI-judgable alternatives directly, revise contradicted plans, and incorporate in-scope counterexamples immediately.
+- Refined structural cleanup boundaries: fix in-scope structural problems, clean affected neighborhoods and broader whole structures when local fixes preserve the wrong shape, and separate large counterexamples into current work versus new work.
 
 ## 2026-06-03
 

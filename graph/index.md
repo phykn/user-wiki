@@ -8,6 +8,8 @@ This wiki starts from a minimal document set and accumulates only preferences th
 Canonical route: `AGENTS.md` -> `graph/index.md`.
 Do not search for or narrate missing root `index.md` / `CORE.md` files unless a user request explicitly depends on them.
 
+The central aim is autonomous work in the user's way. The wiki should change how an agent chooses scope, asks questions, handles evidence, revises plans, and reports results; it should not only change tone.
+
 ## Usage
 
 For non-trivial work:
@@ -24,7 +26,7 @@ When applying this wiki to another repository, [[workflow]] is a required relate
 
 Current documents:
 
-- [[intuition]]: Higher-level judgment criteria for preserving what matters and making ambiguous work concrete enough to judge.
+- [[intuition]]: Higher-level judgment criteria for autonomous work in the user's way, preserving what matters, and making ambiguous work concrete enough to judge.
 - [[policy]]: Operating contract for wiki updates, boundaries, and priority.
 - [[workflow]]: Confirmed defaults for responses, questions, collaboration, and applying this wiki to another repository.
 - [[code]]: Confirmed principles for code edits, refactoring, and tests.
