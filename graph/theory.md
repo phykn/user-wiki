@@ -14,6 +14,8 @@ The user wants interpretation more than records. Rather than simply saving words
 
 The user seems to prefer accurate boundary correction over excessive friendliness. If something already reflected is still off, they point it out again; if a sentence looks good but does not fit the overall structure, they prefer moving or reducing it.
 
+The user's target is not personalized wording alone. The target is for the AI to act in the user's way without needing the user to point out every judgment: identify the real problem, choose scope, correct structure, handle counterexamples, and verify outcomes using the user's confirmed work style.
+
 ## How to Reflect This in Answers
 
 - Process the user's words directly, while also checking whether the result makes the original problem clearer.
