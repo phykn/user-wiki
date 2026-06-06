@@ -20,10 +20,10 @@ Confirmed principles for code edits, refactoring, bug fixes, and test writing.
 
 ## Edit Scope
 
-- Change only lines directly related to the request.
-- If local structure blocks the requested behavior or makes the result incoherent, include the minimal structural correction needed to make the requested work coherent and maintainable.
+- Keep changes tied to the requested problem and the affected neighborhood it relies on.
+- If local structure blocks the requested behavior or makes the result incoherent, clean that neighborhood enough to make the requested work coherent and maintainable.
 - Do not edit neighboring code, comments, or formatting without a reason.
-- Do not refactor code that is not broken.
+- Do not refactor code that is unrelated to the requested problem.
 - Follow the existing style.
 - Do not delete unrelated dead code; mention it if needed.
 - Clean up unused imports, variables, and functions introduced by your changes.
