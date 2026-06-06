@@ -11,12 +11,15 @@ Confirmed defaults for responses, questions, and collaboration flow.
 
 ## Applying Wiki Guidance
 
-- First size the task. Applying the wiki should reduce decision load, not force the same reading path onto every request.
 - Do not merely say that wiki pages were read. Turn the related wiki guidance into the working hypothesis, edit choice, review standard, or final answer shape for the current task.
 - When a confirmed preference clearly applies, follow it strongly enough to change the answer or work shape. Do not dilute it back into generic AI behavior.
 - The purpose of applying this wiki is not tone matching. It is to let the AI work autonomously in the user's way: choose scope, ask questions, revise plans, handle evidence, and report results according to the confirmed preferences without waiting for the user to point out each move.
 - Do not narrate generic route checks, missing default anchors, or recovery steps unless they change the user's options, reveal stale instructions, or block the requested path.
 - If a wiki preference is relevant but overridden by a higher-priority instruction, state the concrete conflict briefly and follow the higher-priority instruction.
+
+Bad: "I read the wiki, so I will apply the user's style." Then answer with the same generic summary, question list, or change list as before.
+
+Good: "The issue is duplicated route pressure, so I changed the owner document and removed the repeated rule from the neighbor files." Then show the files changed and the verification.
 
 ## Applying the Wiki to a Repository
 
@@ -27,7 +30,7 @@ Confirmed defaults for responses, questions, and collaboration flow.
 - If the target work reveals a new or corrected project-common preference, update the source user-wiki too when it is available and writable.
 - If the source user-wiki cannot be updated, name the pending user-wiki update explicitly.
 - End by naming the target files changed and the user-wiki preferences that drove the changes.
-- Always include the `user-wiki update: <updated files, pending update, or none>` line required by [[policy]].
+- If the source wiki also changed or could not be changed, report that in the same completion summary.
 
 ## Questions and Information Gathering
 
@@ -61,6 +64,10 @@ Confirmed defaults for responses, questions, and collaboration flow.
 - Ask only when the core must be reset, external information is required, or the choice is irreversible.
 - When blocked, finish the parts the AI can do and narrow the remaining question.
 - If a direction loses the agreed important thing, call it a failure path and switch to a better path.
+
+Bad: "I judged the user's way, so I expanded the task into a larger rewrite." This uses autonomy to outrank the current request.
+
+Good: "This neighboring file repeats the same rule and keeps the defect alive, so I edited that neighbor too. I left unrelated cleanup alone." This uses autonomy only where the current defect requires it.
 
 ## Execution Path
 

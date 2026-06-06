@@ -8,8 +8,7 @@ Accumulate only project-common work preferences and user understanding. Do not e
 
 Documents, code, reviews, design, operating rules, and repeated work count as non-trivial work.
 
-One-off results such as checking the time, short translations, or single command output may be excluded.
-For excluded work, applying the wiki means keeping the answer direct, not proving that every wiki page was considered.
+Use [[index]] for the reading path and task-size boundary.
 
 ## Update Criteria
 
@@ -41,9 +40,7 @@ If the wiki was edited, check for empty documents, duplication, stale wording, a
 
 Record major structural changes or changes spanning multiple documents in `changelog.md`. Do not repeat detailed rule text there.
 
-End the final answer with one visible line: `user-wiki update: <updated files, pending update, or none>`.
-If higher-priority system-required directives, citations, or machine-readable blocks must come after it, place the `user-wiki update:` line as the last normal user-facing line before those blocks.
-For target-repository work, this line is still required even when the target repository also changed.
+When the wiki changed, or when a target-repository task leaves a pending wiki update, state that naturally in the completion report. Do not add a fixed ritual line when no wiki update is relevant.
 
 ## Placement
 

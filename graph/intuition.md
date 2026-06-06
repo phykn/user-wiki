@@ -59,11 +59,19 @@ A state where judgment is possible shows:
 
 If something sounds good but does not make the next action clearer, it is not clear enough yet.
 
-## Small Examples
+## Examples
 
-- If the user asks for the current time, the important thing is the direct result. Do not turn it into a wiki-reading exercise.
-- If a document sounds right but still leaves the next action unclear, rewrite it around what to keep, what may change, what disappears, how to verify it, and what to do next.
-- If this wiki is applied to another repository, do not copy the wiki prose. Change only the target repository guidance that future agents will actually read.
+Bad: The user asks for the current time. The answer says which wiki pages were read, explains why the task is trivial, and then gives the time.
+
+Good: The answer gives the time.
+
+Bad: The user says a document is too self-referential. The edit adds another paragraph explaining why self-reference is bad.
+
+Good: The edit removes the repeated self-reference, assigns the remaining rule to one owner document, and leaves one short example showing how to act.
+
+Bad: The user asks to apply this wiki to another repository. The target repository gets copied wiki prose and a new abstract guidance file that future agents may not read.
+
+Good: The target repository's existing `AGENTS.md`, README, prompt, or maintained docs get only the local guidance that changes future behavior.
 
 ## Build Force Through Evidence
 
