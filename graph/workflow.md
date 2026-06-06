@@ -61,26 +61,11 @@ Judgment: When the signals conflict, decide in this order:
 3. If new evidence overturns the current claim, it is the same failure even when more sources are needed. If the new sources are only needed to make a new claim, it is a different task.
 4. If the current output remains usable after naming the limit, and the new work needs a separate deliverable, audience, feature, source set, or design decision, it is a different task.
 
-Domain mapping:
+Conflict checks:
 
-- Code: misleading means the same test, command, or user path still fails; a different task usually needs a new API, dependency, or behavior contract.
-- Documents: misleading means the reader would take the same wrong next action; a lens reset changes the reader, purpose, or artifact being preserved.
-- Research: misleading means the conclusion direction changes; new sources are current-task work only when they test the existing claim.
-- Repository application: misleading means future agents still read or follow the wrong local guidance; a different task needs a new maintained surface or project policy.
-
-Same failure:
-
-- The same user, reader, command, route, or test would still hit the problem after the current edit.
-- A neighboring file or section repeats the rule, stale name, broken link, unsupported claim, or behavior that caused the defect.
-- The current claim depends on evidence that the counterexample weakens or overturns.
-- A user correction changes what must be preserved for the current request.
-
-Different task:
-
-- It needs a new deliverable, audience, feature, source set, or design decision.
-- It is interesting cleanup, but the current output works without it.
-- It would require replacing the user's current request with a broader project.
-- It can be reported as a limitation or next task without making the current result misleading.
+- Code: If the same user path, test, command, API meaning, or maintenance contract still fails, it is the same defect. If fixing it needs a new API, dependency, or behavior contract that the current bugfix can name but not require, split it out.
+- Documents: If the reader would keep the same wrong understanding, next action, or entrypoint, it is the same defect. If the change only improves wording without changing what the reader can decide or do, keep it out.
+- Research: If new evidence changes the conclusion, confidence, or scope of the current claim, handle it now. If it only opens a new claim, source set, or comparison, name it as a separate task.
 
 Action: First restate what the current task must preserve. If the counterexample keeps the same failure alive, fix the smallest affected area and continue. If it changes the protected thing, revise the task lens and continue. If it creates a different task, finish the current part, name the boundary, and ask only for the decision that cannot be inferred.
 
