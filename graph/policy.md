@@ -41,6 +41,7 @@ If the wiki was edited, check for empty documents, duplication, stale wording, a
 Record major structural changes or changes spanning multiple documents in `changelog.md`. Do not repeat detailed rule text there.
 
 End the final answer with one visible line: `user-wiki update: <updated files, pending update, or none>`.
+If higher-priority system-required directives, citations, or machine-readable blocks must come after it, place the `user-wiki update:` line as the last normal user-facing line before those blocks.
 For target-repository work, this line is still required even when the target repository also changed.
 
 ## Placement
