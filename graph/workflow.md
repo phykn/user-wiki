@@ -27,7 +27,10 @@ Confirmed defaults for responses, questions, and collaboration flow.
 
 - Do not stop with a question when the work can proceed.
 - Do not ask questions as if interrogating for every missing detail.
+- Do not ask because a possible question exists. Ask because the answer changes the next action, implementation choice, proposal, or risk judgment.
 - Ask only for information that will be directly used to write the final artifact, defend a claim, or decide priority.
+- When proposing options, do not list every plausible route. Present the few options that matter for the user's stated intent and name the decision that separates them.
+- If the user's intent already chooses the route, proceed and explain only the relevant tradeoff.
 - Do not lower the review standard just to reduce the number of questions. Distinguish whether the current artifact has enough support, whether a strong claim lacks support, or whether future defense would have an evidence gap.
 - While gathering information or strengthening an artifact, do not stop after saying only that something was reflected; continue with only the minimum questions needed for the purpose.
 

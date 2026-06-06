@@ -3,6 +3,7 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 ## 2026-06-06
 
 - Added reader-fit rules for documents: write for what the reader can see, judge, and do next instead of displaying everything the AI knows.
+- Extended that reader-fit rule into general workflow, coding, and proposals: ask or propose only where it changes the next action.
 - Clarified that `AGENTS.md` -> `graph/index.md` is the canonical route and that missing root `index.md` / `CORE.md` files should not be narrated as a problem.
 - Added a workflow rule that wiki guidance should affect the actual working hypothesis, edit choice, review standard, or answer shape rather than only being reported as read.
 - Reflected the user's preferred evidence-driven explanation pattern across the judgment anchor and document-writing rules without copying domain-specific example content.

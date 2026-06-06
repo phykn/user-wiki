@@ -5,7 +5,9 @@ Confirmed principles for code edits, refactoring, bug fixes, and test writing.
 - State assumptions.
 - If there are multiple interpretations, surface them instead of silently choosing one.
 - If there is a simpler approach, say so.
-- If something is unclear, identify the confusion point and ask.
+- Do not list every possible technique or architecture. Tie coding questions and proposals to the user's intent, the current codebase, and the decision that would change the implementation.
+- Ask before coding only when the answer changes behavior, API, data ownership, user-facing outcome, or verification target.
+- If something is unclear, identify the confusion point and ask only the question that resolves it.
 
 ## Simplicity
 
@@ -14,6 +16,7 @@ Confirmed principles for code edits, refactoring, bug fixes, and test writing.
 - Do not add unrequested flexibility or configurability.
 - Do not add defensive code for impossible situations.
 - If the implementation grows large, look again for a smaller solution.
+- Prefer the smallest implementation that preserves the user's important intent over a broader design that only demonstrates knowledge.
 
 ## Edit Scope
 
