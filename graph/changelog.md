@@ -6,6 +6,7 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 - Extended that reader-fit rule into general workflow, coding, and proposals: ask or propose only where it changes the next action.
 - Added a completion-reporting rule that explains the original problem, why the change was made, how it resolves the problem, and what verified it.
 - Clarified that concrete verification evidence is preferred over purely logical assurance in completion reports.
+- Clarified that when verification cannot be run, the report should say so and explain the strongest available static reasoning plus remaining risk.
 - Clarified how the required `user-wiki update:` line works when higher-priority system citations or machine-readable blocks must follow it, and strengthened repeated verification commands.
 - Clarified that `AGENTS.md` -> `graph/index.md` is the canonical route and that missing root `index.md` / `CORE.md` files should not be narrated as a problem.
 - Added a workflow rule that wiki guidance should affect the actual working hypothesis, edit choice, review standard, or answer shape rather than only being reported as read.
