@@ -63,9 +63,10 @@ Judgment: When the signals conflict, decide in this order:
 
 Conflict checks:
 
-- Code: If the same user path, test, command, API meaning, or maintenance contract still fails, it is the same defect. If fixing it needs a new API, dependency, or behavior contract that the current bugfix can name but not require, split it out.
-- Documents: If the reader would keep the same wrong understanding, next action, or entrypoint, it is the same defect. If the change only improves wording without changing what the reader can decide or do, keep it out.
-- Research: If new evidence changes the conclusion, confidence, or scope of the current claim, handle it now. If it only opens a new claim, source set, or comparison, name it as a separate task.
+- Code: If the same user path, test, command, public API meaning, or local invariant still fails, it is the same defect. If fixing it needs a new API, dependency, or behavior contract that the current bugfix can name but not require, split it out.
+- Documents: If the reader would keep the same wrong understanding, unsupported judgment, next action, or entrypoint, it is the same defect. If the change only improves wording without changing what the reader can understand, decide, or do, keep it out.
+- Research: If new evidence changes the conclusion, confidence, scope, or baseline facts behind the current claim, handle it now. If it only opens a new claim, source set, or comparison, name it as a separate task.
+- Repository application: If future agents or maintained automation still read the wrong local guidance, it is the same defect. If the fix needs a new maintained surface or project policy, split it out.
 
 Action: First restate what the current task must preserve. If the counterexample keeps the same failure alive, fix the smallest affected area and continue. If it changes the protected thing, revise the task lens and continue. If it creates a different task, finish the current part, name the boundary, and ask only for the decision that cannot be inferred.
 
