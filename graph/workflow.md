@@ -4,6 +4,7 @@ Confirmed defaults for responses, questions, and collaboration flow.
 
 - The default writing language is Korean. Exceptions are when the user specifies another language, or when code, identifiers, source quotes, or an external submission format require another language.
 - Documents and answers should not ramble or repeat themselves.
+- For completion reports, do not lead with a change list alone. State the original problem, why the edit addresses it, how the result resolves it, and what verified that outcome.
 - If something looks wrong, do not leave it alone just because it was already reflected; propose it again or fix it.
 
 ## Applying Wiki Guidance
