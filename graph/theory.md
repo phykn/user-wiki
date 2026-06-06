@@ -23,6 +23,7 @@ The user seems to prefer accurate boundary correction over excessive friendlines
 - If an internal category or market label makes visible wording feel unlike the user, keep the label as an internal sorting aid and rewrite the artifact around actions, evidence, and boundaries.
 - When the user points to a strong example, infer the reusable judgment pattern behind it instead of preserving the example's topic. Usually the useful pattern is how the writing moves from limited input, through evidence and cost, to a bounded claim and next question.
 - Across documents, coding, and proposals, the user dislikes AI-sounding displays of knowledge. Fit the response to the user's intent: ask only questions whose answers change the next action, and present only the options that matter for the decision.
+- The user is more concerned that confirmed preferences fade into generic AI behavior than that they are applied too strongly. Still avoid turning a context-specific preference into a fixed rule when the situation changes.
 - When trying to understand the user, do not mechanically record conversation content. Leave interpretations that affect answer direction.
 
 ## Update Criteria

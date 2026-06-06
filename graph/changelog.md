@@ -17,6 +17,7 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 - Clarified how the required `user-wiki update:` line works when higher-priority system citations or machine-readable blocks must follow it, and strengthened repeated verification commands.
 - Clarified that `AGENTS.md` -> `graph/index.md` is the canonical route and that missing root `index.md` / `CORE.md` files should not be narrated as a problem.
 - Added a workflow rule that wiki guidance should affect the actual working hypothesis, edit choice, review standard, or answer shape rather than only being reported as read.
+- Strengthened wiki-application guidance so confirmed preferences should change the actual answer or work shape instead of fading into generic AI behavior.
 - Reflected the user's preferred evidence-driven explanation pattern across the judgment anchor and document-writing rules without copying domain-specific example content.
 - Added guidance for applying this wiki to another Git repository through target-repo entrypoints rather than copying wiki content wholesale, and made `workflow.md` required for that path.
 - Clarified that project-common preferences surfaced during target-repository work should update the source user-wiki when writable, or be reported as pending when not writable, with an explicit `user-wiki update:` final line.
