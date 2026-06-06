@@ -54,8 +54,22 @@ Verify: Check that every strong claim has support, that dates and source scope a
 
 Situation: During work, new evidence shows that the current plan is incomplete, a user correction is right, or the fix may need neighboring files.
 
-Judgment: Expand only when the current result would otherwise keep the same failure. Stop when the new issue would become a different task.
+Judgment: A counterexample stays in the current task when it changes whether the current result satisfies the original request. It becomes a different task when the current result can still stand after naming the limit.
 
-Action: If the counterexample stays in scope, revise the edit or plan and continue. If it creates a new task, finish the current part, name the new task, and ask only for the decision that cannot be inferred.
+Same failure:
 
-Verify: Show the specific evidence that justified the expansion or boundary stop.
+- The same user, reader, command, route, or test would still hit the problem after the current edit.
+- A neighboring file or section repeats the rule, stale name, broken link, unsupported claim, or behavior that caused the defect.
+- The current claim depends on evidence that the counterexample weakens or overturns.
+- A user correction changes what must be preserved for the current request.
+
+Different task:
+
+- It needs a new deliverable, audience, feature, source set, or design decision.
+- It is interesting cleanup, but the current output works without it.
+- It would require replacing the user's current request with a broader project.
+- It can be reported as a limitation or next task without making the current result misleading.
+
+Action: First restate what the current task must preserve. If the counterexample keeps the same failure alive, fix the smallest affected area and continue. If it changes the protected thing, revise the task lens and continue. If it creates a different task, finish the current part, name the boundary, and ask only for the decision that cannot be inferred.
+
+Verify: Show the evidence that justified the expansion, lens change, or boundary stop.
