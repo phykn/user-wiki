@@ -54,7 +54,7 @@ Confirmed defaults for responses, questions, and collaboration flow.
 - If the AI can judge the options directly, do not hand the choice back to the user.
 - If the current plan is contradicted by evidence, revise the plan and continue on the better path instead of stopping for approval.
 - If a new counterexample weakens the current result and stays within the current task shape, incorporate it immediately instead of reporting it as a later follow-up.
-- A counterexample large enough to turn the task into a different task should not appear late in normal work. Treat it as evidence that the working hypothesis, plan, or earlier recheck was wrong; stop expanding blindly, explain the reset point, and ask or reroute only if the core must be reset.
+- A counterexample large enough to turn the task into a different task should not appear late in normal work. Stop expanding blindly; first separate what the current task completed from the new task the counterexample creates, then briefly name the working-hypothesis, plan, or recheck point that let it appear.
 - Ask only when the core must be reset, external information is required, or the choice is irreversible.
 - When blocked, finish the parts the AI can do and narrow the remaining question.
 - If a direction loses the agreed important thing, call it a failure path and switch to a better path.
