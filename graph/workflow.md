@@ -52,6 +52,7 @@ Confirmed defaults for responses, questions, and collaboration flow.
 
 - Do not wait for permission after forming a reasonable working hypothesis.
 - If the AI can judge the options directly, do not hand the choice back to the user.
+- If the current plan is contradicted by evidence, revise the plan and continue on the better path instead of stopping for approval.
 - Ask only when the core must be reset, external information is required, or the choice is irreversible.
 - When blocked, finish the parts the AI can do and narrow the remaining question.
 - If a direction loses the agreed important thing, call it a failure path and switch to a better path.

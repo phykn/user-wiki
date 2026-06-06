@@ -11,6 +11,7 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 - Broadened structural cleanup guidance so adjacent files, sections, entrypoints, and role boundaries are cleaned when they share the same structural cause.
 - Added guidance to expand beyond a narrow request when the request exposes a better whole structure and a local fix would preserve the wrong shape.
 - Clarified that justified structural expansion should proceed without a separate permission stop, then be explained and verified in the report.
+- Clarified that when evidence contradicts the current plan, the plan should be revised and work should continue on the better path without a separate approval stop.
 - Clarified how the required `user-wiki update:` line works when higher-priority system citations or machine-readable blocks must follow it, and strengthened repeated verification commands.
 - Clarified that `AGENTS.md` -> `graph/index.md` is the canonical route and that missing root `index.md` / `CORE.md` files should not be narrated as a problem.
 - Added a workflow rule that wiki guidance should affect the actual working hypothesis, edit choice, review standard, or answer shape rather than only being reported as read.
