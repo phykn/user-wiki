@@ -6,9 +6,9 @@ Accumulate only project-common work preferences and user understanding. Do not e
 
 ## Scope
 
-Documents, code, reviews, design, operating rules, and repeated work count as non-trivial work.
+This policy applies to durable preferences and repeated work: documents, code, reviews, design, operating rules, and corrections meant to affect future answers.
 
-Use [[index]] for the reading path and task-size boundary.
+It usually does not apply to one-off results such as checking the time, short translations, or single command output.
 
 ## Update Criteria
 
@@ -40,7 +40,7 @@ If the wiki was edited, check for empty documents, duplication, stale wording, a
 
 Record major structural changes or changes spanning multiple documents in `changelog.md`. Do not repeat detailed rule text there.
 
-When the wiki changed, or when a target-repository task leaves a pending wiki update, state that naturally in the completion report. Do not add a fixed ritual line when no wiki update is relevant.
+When the wiki changed, or when a target-repository task leaves a pending wiki update, state that naturally in the completion report. Do not add a required final line when no wiki update is relevant.
 
 ## Placement
 

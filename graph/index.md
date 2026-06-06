@@ -26,9 +26,9 @@ When applying this wiki to another repository, [[workflow]] is a required relate
 
 Current documents:
 
-- [[intuition]]: Higher-level judgment criteria for autonomous work in the user's way, preserving what matters, and making ambiguous work concrete enough to judge.
+- [[intuition]]: Short judgment lens for deciding what must be protected before acting.
 - [[policy]]: Operating contract for wiki updates, boundaries, and priority.
-- [[workflow]]: Confirmed defaults for responses, questions, collaboration, and applying this wiki to another repository.
+- [[workflow]]: Scenario-based execution guidance for common work situations.
 - [[code]]: Confirmed principles for code edits, refactoring, and tests.
 - [[docs]]: Confirmed structure and wording standards for documents, wikis, prompts, and work instructions.
 - [[theory]]: Current interpretation used to better align answers with the user.

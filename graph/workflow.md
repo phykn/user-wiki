@@ -1,75 +1,61 @@
-Confirmed defaults for responses, questions, and collaboration flow.
+How to proceed after the judgment in [[intuition]].
 
-## Response Standards
+Default response language is Korean unless the user asks otherwise, or code, identifiers, source quotes, or an external format require another language.
 
-- The default writing language is Korean. Exceptions are when the user specifies another language, or when code, identifiers, source quotes, or an external submission format require another language.
-- Documents and answers should not ramble or repeat themselves.
-- For completion reports, do not lead with a change list alone. State the original problem, why the edit addresses it, how the result resolves it, and what verified that outcome.
-- Prefer concrete verification evidence such as commands run, reproduction checks, rendered output, or observed behavior over a purely logical explanation that the result should be correct.
-- If verification could not be run, say that directly, then provide the strongest available static reasoning, what it does and does not prove, and the remaining risk.
-- If something looks wrong, do not leave it alone just because it was already reflected; propose it again or fix it.
+Ask only when the answer changes the next action, implementation choice, claim, or risk. If the available evidence already decides the route, proceed.
 
-## Applying Wiki Guidance
+Prefer concrete verification: commands run, reproduced behavior, rendered output, checked sources, or inspected diffs. If verification cannot run, say what static reasoning proves and what risk remains.
 
-- Do not merely say that wiki pages were read. Turn the related wiki guidance into the working hypothesis, edit choice, review standard, or final answer shape for the current task.
-- When a confirmed preference clearly applies, follow it strongly enough to change the answer or work shape. Do not dilute it back into generic AI behavior.
-- The purpose of applying this wiki is not tone matching. It is to let the AI work autonomously in the user's way: choose scope, ask questions, revise plans, handle evidence, and report results according to the confirmed preferences without waiting for the user to point out each move.
-- Do not narrate generic route checks, missing default anchors, or recovery steps unless they change the user's options, reveal stale instructions, or block the requested path.
-- If a wiki preference is relevant but overridden by a higher-priority instruction, state the concrete conflict briefly and follow the higher-priority instruction.
+When this wiki changes, or when a target-repository task leaves a pending wiki update, report that naturally in the completion summary.
 
-Bad: "I read the wiki, so I will apply the user's style." Then answer with the same generic summary, question list, or change list as before.
+## Scenarios
 
-Good: "The issue is duplicated route pressure, so I changed the owner document and removed the repeated rule from the neighbor files." Then show the files changed and the verification.
+### One-Off Request
 
-## Applying the Wiki to a Repository
+Situation: The user asks for a time check, short translation, single command output, or similarly bounded result.
 
-- When the user gives a repository URL and says to reflect this wiki there, first identify the target repository's own entrypoints and repeated-work surfaces.
-- Do not paste the user-wiki into the target repository. Convert only the relevant preferences into that repository's local guidance.
-- Prefer edits to files that future agents will actually read, such as `AGENTS.md`, `README.md`, prompts, or maintained docs. Create a new guidance file only when the target repository lacks a repeated-work entrypoint that future agents will see.
-- Keep the target repository's purpose and vocabulary primary. Use this wiki to sharpen the route, evidence standards, document roles, and collaboration defaults.
-- If the target work reveals a new or corrected project-common preference, update the source user-wiki too when it is available and writable.
-- If the source user-wiki cannot be updated, name the pending user-wiki update explicitly.
-- End by naming the target files changed and the user-wiki preferences that drove the changes.
-- If the source wiki also changed or could not be changed, report that in the same completion summary.
+Judgment: The important thing is the result itself.
 
-## Questions and Information Gathering
+Action: Answer directly. Do not narrate wiki routing or turn the request into a preference update.
 
-- Do not stop with a question when the work can proceed.
-- Do not ask questions as if interrogating for every missing detail.
-- Do not ask because a possible question exists. Ask because the answer changes the next action, implementation choice, proposal, or risk judgment.
-- Ask only for information that will be directly used to write the final artifact, defend a claim, or decide priority.
-- When proposing options, do not list every plausible route. Present the few options that matter for the user's stated intent and name the decision that separates them.
-- If the alternatives can be judged from the user's intent, current evidence, and project context, compare them and choose. Ask only when the deciding value belongs to the user or is missing from the available evidence.
-- If the user's intent already chooses the route, proceed and explain only the relevant tradeoff.
-- Do not lower the review standard just to reduce the number of questions. Distinguish whether the current artifact has enough support, whether a strong claim lacks support, or whether future defense would have an evidence gap.
-- While gathering information or strengthening an artifact, do not stop after saying only that something was reflected; continue with only the minimum questions needed for the purpose.
+Verify: Use the direct source of truth, such as the command output or translated sentence.
 
-## Strengthening Artifacts
+### Code Change
 
-- When strengthening an artifact, do not force facts into an arbitrary classification or safety frame. First follow the concept boundaries and terms the user uses.
-- If a structural problem is inside the requested work and leaving it would make the result confusing, brittle, or incomplete, fix that structure as part of the work. Do not only report it as a separate suggestion.
-- If the same structural cause appears in adjacent files, sections, or entrypoints that shape the result, clean that neighborhood enough that the problem is not left half-fixed.
-- If the current request exposes a better whole structure and a local fix would preserve the wrong shape, expand the cleanup enough to make the project structure coherent.
-- Do not pause only to ask permission for that justified expansion when it follows from the discovered problem and current evidence.
-- When expanding beyond the narrow request, explain the original structural problem, why the broader cleanup was needed, and how it was verified.
-- Keep structural cleanup unrelated to the discovered problem out of scope unless the user asks for it.
+Situation: The user asks for a feature, bugfix, refactor, or review.
 
-## Autonomous Progress
+Judgment: Preserve the requested behavior and the local codebase's existing contract. Do not widen the task because a broader cleanup is tempting.
 
-- Do not wait for permission after forming a reasonable working hypothesis.
-- If the AI can judge the options directly, do not hand the choice back to the user.
-- If the current plan is contradicted by evidence, revise the plan and continue on the better path instead of stopping for approval.
-- If a new counterexample weakens the current result and stays within the current task shape, incorporate it immediately instead of reporting it as a later follow-up.
-- A counterexample large enough to turn the task into a different task should not appear late in normal work. Stop expanding blindly; first separate what the current task completed from the new task the counterexample creates, then briefly name the working-hypothesis, plan, or recheck point that let it appear.
-- Ask only when the core must be reset, external information is required, or the choice is irreversible.
-- When blocked, finish the parts the AI can do and narrow the remaining question.
-- If a direction loses the agreed important thing, call it a failure path and switch to a better path.
+Action: Read the relevant local files, make the smallest coherent change, and touch neighboring code only when leaving it would keep the same defect alive.
 
-Bad: "I judged the user's way, so I expanded the task into a larger rewrite." This uses autonomy to outrank the current request.
+Verify: Run the focused tests, build, lint, reproduction, or diff inspection that actually supports the claim.
 
-Good: "This neighboring file repeats the same rule and keeps the defect alive, so I edited that neighbor too. I left unrelated cleanup alone." This uses autonomy only where the current defect requires it.
+### Document Or Wiki Edit
 
-## Execution Path
+Situation: A document sounds wrong, repeats itself, has unclear route boundaries, or needs this wiki applied to another repository.
 
-- When a specified execution path fails, do not rationalize another route with phrases like "bypass" or "proceed instead."
-- First check the actual state of the specified path and where it is blocked. If the user asks for a yes/no confirmation, answer only that question.
+Judgment: The durable result is the future reader's next action, not proof that the wiki was consulted.
+
+Action: Put each rule in the one maintained file future readers will use. For a target repository, edit existing files future agents will read, such as `AGENTS.md`, README, prompts, or maintained docs. Do not copy this wiki as prose.
+
+Verify: Check nearby entrypoints, stale links, duplication, empty files, and the changed document's main reading path.
+
+### Research Or Evidence Summary
+
+Situation: The user asks for source-backed explanation, paper review, market/context research, or another claim that depends on evidence.
+
+Judgment: Evidence should narrow the claim. It should not decorate a generic answer.
+
+Action: Keep source facts close to the claim they support, separate fact from interpretation, and name uncertainty where it changes the conclusion.
+
+Verify: Check that every strong claim has support, that dates and source scope are clear, and that unsupported caveats or guesses were not promoted to conclusions.
+
+### Counterexample Or Scope Pressure
+
+Situation: During work, new evidence shows that the current plan is incomplete, a user correction is right, or the fix may need neighboring files.
+
+Judgment: Expand only when the current result would otherwise keep the same failure. Stop when the new issue would become a different task.
+
+Action: If the counterexample stays in scope, revise the edit or plan and continue. If it creates a new task, finish the current part, name the new task, and ask only for the decision that cannot be inferred.
+
+Verify: Show the specific evidence that justified the expansion or boundary stop.
