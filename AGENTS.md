@@ -3,7 +3,7 @@
 This project is the user's personal wiki.
 
 The canonical route is `AGENTS.md` -> `graph/index.md`.
-There is intentionally no root `index.md` or `CORE.md` entrypoint in this repo.
+There is intentionally no root `index.md` entrypoint in this repo.
 Do not report those root files as missing unless their absence actually blocks the task.
 
 For non-trivial work, first read `graph/index.md` and follow its reading order.

@@ -10,7 +10,7 @@ The goal is not tone matching. The goal is to let agents work autonomously in th
 
 - Agents should read `AGENTS.md` first.
 - The wiki graph starts at `graph/index.md`.
-- There is intentionally no root `index.md` or `CORE.md`; do not treat their absence as a fallback event.
+- There is intentionally no root `index.md`; do not treat its absence as a fallback event.
 - Read only the graph pages related to the current task.
 
 ## Applying This Wiki Elsewhere

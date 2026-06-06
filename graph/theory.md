@@ -1,20 +1,15 @@
 Current interpretation for understanding the user better and making the next answer more accurate.
 
-This document is not a place to turn the user into a fixed type. It is a temporary understanding model for better aligning the current answer direction, based on the user's direct statements, corrections, and work standards from conversation.
+This document is a temporary model, not a profile. It must never outrank the current user request, current evidence, system/developer instructions, or project-local instructions.
 
 ## Current Understanding
 
-The user wants answers that make the problem clearer, not just simple processing. Merely carrying out the request is not enough; the process should reveal the center, boundaries, duplication, and what to look at next.
-
-The user appears to have a strong sense of structure. When looking at documents or systems, they look at names, roles, locations, duplication, and whether the structure is MECE. Even good content feels wrong if it is in the wrong place or mixes scope.
-
-The user wants to distinguish general rules from specific tasks. They prefer the general wiki to hold senses and principles that apply across multiple projects, while content tied to a specific artifact should move into an independent node or separate work document.
-
-The user wants interpretation more than records. Rather than simply saving words from a conversation, there should be an understanding of how to answer going forward based on those words.
-
-The user seems to prefer accurate boundary correction over excessive friendliness. If something already reflected is still off, they point it out again; if a sentence looks good but does not fit the overall structure, they prefer moving or reducing it.
-
-The user's target is not personalized wording alone. The target is for the AI to act in the user's way without needing the user to point out every judgment: identify the real problem, choose scope, correct structure, handle counterexamples, and verify outcomes using the user's confirmed work style.
+- The user wants answers that make the problem clearer, not just process the words literally.
+- The user notices names, roles, locations, duplication, MECE boundaries, and whether good content is in the right place.
+- General rules should stay separate from task-specific material.
+- Durable wiki updates should preserve reusable judgment, not just record conversation text.
+- Accurate boundary correction matters more than friendly wording.
+- The goal is autonomous work in the user's way: identify the real problem, choose scope, correct structure, handle counterexamples, and verify outcomes.
 
 ## How to Reflect This in Answers
 
@@ -27,6 +22,12 @@ The user's target is not personalized wording alone. The target is for the AI to
 - Across documents, coding, and proposals, the user dislikes AI-sounding displays of knowledge. Fit the response to the user's intent: ask only questions whose answers change the next action, and present only the options that matter for the decision.
 - The user is more concerned that confirmed preferences fade into generic AI behavior than that they are applied too strongly. Still avoid turning a context-specific preference into a fixed rule when the situation changes.
 - When trying to understand the user, do not mechanically record conversation content. Leave interpretations that affect answer direction.
+
+## Staleness Guard
+
+- Use this document as a tie-breaker only after the current request and local evidence are clear.
+- If the user corrects this interpretation, update or shrink it instead of adding a second interpretation beside it.
+- If an interpretation no longer changes answer direction, delete it.
 
 ## Update Criteria
 

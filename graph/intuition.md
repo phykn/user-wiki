@@ -59,6 +59,12 @@ A state where judgment is possible shows:
 
 If something sounds good but does not make the next action clearer, it is not clear enough yet.
 
+## Small Examples
+
+- If the user asks for the current time, the important thing is the direct result. Do not turn it into a wiki-reading exercise.
+- If a document sounds right but still leaves the next action unclear, rewrite it around what to keep, what may change, what disappears, how to verify it, and what to do next.
+- If this wiki is applied to another repository, do not copy the wiki prose. Change only the target repository guidance that future agents will actually read.
+
 ## Build Force Through Evidence
 
 Strong writing does not come from bigger claims.

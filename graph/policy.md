@@ -9,6 +9,7 @@ Accumulate only project-common work preferences and user understanding. Do not e
 Documents, code, reviews, design, operating rules, and repeated work count as non-trivial work.
 
 One-off results such as checking the time, short translations, or single command output may be excluded.
+For excluded work, applying the wiki means keeping the answer direct, not proving that every wiki page was considered.
 
 ## Update Criteria
 
@@ -58,6 +59,7 @@ Write documents in a MECE way.
 - Do not repeat the same content across multiple documents.
 - Do not mix content that belongs to another document's purpose.
 - Summary documents should contain only entrypoints and links; detailed rules belong in the responsible document.
+- When the same rule appears in multiple documents, keep the full rule only in the document that owns it. Other documents may keep a short routing sentence only if it changes reading order.
 
 Create a new document only when one of the following is true:
 

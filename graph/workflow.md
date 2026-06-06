@@ -11,6 +11,7 @@ Confirmed defaults for responses, questions, and collaboration flow.
 
 ## Applying Wiki Guidance
 
+- First size the task. Applying the wiki should reduce decision load, not force the same reading path onto every request.
 - Do not merely say that wiki pages were read. Turn the related wiki guidance into the working hypothesis, edit choice, review standard, or final answer shape for the current task.
 - When a confirmed preference clearly applies, follow it strongly enough to change the answer or work shape. Do not dilute it back into generic AI behavior.
 - The purpose of applying this wiki is not tone matching. It is to let the AI work autonomously in the user's way: choose scope, ask questions, revise plans, handle evidence, and report results according to the confirmed preferences without waiting for the user to point out each move.
