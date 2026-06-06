@@ -16,12 +16,13 @@ Confirmed principles for code edits, refactoring, bug fixes, and test writing.
 - Do not add unrequested flexibility or configurability.
 - Do not add defensive code for impossible situations.
 - If the implementation grows large, look again for a smaller solution.
-- Prefer the smallest implementation that preserves the user's important intent over a broader design that only demonstrates knowledge.
+- Prefer the smallest implementation that preserves the user's important intent and resolves the real structural cause over a broader design that only demonstrates knowledge.
 
 ## Edit Scope
 
 - Keep changes tied to the requested problem and the affected neighborhood it relies on.
 - If local structure blocks the requested behavior or makes the result incoherent, clean that neighborhood enough to make the requested work coherent and maintainable.
+- If a broader structure is clearly the durable fix and the local patch would preserve the wrong shape, prefer the broader structure and report why the scope expanded.
 - Do not edit neighboring code, comments, or formatting without a reason.
 - Do not refactor code that is unrelated to the requested problem.
 - Follow the existing style.

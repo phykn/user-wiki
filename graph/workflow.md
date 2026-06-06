@@ -43,7 +43,9 @@ Confirmed defaults for responses, questions, and collaboration flow.
 - When strengthening an artifact, do not force facts into an arbitrary classification or safety frame. First follow the concept boundaries and terms the user uses.
 - If a structural problem is inside the requested work and leaving it would make the result confusing, brittle, or incomplete, fix that structure as part of the work. Do not only report it as a separate suggestion.
 - If the same structural cause appears in adjacent files, sections, or entrypoints that shape the result, clean that neighborhood enough that the problem is not left half-fixed.
-- Keep structural cleanup unrelated to the requested result out of scope unless the user asks for it.
+- If the current request exposes a better whole structure and a local fix would preserve the wrong shape, expand the cleanup enough to make the project structure coherent.
+- When expanding beyond the narrow request, explain the original structural problem, why the broader cleanup was needed, and how it was verified.
+- Keep structural cleanup unrelated to the discovered problem out of scope unless the user asks for it.
 
 ## Autonomous Progress
 

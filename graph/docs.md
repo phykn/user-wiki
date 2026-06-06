@@ -76,5 +76,6 @@ Confirmed preferences for text artifacts that people read and execute, such as d
 
 - Before finishing a document or graph node, reduce unnecessary wording, duplicate sections, and prohibition sentences that repeat the same boundary.
 - After structural document cleanup, inspect neighboring entrypoints, links, and role boundaries enough to ensure the same overlap or stale route has not been left around the edited node.
+- If a document fix reveals that the main route or role split is wrong, fix the route or role split rather than polishing the local node alone.
 - After cleaning up a document graph, check for broken wikilinks, stale filename references, references to deleted nodes, and work files created in the rule folder.
 - Confirm that the main execution path reads from beginning to end.
