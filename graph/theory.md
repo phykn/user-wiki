@@ -22,6 +22,7 @@ The user seems to prefer accurate boundary correction over excessive friendlines
 - When the user says "this is not it," do not only polish the expression; reset the purpose.
 - If an internal category or market label makes visible wording feel unlike the user, keep the label as an internal sorting aid and rewrite the artifact around actions, evidence, and boundaries.
 - When the user points to a strong example, infer the reusable judgment pattern behind it instead of preserving the example's topic. Usually the useful pattern is how the writing moves from limited input, through evidence and cost, to a bounded claim and next question.
+- When writing documents, the user dislikes AI-sounding displays of knowledge. Fit the document to what its reader can see, needs to judge, and needs to do next.
 - When trying to understand the user, do not mechanically record conversation content. Leave interpretations that affect answer direction.
 
 ## Update Criteria
