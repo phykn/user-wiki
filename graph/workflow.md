@@ -61,6 +61,13 @@ Judgment: When the signals conflict, decide in this order:
 3. If new evidence overturns the current claim, it is the same failure even when more sources are needed. If the new sources are only needed to make a new claim, it is a different task.
 4. If the current output remains usable after naming the limit, and the new work needs a separate deliverable, audience, feature, source set, or design decision, it is a different task.
 
+Domain mapping:
+
+- Code: misleading means the same test, command, or user path still fails; a different task usually needs a new API, dependency, or behavior contract.
+- Documents: misleading means the reader would take the same wrong next action; a lens reset changes the reader, purpose, or artifact being preserved.
+- Research: misleading means the conclusion direction changes; new sources are current-task work only when they test the existing claim.
+- Repository application: misleading means future agents still read or follow the wrong local guidance; a different task needs a new maintained surface or project policy.
+
 Same failure:
 
 - The same user, reader, command, route, or test would still hit the problem after the current edit.
