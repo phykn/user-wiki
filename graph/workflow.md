@@ -54,7 +54,12 @@ Verify: Check that every strong claim has support, that dates and source scope a
 
 Situation: During work, new evidence shows that the current plan is incomplete, a user correction is right, or the fix may need neighboring files.
 
-Judgment: A counterexample stays in the current task when it changes whether the current result satisfies the original request. It becomes a different task when the current result can still stand after naming the limit.
+Judgment: When the signals conflict, decide in this order:
+
+1. If using the current output would mislead the user, reader, command, route, or test, it is the same failure.
+2. If a user correction changes what must be preserved, reset the task lens before choosing scope.
+3. If new evidence overturns the current claim, it is the same failure even when more sources are needed. If the new sources are only needed to make a new claim, it is a different task.
+4. If the current output remains usable after naming the limit, and the new work needs a separate deliverable, audience, feature, source set, or design decision, it is a different task.
 
 Same failure:
 
