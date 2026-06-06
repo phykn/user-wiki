@@ -21,6 +21,7 @@ Confirmed principles for code edits, refactoring, bug fixes, and test writing.
 ## Edit Scope
 
 - Change only lines directly related to the request.
+- If local structure blocks the requested behavior or makes the result incoherent, include the minimal structural correction needed to make the requested work coherent and maintainable.
 - Do not edit neighboring code, comments, or formatting without a reason.
 - Do not refactor code that is not broken.
 - Follow the existing style.

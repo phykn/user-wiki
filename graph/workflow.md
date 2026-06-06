@@ -41,6 +41,8 @@ Confirmed defaults for responses, questions, and collaboration flow.
 ## Strengthening Artifacts
 
 - When strengthening an artifact, do not force facts into an arbitrary classification or safety frame. First follow the concept boundaries and terms the user uses.
+- If a structural problem is inside the requested work and leaving it would make the result confusing, brittle, or incomplete, fix that structure as part of the work. Do not only report it as a separate suggestion.
+- Keep unrelated structural cleanup out of scope unless the user asks for it.
 
 ## Autonomous Progress
 
