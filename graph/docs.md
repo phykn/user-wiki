@@ -20,6 +20,8 @@ Confirmed preferences for text artifacts that people read and execute, such as d
 
 - Use easier words when meaning is not reduced.
 - When explaining functionality, prefer action wording the user can follow directly over abstractions.
+- For visible artifacts, do not assume the reader knows internal shorthand. At first mention, show the concrete object, action, and output clearly enough that the sentence can stand alone.
+- In self-representing artifacts, avoid evaluator-style framing that teaches the reader what the core is. Prefer the person's own work flow, choices, evidence, and resulting effect.
 - README or first-screen documents should first tell the user what the project is, why it matters, and whether they need it, before explaining internal structure.
 - Role statements should state the real purpose directly instead of circling around it.
 - Use direct and intuitive wording so that readers or executors without context are not confused.
@@ -27,6 +29,14 @@ Confirmed preferences for text artifacts that people read and execute, such as d
 - If a list of rules leaves the execution order unclear, rewrite it into actual action order such as check, judge, write, extract, and verify.
 - Use easy English words for work folder names and runtime artifact folder names when possible.
 - Do not elevate a device that worked well for one task into a general rule for every document or graph. Keep case-specific devices as conditional criteria or effects from the input.
+
+## Evidence-Driven Explanation
+
+- When using a strong example as a writing model, extract the transferable structure rather than the domain details.
+- A strong explanatory node should usually move through: starting condition, practical advantage, limit, cost or burden of alternatives, supported claim, and next question.
+- Put evidence directly under the claim it supports. Do not collect sources as a detached bibliography that the reader has to connect alone.
+- Use caveats when they protect the claim from overreach. A good caveat narrows the claim; it should not weaken the whole document into vagueness.
+- Prefer compact problem summaries that state what is available, what is needed, and what makes the gap hard.
 
 ## Document Graph
 

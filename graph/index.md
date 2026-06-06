@@ -5,6 +5,9 @@ This document set is the user's personal wiki / user wiki.
 The root `AGENTS.md` is the entrypoint for agents, and this `graph/` folder contains the actual wiki nodes.
 This wiki starts from a minimal document set and accumulates only preferences that apply across multiple projects.
 
+Canonical route: `AGENTS.md` -> `graph/index.md`.
+Do not search for or narrate missing root `index.md` / `CORE.md` files unless a user request explicitly depends on them.
+
 ## Usage
 
 For non-trivial work:
@@ -15,13 +18,15 @@ For non-trivial work:
 4. Apply confirmed preferences as defaults.
 5. If the current user request, system/developer instructions, or project instructions conflict with this wiki, they take precedence over this wiki.
 
+When applying this wiki to another repository, [[workflow]] is a required related page because it owns the target-repository application path and source-wiki update reporting.
+
 ## Documents
 
 Current documents:
 
 - [[intuition]]: Higher-level judgment criteria for preserving what matters and making ambiguous work concrete enough to judge.
 - [[policy]]: Operating contract for wiki updates, boundaries, and priority.
-- [[workflow]]: Confirmed defaults for responses, questions, and collaboration.
+- [[workflow]]: Confirmed defaults for responses, questions, collaboration, and applying this wiki to another repository.
 - [[code]]: Confirmed principles for code edits, refactoring, and tests.
 - [[docs]]: Confirmed structure and wording standards for documents, wikis, prompts, and work instructions.
 - [[theory]]: Current interpretation used to better align answers with the user.

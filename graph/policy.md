@@ -24,6 +24,8 @@ Automatic updates should directly reflect only clear project-common preferences 
 
 Project-specific content belongs in that project's `AGENTS.md` or project wiki.
 
+These update rules still apply when this wiki is being used from another project. If a target-repository task surfaces a new or corrected project-common preference, update this source user-wiki when it is available and writable. If the source wiki is not writable or not checked out, state the pending user-wiki update in the final answer instead of silently treating the target-repository edit as enough.
+
 ## Update Loop
 
 At the end of non-trivial work, check:
@@ -38,7 +40,8 @@ If the wiki was edited, check for empty documents, duplication, stale wording, a
 
 Record major structural changes or changes spanning multiple documents in `changelog.md`. Do not repeat detailed rule text there.
 
-End the final answer with one visible line: `user-wiki update: <updated files or none>`.
+End the final answer with one visible line: `user-wiki update: <updated files, pending update, or none>`.
+For target-repository work, this line is still required even when the target repository also changed.
 
 ## Placement
 

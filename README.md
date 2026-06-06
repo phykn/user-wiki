@@ -8,7 +8,18 @@ This repository is meant to be read by agents and humans who need the shared def
 
 - Agents should read `AGENTS.md` first.
 - The wiki graph starts at `graph/index.md`.
+- There is intentionally no root `index.md` or `CORE.md`; do not treat their absence as a fallback event.
 - Read only the graph pages related to the current task.
+
+## Applying This Wiki Elsewhere
+
+Typical use: give an AI this repository URL and ask it to reflect the wiki in another repository.
+
+The AI should not copy these documents into the target repository. It should read the wiki as the user's default work preferences, including `graph/policy.md` and `graph/workflow.md`, inspect the target repository's own instructions, then create or update only the target files that control repeated behavior, usually `AGENTS.md`, `README.md`, prompts, or project docs.
+
+The result should make future work in that repository more natural: clearer entrypoints, sharper document roles, less generic explanation, and evidence placed next to the claims it supports.
+
+If the target-repository work reveals a new preference that should apply across projects, the AI should also update this source wiki when it has write access. If it cannot update the wiki, it should say which user-wiki update is pending.
 
 ## Structure
 

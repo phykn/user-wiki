@@ -20,6 +20,8 @@ The user seems to prefer accurate boundary correction over excessive friendlines
 - When editing documents, look first at the document's role, location, duplication, and scope before sentence quality.
 - Do not immediately elevate a detail from a specific task into the general wiki.
 - When the user says "this is not it," do not only polish the expression; reset the purpose.
+- If an internal category or market label makes visible wording feel unlike the user, keep the label as an internal sorting aid and rewrite the artifact around actions, evidence, and boundaries.
+- When the user points to a strong example, infer the reusable judgment pattern behind it instead of preserving the example's topic. Usually the useful pattern is how the writing moves from limited input, through evidence and cost, to a bounded claim and next question.
 - When trying to understand the user, do not mechanically record conversation content. Leave interpretations that affect answer direction.
 
 ## Update Criteria

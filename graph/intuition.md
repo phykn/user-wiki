@@ -56,6 +56,24 @@ A state where judgment is possible shows:
 
 If something sounds good but does not make the next action clearer, it is not clear enough yet.
 
+## Build Force Through Evidence
+
+Strong writing does not come from bigger claims.
+It comes from a clear starting condition, the practical limit it creates, and evidence placed where it actually supports the claim.
+
+Do not copy the surface details of a strong example.
+Keep the structure that made it work:
+
+* what the work starts with
+* what that starting point makes easy
+* what it cannot show or decide
+* what the alternative costs or risks
+* what the proposed work can therefore claim
+* what question should be read next
+
+Facts should narrow the problem, not decorate the prose.
+If a fact does not change the reader's judgment about the need, limit, claim, or next step, it probably does not belong.
+
 ## Keep Judging Again
 
 The first choice is not the final answer.

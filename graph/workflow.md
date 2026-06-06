@@ -6,6 +6,23 @@ Confirmed defaults for responses, questions, and collaboration flow.
 - Documents and answers should not ramble or repeat themselves.
 - If something looks wrong, do not leave it alone just because it was already reflected; propose it again or fix it.
 
+## Applying Wiki Guidance
+
+- Do not merely say that wiki pages were read. Turn the related wiki guidance into the working hypothesis, edit choice, review standard, or final answer shape for the current task.
+- Do not narrate generic route checks, missing default anchors, or recovery steps unless they change the user's options, reveal stale instructions, or block the requested path.
+- If a wiki preference is relevant but overridden by a higher-priority instruction, state the concrete conflict briefly and follow the higher-priority instruction.
+
+## Applying the Wiki to a Repository
+
+- When the user gives a repository URL and says to reflect this wiki there, first identify the target repository's own entrypoints and repeated-work surfaces.
+- Do not paste the user-wiki into the target repository. Convert only the relevant preferences into that repository's local guidance.
+- Prefer edits to files that future agents will actually read, such as `AGENTS.md`, `README.md`, prompts, or maintained docs. Create a new guidance file only when the target repository lacks a repeated-work entrypoint that future agents will see.
+- Keep the target repository's purpose and vocabulary primary. Use this wiki to sharpen the route, evidence standards, document roles, and collaboration defaults.
+- If the target work reveals a new or corrected project-common preference, update the source user-wiki too when it is available and writable.
+- If the source user-wiki cannot be updated, name the pending user-wiki update explicitly.
+- End by naming the target files changed and the user-wiki preferences that drove the changes.
+- Always include the `user-wiki update: <updated files, pending update, or none>` line required by [[policy]].
+
 ## Questions and Information Gathering
 
 - Do not stop with a question when the work can proceed.

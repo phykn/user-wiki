@@ -1,5 +1,13 @@
 Record only major user-wiki structural changes. Detailed rule text belongs in the responsible document.
 
+## 2026-06-06
+
+- Clarified that `AGENTS.md` -> `graph/index.md` is the canonical route and that missing root `index.md` / `CORE.md` files should not be narrated as a problem.
+- Added a workflow rule that wiki guidance should affect the actual working hypothesis, edit choice, review standard, or answer shape rather than only being reported as read.
+- Reflected the user's preferred evidence-driven explanation pattern across the judgment anchor and document-writing rules without copying domain-specific example content.
+- Added guidance for applying this wiki to another Git repository through target-repo entrypoints rather than copying wiki content wholesale, and made `workflow.md` required for that path.
+- Clarified that project-common preferences surfaced during target-repository work should update the source user-wiki when writable, or be reported as pending when not writable, with an explicit `user-wiki update:` final line.
+
 ## 2026-06-03
 
 - Made the root `AGENTS.md` the user-wiki bootstrap entrypoint, and moved the actual wiki document nodes under the `graph/` folder.
