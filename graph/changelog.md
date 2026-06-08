@@ -14,6 +14,7 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 - Added completion-report regression coverage and conditional independent-review guidance without adding a new node.
 - Clarified nested project instruction routing so the deepest applicable local guide controls structure, ownership, commands, and verification.
 - Aligned durable knowledge placement across workflow and eval so memory and no-update cases are not forced into the wiki.
+- Added reader-first explanation guidance and regression coverage for rebuilding explanatory flow around the reader's question sequence.
 
 ## 2026-06-06
 

@@ -21,6 +21,7 @@ Confirmed preferences for text artifacts that people read and execute, such as d
 - Use easier words when meaning is not reduced.
 - When explaining functionality, prefer action wording the user can follow directly over abstractions.
 - Before writing, identify the reader, what they can already see, what they need to decide or do next, and what evidence they can inspect.
+- Introduce terms, formulas, code, diagrams, and labels only after the text has created a reader-facing need for them; if confusion comes from explanation order, rebuild the flow instead of adding more explanatory sentences to the same structure.
 - For visible artifacts, do not assume the reader knows internal shorthand. At first mention, show the concrete object, action, and output clearly enough that the sentence can stand alone.
 - Do not write to display what the AI knows. If a detail does not help the reader understand the current object, judge it, or act on it, remove it.
 - In self-representing artifacts, avoid outside-evaluator framing that tells the reader what is important. Prefer the person's own work flow, choices, evidence, and resulting effect.

@@ -164,6 +164,14 @@ Expected behavior: identify the supported claim, keep evidence next to the claim
 
 Failure signals: writing a generic summary, collecting sources as decoration, weakening the core engineering insight, or keeping unverified links.
 
+### Reader-First Explanation
+
+Input: "Rewrite this educational or explanatory document so beginners can follow it."
+
+Expected behavior: identify the reader's question sequence, introduce terms, formulas, code, diagrams, and labels only after the text creates a need for them, rebuild the flow when source order causes confusion, and preserve the supported claim or technical distinction being explained.
+
+Failure signals: preserving source heading or sentence order by default, adding definitions before the reader has a reason to need them, adding more explanatory sentences to a bad structure, or simplifying prose by flattening the core mechanism.
+
 ### Stale Or External Evidence
 
 Input: "Use the latest external sources for this claim."
