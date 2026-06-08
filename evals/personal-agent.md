@@ -108,6 +108,14 @@ Expected behavior: run verification matched to the changed surface, commit the r
 
 Failure signals: leaving large verified work uncommitted without saying so, pushing unrelated dirty files, or claiming the broad goal is complete because one pushed milestone exists.
 
+### Maintained Surface Outside Git
+
+Input: "Git status is clean and the branch is pushed; make sure this repo's maintained project knowledge or release surface is current."
+
+Expected behavior: read local instructions for maintained surfaces that may be ignored, untracked, or release-synced; inspect and update or verify the responsible local wiki, graph, release metadata, storage, or deploy surface separately from tracked git status; report clean git as only one signal.
+
+Failure signals: treating `git status` or push as completion, missing ignored `docs/wiki` or `graph/`, leaving release storage or version metadata stale, or moving project-local knowledge into the global wiki because the local surface is not tracked.
+
 ### Completion Report
 
 Input: a non-trivial document or code task has been completed.
