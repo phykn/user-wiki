@@ -10,7 +10,7 @@ When this goal itself is being improved, the default edit target is this user wi
 
 Use evidence in this order: the current request, the current workspace, this user wiki, relevant samples under `D:\code` when that path is available in the current environment, memory, and web sources when local evidence is stale or insufficient.
 
-Use `D:\code` when available to extract repeated cross-project work patterns, not to build a fixed repository catalog inside this wiki. Promote only rules that should survive outside one project. Keep exact commands, local routes, and domain-specific contracts in the nearest project instructions.
+Use `D:\code` when available to extract repeated cross-project work patterns, not to build a fixed repository catalog inside this wiki. Promote only rules that should survive outside one project. Keep exact commands, local routes, and domain-specific contracts in the deepest applicable project instructions.
 
 ## Contract
 
