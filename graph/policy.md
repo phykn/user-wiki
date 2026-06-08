@@ -36,6 +36,8 @@ At the end of non-trivial work, check:
 4. Is it clear enough to add as a confirmed rule in the responsible document?
 5. Does it conflict with existing confirmed documents, or make any existing content stale?
 
+If these checks do not identify a reusable failure or confirmed preference, do not update the wiki.
+
 If the wiki was edited, check for empty documents, duplication, stale wording, and broken links where relevant. `commands.md` may list repeated commands, but this document owns the requirement to check.
 
 Record major structural changes or changes spanning multiple documents in `changelog.md`. Do not repeat detailed rule text there.
