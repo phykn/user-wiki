@@ -14,7 +14,7 @@ Current user requests, system/developer instructions, and project-local `AGENTS.
 
 ## Applying This Wiki Elsewhere
 
-When the user gives this wiki as a Git repository URL and asks to "reflect" or "apply" it to another workspace, repository, or document set:
+When the user gives this wiki as a URL, local checkout, attached document set, or other source and asks to "reflect" or "apply" it to another workspace, repository, or document set:
 
 1. Treat this wiki as a default preference layer, not as content to copy wholesale.
 2. The goal is autonomous work in the user's way, not tone matching or copying wiki prose.
