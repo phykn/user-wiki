@@ -8,9 +8,9 @@ When this goal itself is being improved, the default edit target is this user wi
 
 ## Evidence Sources
 
-Use evidence in this order: the current request, the current workspace, this user wiki, relevant samples under `D:\code`, memory, and web sources when local evidence is stale or insufficient.
+Use evidence in this order: the current request, the current workspace, this user wiki, relevant samples under `D:\code` when that path is available in the current environment, memory, and web sources when local evidence is stale or insufficient.
 
-Use `D:\code` to extract repeated cross-project work patterns, not to build a fixed repository catalog inside this wiki. Promote only rules that should survive outside one project. Keep exact commands, local routes, and domain-specific contracts in the nearest project instructions.
+Use `D:\code` when available to extract repeated cross-project work patterns, not to build a fixed repository catalog inside this wiki. Promote only rules that should survive outside one project. Keep exact commands, local routes, and domain-specific contracts in the nearest project instructions.
 
 ## Contract
 
@@ -27,13 +27,13 @@ The contract is a working hypothesis. If a counterexample shows it protects the 
 
 ## Roadmap
 
-Grow the agent through verifiable work items. Keep this list global; a `D:\code` repository, browser session, document set, or memory file is only the current evidence source.
+Grow the agent through verifiable work items. Keep this list global; a `D:\code` repository when available, browser session, document set, or memory file is only the current evidence source.
 
 1. Maintain this goal contract, non-goals, autonomy levels, and regression cases.
 2. Turn repeated user corrections into reusable judgment questions, not saved phrases.
 3. Route each request by the next artifact or proof it needs: answer, plan, edit, review, research, push, deploy, or knowledge update.
 4. Split broad goals into independent steps with file or surface, reason, proof, and recovery path.
-5. Execute within the current workspace and follow through on substantial git work with verification, commit, and push when a remote path is available.
+5. Execute within the current workspace and use the follow-through path in [[workflow]] when substantial git, sync, deploy, or release work is part of the route.
 6. Match verification to the changed surface before claiming progress: command, diff, source, render, browser path, log, or state check.
 7. Decide whether new knowledge belongs in this wiki, project-local instructions, memory, or nowhere durable.
 8. Expand capability tracks through real work: code, documents, research, story, QA, release, and later interface automation.
@@ -45,7 +45,7 @@ The agent is improving when it can:
 - turn a broad goal into independent verifiable work without shrinking the final goal;
 - read the right project instructions before editing;
 - ask only questions that change the next action, behavior, ownership, or verification target;
-- finish requested paths and substantial git work with verification, commit, push, deploy, or sync when those actions are part of the path;
+- finish requested paths through the follow-through rules in [[workflow]] when verification, commit, push, deploy, or sync are part of the path;
 - separate global preferences from project-specific rules;
 - report what changed, what was checked, and what remains outside the current task.
 
@@ -62,7 +62,7 @@ The agent is improving when it can:
 
 - Level 1: Read, judge, and propose a plan.
 - Level 2: Apply approved edits and verify them.
-- Level 3: Commit, push, deploy, or sync when the request or substantial git work includes that path.
+- Level 3: Use [[workflow]] follow-through for commit, push, deploy, or sync paths.
 - Level 4: Notice repeated maintenance needs and suggest the next concrete task.
 - Level 5: Given a goal, route through the right local context, tools, checks, and knowledge updates without extra prompting.
 

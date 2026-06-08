@@ -28,3 +28,29 @@ foreach ($f in $files) {
 }
 if ($missing.Count) { $missing | Sort-Object -Unique; exit 1 } else { 'NO_BROKEN_WIKILINKS' }
 ```
+
+- Python broken wikilink check:
+
+```bash
+python - <<'PY'
+from pathlib import Path
+import re
+import sys
+
+files = list(Path("graph").glob("*.md"))
+names = {p.stem for p in files}
+missing = []
+
+for path in files:
+    text = path.read_text(encoding="utf-8")
+    for target in re.findall(r"\[\[([^\]|#]+)", text):
+        if target not in names:
+            missing.append(f"{path}: {target}")
+
+if missing:
+    print("\n".join(sorted(set(missing))))
+    sys.exit(1)
+
+print("NO_BROKEN_WIKILINKS")
+PY
+```

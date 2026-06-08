@@ -15,7 +15,8 @@ The central aim is autonomous work in the user's way. The wiki should change how
 First size the task before expanding the reading path.
 
 - For one-off work such as checking the time, a short translation, or a single command result, do not run the full wiki route.
-- For ordinary non-trivial work, read [[intuition]] to frame what matters, then read [[policy]] for update and boundary rules.
+- For ordinary non-trivial work, read [[intuition]] to frame what matters, then read [[workflow]] for the execution route.
+- Read [[policy]] when the task may create, update, or reinterpret durable guidance, document boundaries, or wiki priority.
 - Read other pages only when they change scope, evidence, wording, implementation, or reporting for the current task.
 - Read [[agent]] when the task is part of the long-lived personal work-agent goal or needs a full goal-to-verification loop.
 - Apply confirmed preferences as defaults.

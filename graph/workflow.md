@@ -14,10 +14,10 @@ For broad or long-running requests, define the working goal before planning:
 
 1. Name the final state the user is pointing at.
 2. Name the current slice that can be changed or verified now.
-3. Name the evidence that decides scope: current workspace, nearest local instructions, this wiki, relevant `D:\code` examples, memory, or web sources when local evidence is stale.
+3. Name the evidence that decides scope: current workspace, nearest local instructions, this wiki, relevant `D:\code` examples when that path is available, memory, or web sources when local evidence is stale.
 4. Name what must not be lost while narrowing the task.
 
-Use `D:\code` examples to find repeated work patterns such as read-before-editing, local source-of-truth routing, public-surface alignment, and matched verification. Do not copy exact project commands, domain contracts, or route details into the global workflow.
+Use `D:\code` examples when available to find repeated work patterns such as read-before-editing, local source-of-truth routing, public-surface alignment, and matched verification. Do not copy exact project commands, domain contracts, or route details into the global workflow.
 
 ## Agentic Work Loop
 

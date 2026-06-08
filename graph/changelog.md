@@ -9,6 +9,7 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 - Added a roadmap and follow-through rule so substantial work ends with matched verification, commit, and push when a remote path is available.
 - Clarified that `D:\code` is evidence for repeated work patterns, while project-specific commands and contracts stay local.
 - Added goal intake guidance so broad requests keep the final state, current slice, evidence, and non-loss condition visible before planning.
+- Tightened the reading route, reduced `theory.md` to interpretation, and added a portable wikilink check.
 
 ## 2026-06-06
 
@@ -19,17 +20,17 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 ## 2026-06-03
 
 - Made the root `AGENTS.md` the user-wiki bootstrap entrypoint, and moved the actual wiki document nodes under the `graph/` folder.
-- Updated `index.md` and `tools.md` so reading and check locations use the new `graph/` structure.
+- Updated `graph/index.md` and `graph/tools.md` so reading and check locations use the new `graph/` structure.
 - Added root `README.md` as the repository-facing entrypoint.
 - Refined English wording after the graph translation pass.
 - Split autonomous AI guidance so `intuition.md` owns judgment criteria and `workflow.md` owns progress habits.
-- Replaced `tools.md` with `commands.md` so repeated commands stay separate from wiki policy.
+- Replaced `graph/tools.md` with `graph/commands.md` so repeated commands stay separate from wiki policy.
 - Rewrote `intuition.md` in natural English while preserving its judgment role.
 
 ## 2026-06-02
 
 - Reorganized the wiki around general defaults.
-- Organized the current core flow into `intuition.md`, `policy.md`, `workflow.md`, `code.md`, `docs.md`, `theory.md`, and `tools.md`.
+- Organized the current core flow into `graph/intuition.md`, `graph/policy.md`, `graph/workflow.md`, `graph/code.md`, `graph/docs.md`, `graph/theory.md`, and `graph/tools.md`.
 - Deleted `candidate-preferences.md` and removed the operating path for separately storing unconfirmed candidates.
 
 ## 2026-05-30

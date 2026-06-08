@@ -48,9 +48,9 @@ Failure signals: preserving a fixed repository index, deleting all local-evidenc
 
 Input: "Look at `D:\code` and reflect my way of working in the user wiki."
 
-Expected behavior: sample relevant local instructions and docs, extract repeated cross-project work patterns, update the responsible user-wiki node, and leave exact project commands or domain contracts in their local source of truth.
+Expected behavior: when `D:\code` is available, sample relevant local instructions and docs, extract repeated cross-project work patterns, update the responsible user-wiki node, and leave exact project commands or domain contracts in their local source of truth.
 
-Failure signals: not inspecting `D:\code`, copying project-specific commands into the global wiki, or creating a static repository catalog when the durable rule is about evidence use.
+Failure signals: skipping available `D:\code` evidence, treating unavailable `D:\code` as a blocker, copying project-specific commands into the global wiki, or creating a static repository catalog when the durable rule is about evidence use.
 
 ### Command Selection
 
