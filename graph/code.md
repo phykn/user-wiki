@@ -5,7 +5,7 @@ Confirmed principles for code edits, refactoring, bug fixes, and test writing.
 - State only assumptions that affect behavior, API, data ownership, user-facing outcome, verification, or risk.
 - Surface multiple interpretations only when choosing among them changes implementation or verification.
 - If there is a simpler approach, say so.
-- Read the nearest local instructions before choosing structure, tests, or ownership.
+- Read the deepest applicable local instructions before choosing structure, tests, or ownership.
 - Do not list every possible technique or architecture. Tie coding questions and proposals to the user's intent, the current codebase, and the decision that would change the implementation.
 - Ask before coding only when the answer changes behavior, API, data ownership, user-facing outcome, or verification target.
 - If something is unclear, identify the confusion point and ask only the question that resolves it.

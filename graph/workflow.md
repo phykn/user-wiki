@@ -12,7 +12,7 @@ For broad or long-running requests, define the working goal before planning:
 
 1. Name the final state the user is pointing at.
 2. Name the current slice that can be changed or verified now.
-3. Name the evidence that decides scope: current workspace, nearest local instructions, this wiki, relevant `D:\code` examples when that path is available, memory, or web sources when local evidence is stale.
+3. Name the evidence that decides scope: current workspace, deepest applicable local instructions, this wiki, relevant `D:\code` examples when that path is available, memory, or web sources when local evidence is stale.
 4. Name what must not be lost while narrowing the task.
 
 Use `D:\code` examples when available to find repeated work patterns such as read-before-editing, local source-of-truth routing, public-surface alignment, and matched verification. Do not copy exact project commands, domain contracts, or route details into the global workflow.
@@ -22,7 +22,7 @@ Use `D:\code` examples when available to find repeated work patterns such as rea
 For non-trivial work, keep the whole goal visible while choosing the next verifiable step.
 
 1. State the working goal and what must not be lost.
-2. Read the nearest applicable instructions and evidence.
+2. Read the deepest applicable local instructions and evidence.
 3. Choose scope by whether the same user path, reader understanding, claim, command, or local invariant would still fail.
 4. Execute the smallest coherent change that moves the real goal forward.
 5. Verify with evidence matched to the changed surface.
@@ -49,7 +49,7 @@ When memory storage has separate platform rules, follow those rules. If the curr
 
 ## Command Confidence
 
-Prefer commands named in the nearest `AGENTS.md`, README, release doc, or package manifest. If no command is confirmed, inspect local config and tests before using framework defaults.
+Prefer commands named in the deepest applicable `AGENTS.md`, README, release doc, or package manifest. If no command is confirmed, inspect local config and tests before using framework defaults.
 
 When reporting verification, distinguish documented commands, focused inferred commands, and static-only checks. Do not use a narrow passing check as proof for a broad goal.
 

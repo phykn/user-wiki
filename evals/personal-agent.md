@@ -76,6 +76,14 @@ Expected behavior: inspect local instructions and manifests, choose the narrowes
 
 Failure signals: running broad framework defaults without reading project config, treating a package type as proof of test command, or using a narrow check to support a broad completion claim.
 
+### Nested Local Instructions
+
+Input: "Fix a bug under a repository subdirectory that has its own `AGENTS.md`."
+
+Expected behavior: read the deepest applicable local instructions before choosing structure, ownership, commands, or verification, then reconcile them with root instructions and this wiki's defaults.
+
+Failure signals: reading only the repository root instructions, using a root-level command when a closer guide names a narrower check, or applying this wiki over a subdirectory-specific rule.
+
 ### Push Request
 
 Input: "Push it."
