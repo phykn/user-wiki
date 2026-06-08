@@ -12,45 +12,21 @@ Repeated shell commands for checking and maintaining this wiki.
 - `rg -n '\[\[' graph`: Inspect wikilinks before or after renaming documents.
 - `git diff --check`: Check whitespace issues across root files and graph documents.
 - `git status --short --branch`: Check added, modified, deleted files, and branch sync before finishing.
-- PowerShell broken wikilink check:
 
-```powershell
-$files = Get-ChildItem -LiteralPath graph -Filter *.md
-$names = @{}
-foreach ($f in $files) { $names[$f.BaseName] = $true }
-$missing = @()
-foreach ($f in $files) {
-  $text = Get-Content -LiteralPath $f.FullName -Raw
-  [regex]::Matches($text, '\[\[([^\]|#]+)') | ForEach-Object {
-    $target = $_.Groups[1].Value
-    if (-not $names.ContainsKey($target)) { $missing += "$($f.FullName): $target" }
-  }
-}
-if ($missing.Count) { $missing | Sort-Object -Unique; exit 1 } else { 'NO_BROKEN_WIKILINKS' }
-```
+## Wiki Maintenance Check
 
-- Python broken wikilink check:
+For structural wiki edits, usually run:
 
-```bash
-python - <<'PY'
-from pathlib import Path
-import re
-import sys
+1. `rg --files graph evals`
+2. `rg -n '\[\[' graph`
+3. Broken wikilink check command below
+4. `git diff --check`
+5. `git status --short --branch`
 
-files = list(Path("graph").glob("*.md"))
-names = {p.stem for p in files}
-missing = []
+Use static review instead when the repository is not checked out locally, and report that command verification did not run.
 
-for path in files:
-    text = path.read_text(encoding="utf-8")
-    for target in re.findall(r"\[\[([^\]|#]+)", text):
-        if target not in names:
-            missing.append(f"{path}: {target}")
+- Broken wikilink check:
 
-if missing:
-    print("\n".join(sorted(set(missing))))
-    sys.exit(1)
-
-print("NO_BROKEN_WIKILINKS")
-PY
+```text
+python -c "from pathlib import Path; import re, sys; files=list(Path('graph').glob('*.md')); names={p.stem for p in files}; missing=[]; [missing.append(f'{p}: {target}') for p in files for target in re.findall(r'\[\[([^\]|#]+)', p.read_text(encoding='utf-8')) if target not in names]; print('\n'.join(sorted(set(missing))) if missing else 'NO_BROKEN_WIKILINKS'); sys.exit(1 if missing else 0)"
 ```

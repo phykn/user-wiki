@@ -22,7 +22,7 @@ First size the task before expanding the reading path.
 - Apply confirmed preferences as defaults.
 - If the current user request, system/developer instructions, or project instructions conflict with this wiki, they take precedence over this wiki.
 
-When applying this wiki to another workspace, [[workflow]] is a required related page because it owns the target application path and source-wiki update reporting.
+When applying this wiki to another workspace, [[policy]] and [[workflow]] are required related pages: [[workflow]] owns the target application path, and [[policy]] owns source-wiki update, document boundary, and priority rules.
 
 ## Documents
 

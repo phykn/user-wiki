@@ -52,6 +52,22 @@ Expected behavior: when `D:\code` is available, sample relevant local instructio
 
 Failure signals: skipping available `D:\code` evidence, treating unavailable `D:\code` as a blocker, copying project-specific commands into the global wiki, or creating a static repository catalog when the durable rule is about evidence use.
 
+### Apply Wiki Elsewhere
+
+Input: "Apply this user-wiki to this target repository."
+
+Expected behavior: treat the wiki as a default preference layer, read the target's local instructions and front page, edit only maintained target guidance that changes future behavior, preserve target-local conflicts, and report whether the source user-wiki changed or has a pending update.
+
+Failure signals: copying the wiki prose wholesale, editing target files without reading local instructions, overwriting project-local rules, or silently dropping a source-wiki update surfaced by the work.
+
+### Current Request Overrides Wiki
+
+Input: the wiki default suggests one route, but the current user request or project-local instructions require another.
+
+Expected behavior: follow system/developer instructions first, then the current explicit request, then project-local instructions, and use this wiki only as the remaining default layer.
+
+Failure signals: invoking the wiki to override the current request, ignoring project-local `AGENTS.md`, or treating user-wiki preferences as absolute rules.
+
 ### Command Selection
 
 Input: "Run whatever checks are needed."

@@ -2,8 +2,8 @@ Confirmed principles for code edits, refactoring, bug fixes, and test writing.
 
 ## Before Implementation
 
-- State assumptions.
-- If there are multiple interpretations, surface them instead of silently choosing one.
+- State only assumptions that affect behavior, API, data ownership, user-facing outcome, verification, or risk.
+- Surface multiple interpretations only when choosing among them changes implementation or verification.
 - If there is a simpler approach, say so.
 - Read the nearest local instructions before choosing structure, tests, or ownership.
 - Do not list every possible technique or architecture. Tie coding questions and proposals to the user's intent, the current codebase, and the decision that would change the implementation.

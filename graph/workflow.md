@@ -6,8 +6,6 @@ Ask only when the answer changes the next action, implementation choice, claim, 
 
 Prefer concrete verification: commands run, reproduced behavior, rendered output, checked sources, or inspected diffs. If verification cannot run, say what static reasoning proves and what risk remains.
 
-When this wiki changes, or when target work leaves a pending wiki update, report that naturally in the completion summary.
-
 ## Goal Intake
 
 For broad or long-running requests, define the working goal before planning:
@@ -71,6 +69,16 @@ Do not claim a milestone is done until the evidence covers that milestone's actu
 For substantial work in a git workspace, finish the path with verification, commit, and push when a remote branch is available and the user has not asked to hold changes locally. If branch or remote setup blocks this, report the concrete state and leave the working tree explicit.
 
 Before destructive operations, credential changes, secret inspection, migrations, release sync, or irreversible deploy actions, confirm the action is actually part of the user's requested path. If the route is requested but fails, first try to restore that route; report the concrete blocker before choosing a different path.
+
+## Completion Report
+
+For non-trivial work, report:
+
+1. What original problem or user path was protected.
+2. What changed or was concluded.
+3. What evidence checked it: command, diff, source, render, log, or static reasoning.
+4. What remains outside the current task, if naming it prevents misunderstanding.
+5. Whether this wiki changed or a pending wiki update remains.
 
 ## Scenarios
 
