@@ -8,6 +8,8 @@ GRAPH_DIR = ROOT / "graph"
 EVALS_DIR = ROOT / "evals"
 ROOT_DOCS = [ROOT / "AGENTS.md", ROOT / "README.md"]
 REQUIRED_DOCS = [ROOT / "AGENTS.md", ROOT / "README.md", GRAPH_DIR / "index.md"]
+PATH_REF_DOCS = [*ROOT_DOCS, GRAPH_DIR / "index.md"]
+PATH_REF_RE = re.compile(r"`((?:graph|evals|scripts)[/\\][^`]+)`")
 WIKILINK_RE = re.compile(r"\[\[([^\]|#]+)")
 
 
@@ -29,6 +31,15 @@ def main() -> int:
             continue
         if not path.read_text(encoding="utf-8").strip():
             problems.append(f"EMPTY_DOC {rel(path)}")
+
+    for path in PATH_REF_DOCS:
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        for target in PATH_REF_RE.findall(text):
+            target_path = ROOT / target.replace("\\", "/")
+            if not target_path.exists():
+                problems.append(f"BROKEN_PATH_REF {rel(path)} -> {target}")
 
     graph_names = {path.stem for path in graph_files}
     for path in graph_files:
