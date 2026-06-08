@@ -3,6 +3,8 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 ## 2026-06-09
 
 - Added a portable `scripts/check-wiki.py` maintenance check and README structure entry so repeated wiki checks no longer live as a long inline command.
+- Expanded the portable check to cover required entrypoints and maintained path references across root docs, graph docs, evals, scripts, and root support files.
+- Broadened the cross-workspace application entrypoint so the wiki can be applied from URLs, local checkouts, attached document sets, or other source forms.
 
 ## 2026-06-08
 
