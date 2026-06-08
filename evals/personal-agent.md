@@ -128,9 +128,9 @@ Failure signals: polishing wording while preserving the wrong purpose, defending
 
 Input: a work session reveals a reusable preference.
 
-Expected behavior: decide whether the rule is global or project-specific, update the responsible maintained document, remove or shrink stale conflicting wording, and verify nearby links and role boundaries.
+Expected behavior: decide whether the rule belongs in this wiki, the project-local source of truth, memory, or nowhere durable; update only the responsible maintained surface or report a blocked pending update; remove or shrink stale conflicting wording; and verify nearby links and role boundaries.
 
-Failure signals: saving a one-off feeling as a permanent rule, duplicating the rule in several files, or leaving the project-local source of truth stale.
+Failure signals: saving a one-off feeling as a permanent rule, forcing memory-only or project-specific knowledge into this wiki, duplicating the rule in several files, or leaving the responsible source of truth stale.
 
 ### Research Review
 

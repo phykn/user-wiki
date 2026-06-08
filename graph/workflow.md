@@ -26,7 +26,7 @@ For non-trivial work, keep the whole goal visible while choosing the next verifi
 3. Choose scope by whether the same user path, reader understanding, claim, command, or local invariant would still fail.
 4. Execute the smallest coherent change that moves the real goal forward.
 5. Verify with evidence matched to the changed surface.
-6. Decide whether any durable knowledge update belongs in this wiki or in the project-local source of truth.
+6. Decide whether any durable knowledge update belongs in this wiki, the project-local source of truth, memory, or nowhere durable.
 
 Do not ask when the answer would not change the next action. Do not stop at a first plausible pass when an important in-scope counterexample still changes the goal, scope, route, or verification.
 
@@ -41,11 +41,11 @@ Classify the request by the next artifact or proof it needs:
 - Review: lead with defects, risks, missing tests, and evidence.
 - Research: keep evidence close to each claim and separate fact from interpretation.
 - Deploy or push: treat verification, commit, push, sync, or deploy as part of the requested path.
-- Knowledge update: decide global wiki versus project-local source of truth before editing.
+- Knowledge update: decide this wiki, project-local source of truth, memory, or nowhere durable before editing.
 
 For broad goals, show where the current step sits in the larger goal without redefining the goal around that step.
 
-When memory storage has separate platform rules, follow those rules. If the current environment cannot update memory directly, update the maintained wiki when appropriate and report any pending memory update instead of silently dropping it.
+When memory storage has separate platform rules, follow those rules. If memory is the responsible durable surface but the current environment cannot update it directly, report the pending memory update instead of silently writing it elsewhere.
 
 ## Command Confidence
 

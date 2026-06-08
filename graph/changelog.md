@@ -13,6 +13,7 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 - Closed the operating loop by aligning cross-workspace reading, completion reporting, code assumption scope, eval coverage, and maintenance checks.
 - Added completion-report regression coverage and conditional independent-review guidance without adding a new node.
 - Clarified nested project instruction routing so the deepest applicable local guide controls structure, ownership, commands, and verification.
+- Aligned durable knowledge placement across workflow and eval so memory and no-update cases are not forced into the wiki.
 
 ## 2026-06-06
 
