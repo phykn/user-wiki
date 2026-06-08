@@ -8,12 +8,17 @@ GRAPH_DIR = ROOT / "graph"
 EVALS_DIR = ROOT / "evals"
 ROOT_DOCS = [ROOT / "AGENTS.md", ROOT / "README.md"]
 REQUIRED_DOCS = [ROOT / "AGENTS.md", ROOT / "README.md", GRAPH_DIR / "index.md"]
-PATH_REF_RE = re.compile(r"`((?:graph|evals|scripts)[/\\][^`]+)`")
+ROOT_FILE_REF = r"(?:[A-Za-z0-9_.-]+\.md|\.gitignore)"
+MAINTAINED_DIR_REF = r"(?:graph|evals|scripts)[/\\]"
+OPTIONAL_MAINTAINED_DIR_REF = rf"(?:{MAINTAINED_DIR_REF})?"
+PATH_REF_RE = re.compile(rf"`({OPTIONAL_MAINTAINED_DIR_REF}{ROOT_FILE_REF}|{MAINTAINED_DIR_REF}[^`]+)`")
 MARKDOWN_PATH_REF_RE = re.compile(
-    r"\]\(\s*((?:graph|evals|scripts)[/\\][^\s)#]+)(?:#[^\s)]*)?(?:\s+\"[^\"]*\")?\s*\)"
+    rf"\]\(\s*({OPTIONAL_MAINTAINED_DIR_REF}{ROOT_FILE_REF}|{MAINTAINED_DIR_REF}[^\s)#]+)"
+    r"(?:#[^\s)]*)?(?:\s+\"[^\"]*\")?\s*\)"
 )
 WIKILINK_RE = re.compile(r"\[\[([^\]|#]+)")
 GLOB_CHARS = "*?[]"
+INTENTIONAL_ABSENT_ROOT_REFS = {"index.md"}
 
 
 def rel(path: Path) -> str:
@@ -44,8 +49,17 @@ def main() -> int:
         for target in path_refs:
             if any(char in target for char in GLOB_CHARS):
                 continue
-            target_path = ROOT / target.replace("\\", "/")
-            if not target_path.exists():
+            normalized_target = target.replace("\\", "/")
+            candidate_paths = (
+                [ROOT / normalized_target]
+                if "/" in normalized_target
+                else [path.parent / normalized_target, ROOT / normalized_target]
+            )
+            if normalized_target in INTENTIONAL_ABSENT_ROOT_REFS and not any(
+                candidate.exists() for candidate in candidate_paths
+            ):
+                continue
+            if not any(candidate.exists() for candidate in candidate_paths):
                 problems.append(f"BROKEN_PATH_REF {rel(path)} -> {target}")
 
     graph_names = {path.stem for path in graph_files}

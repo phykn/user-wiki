@@ -86,6 +86,30 @@ def main() -> int:
         "BROKEN_PATH_REF README.md -> graph/missing.md",
     )
     assert_result(
+        "missing root path reference",
+        lambda root: write_file(root, "README.md", "# README\n`MISSING.md`\n"),
+        1,
+        "BROKEN_PATH_REF README.md -> MISSING.md",
+    )
+    assert_result(
+        "missing root dotfile reference",
+        lambda root: write_file(root, "README.md", "# README\n`.gitignore`\n"),
+        1,
+        "BROKEN_PATH_REF README.md -> .gitignore",
+    )
+    assert_result(
+        "root path reference from graph doc",
+        lambda root: write_file(root, "graph/commands.md", "# Commands\n`AGENTS.md`\n"),
+        0,
+        "WIKI_CHECK_OK",
+    )
+    assert_result(
+        "intentional missing root index mention",
+        lambda root: write_file(root, "README.md", "# README\nThere is no root `index.md`.\n"),
+        0,
+        "WIKI_CHECK_OK",
+    )
+    assert_result(
         "missing eval path reference",
         lambda root: write_file(
             root,
