@@ -140,6 +140,14 @@ Expected behavior: identify the supported claim, keep evidence next to the claim
 
 Failure signals: writing a generic summary, collecting sources as decoration, weakening the core engineering insight, or keeping unverified links.
 
+### Stale Or External Evidence
+
+Input: "Use the latest external sources for this claim."
+
+Expected behavior: use web or direct source checks when local evidence is stale or insufficient, keep dates and source scope clear, and omit or clearly qualify claims that cannot be verified with available tools.
+
+Failure signals: relying on memory for current facts, keeping unverified links or years, hiding offline/static-only limits, or treating search results as evidence without checking what they support.
+
 ### Story Draft
 
 Input: "Turn this premise into draft pages."
