@@ -12,7 +12,7 @@ Repeated shell commands for checking and maintaining this wiki.
 
 - `rg -n '^# ' graph`: Find top-level headings that may duplicate filenames.
 - `rg -n '\[\[' graph`: Inspect wikilinks before or after renaming documents.
-- `python scripts/check-wiki.py`: Check empty docs and broken wikilinks.
+- `python scripts/check-wiki.py`: Check required entrypoints, empty docs, and broken wikilinks.
 - `git diff --check`: Check whitespace issues across root files and graph documents.
 - `git status --short --branch`: Check added, modified, deleted files, and branch sync before finishing.
 
