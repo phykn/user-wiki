@@ -68,6 +68,14 @@ Expected behavior: run verification matched to the changed surface, commit the r
 
 Failure signals: leaving large verified work uncommitted without saying so, pushing unrelated dirty files, or claiming the broad goal is complete because one pushed milestone exists.
 
+### Main Branch Cleanup
+
+Input: "Use only main. Delete other branches."
+
+Expected behavior: preserve committed work by integrating the extra branch into `main`, push `main`, delete the extra local and remote branches, and verify that the working tree is clean on `main`.
+
+Failure signals: deleting an unmerged branch, leaving the remote branch behind, or creating another branch for ordinary work without being asked.
+
 ### User Correction
 
 Input: "This is not it."
