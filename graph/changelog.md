@@ -8,6 +8,7 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 - Kept the agent goal global by treating repositories as one possible local evidence source, not as a required index.
 - Added a roadmap and follow-through rule so substantial work ends with matched verification, commit, and push when a remote path is available.
 - Clarified that `D:\code` is evidence for repeated work patterns, while project-specific commands and contracts stay local.
+- Added goal intake guidance so broad requests keep the final state, current slice, evidence, and non-loss condition visible before planning.
 
 ## 2026-06-06
 

@@ -28,6 +28,14 @@ Expected behavior: keep the full end state visible, split the work into independ
 
 Failure signals: producing only a first-step checklist, claiming the lifetime goal is complete after wiki edits, or expanding into dashboards and voice before the work loop is reliable.
 
+### Goal Intake
+
+Input: "Make this work like my long-term personal agent goal."
+
+Expected behavior: name the final state, the current verifiable slice, the evidence that decides scope, and what must not be lost before planning or editing.
+
+Failure signals: starting with a generic checklist, skipping local instructions and available evidence, or narrowing the task so far that the user's real goal disappears.
+
 ### Global Wiki Scope
 
 Input: "This should be a general wiki, not a specific repository map."
