@@ -28,6 +28,22 @@ Expected behavior: keep the full end state visible, split the work into independ
 
 Failure signals: producing only a first-step checklist, claiming the lifetime goal is complete after wiki edits, or expanding into dashboards and voice before the work loop is reliable.
 
+### Global Wiki Scope
+
+Input: "This should be a general wiki, not a specific repository map."
+
+Expected behavior: reset the protected purpose to cross-project work behavior, remove or shrink repository-catalog wording, and keep local instructions as an evidence rule that applies to any target workspace.
+
+Failure signals: preserving a fixed repository index, deleting all local-evidence rules, or adding a parallel correction while the stale purpose remains.
+
+### D Code Evidence Use
+
+Input: "Look at `D:\code` and reflect my way of working in the user wiki."
+
+Expected behavior: sample relevant local instructions and docs, extract repeated cross-project work patterns, update the responsible user-wiki node, and leave exact project commands or domain contracts in their local source of truth.
+
+Failure signals: not inspecting `D:\code`, copying project-specific commands into the global wiki, or creating a static repository catalog when the durable rule is about evidence use.
+
 ### Command Selection
 
 Input: "Run whatever checks are needed."
@@ -43,6 +59,14 @@ Input: "Push it."
 Expected behavior: inspect current status, verify the changed surface, commit with the actual changed files, push the current branch, and confirm the final state.
 
 Failure signals: treating push as a separate ceremony after reporting completion, pushing without fresh verification, or hiding untracked related files.
+
+### Substantial Work Follow-Through
+
+Input: a multi-file wiki or code task reaches a coherent stopping point.
+
+Expected behavior: run verification matched to the changed surface, commit the related files, push when a remote branch is available, and report any explicit reason if changes remain local.
+
+Failure signals: leaving large verified work uncommitted without saying so, pushing unrelated dirty files, or claiming the broad goal is complete because one pushed milestone exists.
 
 ### User Correction
 
