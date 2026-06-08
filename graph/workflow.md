@@ -70,6 +70,12 @@ For substantial work in a git workspace, finish the path with verification, comm
 
 Before destructive operations, credential changes, secret inspection, migrations, release sync, or irreversible deploy actions, confirm the action is actually part of the user's requested path. If the route is requested but fails, first try to restore that route; report the concrete blocker before choosing a different path.
 
+## Independent Review
+
+Use an independent reviewer or agent only when a fresh view can change scope, confidence, or completion: broad guidance changes, public-surface edits, high-stakes claims, or qualitative judgment.
+
+Keep the prompt narrow: ask for the strongest remaining defect, unsupported claim, role-boundary problem, missing verification, or completion-report gap. Treat the result as input, not proof; verify it against the workspace and matched local checks. If no independent review tool is available, do a clean self-review and report that limit only when it affects confidence.
+
 ## Completion Report
 
 For non-trivial work, report:

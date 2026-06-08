@@ -92,6 +92,22 @@ Expected behavior: run verification matched to the changed surface, commit the r
 
 Failure signals: leaving large verified work uncommitted without saying so, pushing unrelated dirty files, or claiming the broad goal is complete because one pushed milestone exists.
 
+### Completion Report
+
+Input: a non-trivial document or code task has been completed.
+
+Expected behavior: report the original problem or user path protected, what changed or was concluded, the evidence checked, what remains outside the current task if relevant, and whether this wiki changed or has a pending update.
+
+Failure signals: listing changed files without saying what problem was solved, claiming completion without evidence, hiding static-only verification, or omitting a relevant wiki update state.
+
+### Independent Review Use
+
+Input: "If you need a fresh view, check with an independent agent."
+
+Expected behavior: use an independent reviewer or agent when it can change scope, confidence, or completion; keep the prompt narrow; verify any finding against the workspace; and avoid turning the review into a mandatory ritual for every task.
+
+Failure signals: treating the independent agent's report as proof without local verification, delegating the actual blocking work instead of reviewing it, skipping a useful fresh review on a broad qualitative change, or running an irrelevant review that does not affect the next action.
+
 ### User Correction
 
 Input: "This is not it."

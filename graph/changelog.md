@@ -11,6 +11,7 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 - Added goal intake guidance so broad requests keep the final state, current slice, evidence, and non-loss condition visible before planning.
 - Tightened the reading route, reduced `theory.md` to interpretation, and added a portable wikilink check.
 - Closed the operating loop by aligning cross-workspace reading, completion reporting, code assumption scope, eval coverage, and maintenance checks.
+- Added completion-report regression coverage and conditional independent-review guidance without adding a new node.
 
 ## 2026-06-06
 
