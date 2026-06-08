@@ -28,6 +28,7 @@ If the target work reveals a new preference that should apply across projects, t
 - `AGENTS.md`: Bootstrap instructions for agents.
 - `graph/`: Wiki nodes for confirmed preferences, workflow rules, code rules, document rules, and current user understanding.
 - `evals/`: Regression prompts for checking whether future agent behavior matches the wiki.
+- `scripts/`: Portable maintenance checks for this wiki.
 - `.gitignore`: Keeps local Obsidian state and OS/editor noise out of the repository.
 
 ## Priority

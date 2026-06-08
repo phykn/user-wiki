@@ -6,6 +6,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 GRAPH_DIR = ROOT / "graph"
 EVALS_DIR = ROOT / "evals"
+ROOT_DOCS = [ROOT / "AGENTS.md", ROOT / "README.md"]
 WIKILINK_RE = re.compile(r"\[\[([^\]|#]+)")
 
 
@@ -18,7 +19,7 @@ def main() -> int:
     graph_files = sorted(GRAPH_DIR.glob("*.md"))
     eval_files = sorted(EVALS_DIR.glob("*.md")) if EVALS_DIR.exists() else []
 
-    for path in [*graph_files, *eval_files]:
+    for path in [*ROOT_DOCS, *graph_files, *eval_files]:
         if not path.read_text(encoding="utf-8").strip():
             problems.append(f"EMPTY_DOC {rel(path)}")
 

@@ -2,6 +2,7 @@ Repeated shell commands for checking and maintaining this wiki.
 
 ## Read
 
+- `rg --files`: List maintained wiki files.
 - `rg --files graph`: List wiki documents.
 - `rg --files evals`: List regression prompts for agent behavior.
 - `rg --files scripts`: List wiki maintenance scripts.
@@ -19,7 +20,7 @@ Repeated shell commands for checking and maintaining this wiki.
 
 For structural wiki edits, usually run:
 
-1. `rg --files graph evals scripts`
+1. `rg --files`
 2. `rg -n '\[\[' graph`
 3. `python scripts/check-wiki.py`
 4. `git diff --check`

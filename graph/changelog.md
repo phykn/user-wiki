@@ -2,7 +2,7 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 
 ## 2026-06-09
 
-- Added a portable `scripts/check-wiki.py` maintenance check so repeated wiki checks no longer live as a long inline command.
+- Added a portable `scripts/check-wiki.py` maintenance check and README structure entry so repeated wiki checks no longer live as a long inline command.
 
 ## 2026-06-08
 
