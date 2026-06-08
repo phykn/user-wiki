@@ -85,6 +85,16 @@ def main() -> int:
         1,
         "BROKEN_PATH_REF README.md -> graph/missing.md",
     )
+    assert_result(
+        "missing eval path reference",
+        lambda root: write_file(
+            root,
+            "evals/personal-agent.md",
+            "# Personal Agent\nSee `graph/missing.md`.\n",
+        ),
+        1,
+        "BROKEN_PATH_REF evals/personal-agent.md -> graph/missing.md",
+    )
     print("CHECK_WIKI_TESTS_OK")
     return 0
 

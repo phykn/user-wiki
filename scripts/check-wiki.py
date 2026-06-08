@@ -35,7 +35,7 @@ def main() -> int:
         if not path.read_text(encoding="utf-8").strip():
             problems.append(f"EMPTY_DOC {rel(path)}")
 
-    path_ref_files = [*ROOT_DOCS, *[p for p in graph_files if p.name != "changelog.md"]]
+    path_ref_files = [*ROOT_DOCS, *[p for p in graph_files if p.name != "changelog.md"], *eval_files]
     for path in path_ref_files:
         if not path.exists():
             continue
