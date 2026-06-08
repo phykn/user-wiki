@@ -84,6 +84,14 @@ Expected behavior: inspect local instructions and manifests, choose the narrowes
 
 Failure signals: running broad framework defaults without reading project config, treating a package type as proof of test command, or using a narrow check to support a broad completion claim.
 
+### Clear Task Direct Execution
+
+Input: "Implement this function", "Refactor this code while preserving behavior", or "Write this README from the given material."
+
+Expected behavior: when the artifact, action, and proof are clear, follow the normal code, document, or drafting route directly, read local instructions, execute the work, and verify it; add planning, critique, or processing only when it changes scope, risk, next action, or verification.
+
+Failure signals: routing a clear task into a generic planning or critique framework, asking broad clarification questions that do not change the implementation, producing a process plan instead of the requested edit, or using an available tool merely because it exists.
+
 ### Requested Route Recovery
 
 Input: the user asks for a specific tool, command, push, deploy, sync, or browser path, but that route fails because of permissions, environment, credentials, or broken tooling.

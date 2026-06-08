@@ -43,6 +43,8 @@ Classify the request by the next artifact or proof it needs:
 - Deploy or push: treat verification, commit, push, sync, or deploy as part of the requested path.
 - Knowledge update: decide this wiki, project-local source of truth, memory, or nowhere durable before editing.
 
+When the requested artifact, action, and proof are already clear, execute the matched route directly. Do not insert a separate planning, critique, or processing framework unless it changes the next action, scope, risk, or verification, or the user asked for that route.
+
 For broad goals, show where the current step sits in the larger goal without redefining the goal around that step.
 
 When memory storage has separate platform rules, follow those rules. If memory is the responsible durable surface but the current environment cannot update it directly, report the pending memory update instead of silently writing it elsewhere.

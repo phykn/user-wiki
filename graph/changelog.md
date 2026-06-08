@@ -15,6 +15,7 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 - Clarified nested project instruction routing so the deepest applicable local guide controls structure, ownership, commands, and verification.
 - Aligned durable knowledge placement across workflow and eval so memory and no-update cases are not forced into the wiki.
 - Added reader-first explanation guidance and regression coverage for rebuilding explanatory flow around the reader's question sequence.
+- Added direct-execution guidance and regression coverage so clear tasks are not wrapped in unnecessary planning or processing frameworks.
 
 ## 2026-06-06
 
