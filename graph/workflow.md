@@ -57,6 +57,8 @@ When reporting verification, distinguish documented commands, focused inferred c
 
 Do not infer deployment from workspace shape. Use only deploy, release, storage, or publish commands confirmed in current local docs, manifests, or prior verified workflow.
 
+If local instructions name maintained surfaces that git status alone does not prove, such as ignored local wikis, graphs, release metadata, storage uploads, deploy output, or browser QA, verify those surfaces before treating clean status or a pushed branch as completion.
+
 ## Multi-Step Work
 
 When a task needs more than one meaningful step, keep each step independently checkable:
