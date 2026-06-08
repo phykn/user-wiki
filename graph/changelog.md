@@ -1,5 +1,9 @@
 Record only major user-wiki structural changes. Detailed rule text belongs in the responsible document.
 
+## 2026-06-09
+
+- Added a portable `scripts/check-wiki.py` maintenance check so repeated wiki checks no longer live as a long inline command.
+
 ## 2026-06-08
 
 - Added the personal work-agent goal as a maintained global contract with autonomy levels, non-goals, roadmap, and concrete capability tracks.
