@@ -1,6 +1,8 @@
 Regression cases for the personal work agent goal.
 
-These cases are not a command runner. Use them as review prompts before claiming that the agent behavior matches the wiki.
+These cases are not a command runner. Use the smallest relevant set as review prompts before claiming that agent behavior matches the wiki.
+
+Do not run every case or add a new case as a ritual. Before adding a case, first check whether an existing case can catch the failure with clearer wording. Add or revise cases only when a real work session exposes a reusable failure mode that the current set would miss.
 
 ## Cases
 
