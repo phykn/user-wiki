@@ -2,20 +2,11 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 
 ## 2026-06-08
 
-- Added the personal work-agent goal as a maintained contract, with autonomy levels and non-goals.
-- Added a small regression case set for future agent behavior checks.
-- Updated the main route, workflow, code, and docs guidance so broad goals stay tied to evidence, verification, and durable knowledge placement.
-- Kept the agent goal global by treating repositories as one possible local evidence source, not as a required index.
-- Added a roadmap and follow-through rule so substantial work ends with matched verification, commit, and push when a remote path is available.
-- Clarified that `D:\code` is evidence for repeated work patterns, while project-specific commands and contracts stay local.
-- Added goal intake guidance so broad requests keep the final state, current slice, evidence, and non-loss condition visible before planning.
-- Tightened the reading route, reduced `theory.md` to interpretation, and added a portable wikilink check.
-- Closed the operating loop by aligning cross-workspace reading, completion reporting, code assumption scope, eval coverage, and maintenance checks.
-- Added completion-report regression coverage and conditional independent-review guidance without adding a new node.
-- Clarified nested project instruction routing so the deepest applicable local guide controls structure, ownership, commands, and verification.
-- Aligned durable knowledge placement across workflow and eval so memory and no-update cases are not forced into the wiki.
-- Added reader-first explanation guidance and regression coverage for rebuilding explanatory flow around the reader's question sequence.
-- Added direct-execution guidance and regression coverage so clear tasks are not wrapped in unnecessary planning or processing frameworks.
+- Added the personal work-agent goal as a maintained global contract with autonomy levels, non-goals, roadmap, and concrete capability tracks.
+- Aligned `graph/index.md`, `workflow.md`, `policy.md`, `code.md`, and `docs.md` around task-sized reading, goal intake, direct execution when the route is clear, matched verification, durable knowledge placement, and completion reporting.
+- Clarified evidence use across current workspaces, `D:\code`, memory, web sources, and target repositories while keeping project-specific commands and contracts local.
+- Reduced interpretation and maintenance drift by narrowing `theory.md`, adding portable wiki maintenance checks, and avoiding new nodes for completion reporting or independent review.
+- Expanded and bounded personal-agent regression prompts for cross-workspace application, current-request priority, route recovery, nested instructions, follow-through, completion report, independent review, stale evidence, reader-first explanation, clear task execution, and eval usage.
 
 ## 2026-06-06
 
