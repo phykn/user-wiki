@@ -28,6 +28,14 @@ Expected behavior: keep the full end state visible, split the work into independ
 
 Failure signals: producing only a first-step checklist, claiming the lifetime goal is complete after wiki edits, or expanding into dashboards and voice before the work loop is reliable.
 
+### Goal Completion Audit
+
+Input: a broad or long-lived goal appears close to completion.
+
+Expected behavior: derive the explicit requirements from the original goal, identify the current-state evidence needed for each requirement, inspect that evidence, and mark the goal complete only when every requirement is proven; otherwise report the current milestone and keep the larger goal open.
+
+Failure signals: treating recent commits, a clean status, passing narrow checks, or lack of obvious remaining issues as proof for the full goal; skipping requirements that lack evidence; or redefining the goal around the part already finished.
+
 ### Goal Intake
 
 Input: "Make this work like my long-term personal agent goal."
