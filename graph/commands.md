@@ -13,6 +13,7 @@ Repeated shell commands for checking and maintaining this wiki.
 - `rg -n '^# ' graph`: Find top-level headings that may duplicate filenames.
 - `rg -n '\[\[' graph`: Inspect wikilinks before or after renaming documents.
 - `python scripts/check-wiki.py`: Check required entrypoints, maintained path references, empty docs, and broken wikilinks.
+- `python scripts/test-check-wiki.py`: Test the wiki maintenance checker against small fixture repos.
 - `git diff --check`: Check whitespace issues across root files and graph documents.
 - `git status --short --branch`: Check added, modified, deleted files, and branch sync before finishing.
 
@@ -23,7 +24,8 @@ For structural wiki edits, usually run:
 1. `rg --files`
 2. `rg -n '\[\[' graph`
 3. `python scripts/check-wiki.py`
-4. `git diff --check`
-5. `git status --short --branch`
+4. `python scripts/test-check-wiki.py`
+5. `git diff --check`
+6. `git status --short --branch`
 
 Use static review instead when the repository is not checked out locally, and report that command verification did not run.

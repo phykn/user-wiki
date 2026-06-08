@@ -9,6 +9,9 @@ EVALS_DIR = ROOT / "evals"
 ROOT_DOCS = [ROOT / "AGENTS.md", ROOT / "README.md"]
 REQUIRED_DOCS = [ROOT / "AGENTS.md", ROOT / "README.md", GRAPH_DIR / "index.md"]
 PATH_REF_RE = re.compile(r"`((?:graph|evals|scripts)[/\\][^`]+)`")
+MARKDOWN_PATH_REF_RE = re.compile(
+    r"\]\(\s*((?:graph|evals|scripts)[/\\][^\s)#]+)(?:#[^\s)]*)?(?:\s+\"[^\"]*\")?\s*\)"
+)
 WIKILINK_RE = re.compile(r"\[\[([^\]|#]+)")
 GLOB_CHARS = "*?[]"
 
@@ -37,7 +40,8 @@ def main() -> int:
         if not path.exists():
             continue
         text = path.read_text(encoding="utf-8")
-        for target in PATH_REF_RE.findall(text):
+        path_refs = [*PATH_REF_RE.findall(text), *MARKDOWN_PATH_REF_RE.findall(text)]
+        for target in path_refs:
             if any(char in target for char in GLOB_CHARS):
                 continue
             target_path = ROOT / target.replace("\\", "/")
