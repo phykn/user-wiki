@@ -68,6 +68,8 @@ When a task needs more than one meaningful step, keep each step independently ch
 
 Do not claim a milestone is done until the evidence covers that milestone's actual scope.
 
+Before closing a broad or long-lived goal, derive the explicit requirements from the original goal, identify current evidence for each requirement, and leave the larger goal open unless every requirement is proven by matched evidence.
+
 For substantial work in a git workspace, finish the path with verification, commit, and push when a remote branch is available and the user has not asked to hold changes locally. If branch or remote setup blocks this, report the concrete state and leave the working tree explicit.
 
 Before destructive operations, credential changes, secret inspection, migrations, release sync, or irreversible deploy actions, confirm the action is actually part of the user's requested path. If the route is requested but fails, first try to restore that route; report the concrete blocker before choosing a different path.
