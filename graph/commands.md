@@ -3,6 +3,7 @@ Repeated shell commands for checking and maintaining this wiki.
 ## Read
 
 - `rg --files graph`: List wiki documents.
+- `rg --files evals`: List regression prompts for agent behavior.
 - `rg -n '<search term>' graph`: Find duplicate rules, stale wording, and filename references.
 
 ## Check

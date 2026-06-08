@@ -1,5 +1,12 @@
 Record only major user-wiki structural changes. Detailed rule text belongs in the responsible document.
 
+## 2026-06-08
+
+- Added the personal work-agent goal as a maintained contract, with autonomy levels and non-goals.
+- Added a small regression case set for future agent behavior checks.
+- Updated the main route, workflow, code, and docs guidance so broad goals stay tied to evidence, verification, and durable knowledge placement.
+- Kept the agent goal global by treating repositories as one possible local evidence source, not as a required index.
+
 ## 2026-06-06
 
 - Simplified the wiki route around `AGENTS.md` -> `graph/index.md`, task-sized reading, and related pages only when they change the current decision.

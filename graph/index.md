@@ -17,16 +17,18 @@ First size the task before expanding the reading path.
 - For one-off work such as checking the time, a short translation, or a single command result, do not run the full wiki route.
 - For ordinary non-trivial work, read [[intuition]] to frame what matters, then read [[policy]] for update and boundary rules.
 - Read other pages only when they change scope, evidence, wording, implementation, or reporting for the current task.
+- Read [[agent]] when the task is part of the long-lived personal work-agent goal or needs a full goal-to-verification loop.
 - Apply confirmed preferences as defaults.
 - If the current user request, system/developer instructions, or project instructions conflict with this wiki, they take precedence over this wiki.
 
-When applying this wiki to another repository, [[workflow]] is a required related page because it owns the target-repository application path and source-wiki update reporting.
+When applying this wiki to another workspace, [[workflow]] is a required related page because it owns the target application path and source-wiki update reporting.
 
 ## Documents
 
 Current documents:
 
 - [[intuition]]: Short judgment lens for deciding what must be protected before acting.
+- [[agent]]: Long-lived goal and contract for the personal work agent.
 - [[policy]]: Operating contract for wiki updates, boundaries, and priority.
 - [[workflow]]: Scenario-based execution guidance for common work situations.
 - [[code]]: Confirmed principles for code edits, refactoring, and tests.

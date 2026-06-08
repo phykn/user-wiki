@@ -5,6 +5,7 @@ Confirmed principles for code edits, refactoring, bug fixes, and test writing.
 - State assumptions.
 - If there are multiple interpretations, surface them instead of silently choosing one.
 - If there is a simpler approach, say so.
+- Read the nearest local instructions before choosing structure, tests, or ownership.
 - Do not list every possible technique or architecture. Tie coding questions and proposals to the user's intent, the current codebase, and the decision that would change the implementation.
 - Ask before coding only when the answer changes behavior, API, data ownership, user-facing outcome, or verification target.
 - If something is unclear, identify the confusion point and ask only the question that resolves it.
@@ -46,3 +47,4 @@ Confirmed principles for code edits, refactoring, bug fixes, and test writing.
 - If a verifiable test exists, create or update it first.
 - For refactoring, confirm behavior is the same before and after.
 - For multi-step work, keep a short verification method for each step.
+- For public-surface or release-facing changes, verify the related README, wrappers, manifests, generated assets, or deploy/sync state that users actually consume.

@@ -71,6 +71,7 @@ Confirmed preferences for text artifacts that people read and execute, such as d
 - A record document meant to reproduce the user's work method later should record the judgment process, not a result log.
 - These documents should prioritize the question order, judgment criteria, and next-action selection method that led to the conclusion, rather than the user's conclusion itself.
 - Rather than saving the user's words as answer sentences, convert them into questions and branch procedures that can be reused in the same situation.
+- Long-term goals should become operating contracts with success criteria, non-goals, and verification signals. Do not leave them as slogans.
 
 ## Checks
 
