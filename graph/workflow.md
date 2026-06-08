@@ -59,8 +59,6 @@ Do not claim a milestone is done until the evidence covers that milestone's actu
 
 For substantial work in a git workspace, finish the path with verification, commit, and push when a remote branch is available and the user has not asked to hold changes locally. If branch or remote setup blocks this, report the concrete state and leave the working tree explicit.
 
-Use `main` as the default branch. Do not create or leave extra branches unless the user asks for a branch or PR workflow. If substantial work was done on another branch, integrate it into `main`, push `main`, then delete the extra local and remote branches after confirming the commits are preserved.
-
 Before destructive operations, credential changes, secret inspection, migrations, release sync, or irreversible deploy actions, confirm the action is actually part of the user's requested path. If the route is requested but fails, first try to restore that route; report the concrete blocker before choosing a different path.
 
 ## Scenarios

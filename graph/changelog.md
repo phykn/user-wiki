@@ -8,7 +8,6 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 - Kept the agent goal global by treating repositories as one possible local evidence source, not as a required index.
 - Added a roadmap and follow-through rule so substantial work ends with matched verification, commit, and push when a remote path is available.
 - Clarified that `D:\code` is evidence for repeated work patterns, while project-specific commands and contracts stay local.
-- Recorded the main-only branch preference: preserve work on `main`, push it, and delete extra branches after integration.
 
 ## 2026-06-06
 
