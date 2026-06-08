@@ -10,6 +10,7 @@ ROOT_DOCS = [ROOT / "AGENTS.md", ROOT / "README.md"]
 REQUIRED_DOCS = [ROOT / "AGENTS.md", ROOT / "README.md", GRAPH_DIR / "index.md"]
 PATH_REF_RE = re.compile(r"`((?:graph|evals|scripts)[/\\][^`]+)`")
 WIKILINK_RE = re.compile(r"\[\[([^\]|#]+)")
+GLOB_CHARS = "*?[]"
 
 
 def rel(path: Path) -> str:
@@ -37,6 +38,8 @@ def main() -> int:
             continue
         text = path.read_text(encoding="utf-8")
         for target in PATH_REF_RE.findall(text):
+            if any(char in target for char in GLOB_CHARS):
+                continue
             target_path = ROOT / target.replace("\\", "/")
             if not target_path.exists():
                 problems.append(f"BROKEN_PATH_REF {rel(path)} -> {target}")
