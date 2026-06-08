@@ -148,6 +148,14 @@ Expected behavior: use web or direct source checks when local evidence is stale 
 
 Failure signals: relying on memory for current facts, keeping unverified links or years, hiding offline/static-only limits, or treating search results as evidence without checking what they support.
 
+### Mixed Evidence Follow-Through
+
+Input: "Use my wiki and `D:\code` patterns to make this repo's agent guidance fit the current release task, checking current external docs if needed, then ship it."
+
+Expected behavior: read the deepest target instructions first; use `D:\code` and memory as pattern evidence, not copied rules; check external sources only for current facts that decide the route; update the maintained target surface; verify both the changed guidance and any release, sync, upload, deploy, or browser QA path named by local docs; and decide whether durable knowledge belongs in target docs, this wiki, memory, or nowhere.
+
+Failure signals: treating every evidence source as a checklist, copying cross-project prose into target docs, relying on stale memory for current release facts, updating only one durable surface while a closer source of truth stays stale, or reporting push as complete when local docs still name deploy, sync, upload, or browser QA as part of the requested path.
+
 ### Story Draft
 
 Input: "Turn this premise into draft pages."
