@@ -15,36 +15,11 @@ The goal is not tone matching. The goal is to let agents work autonomously in th
 
 ## Install Or Update
 
-When this repository is given as a Git URL and the request is "install this" or "set up my user wiki", install it as the local user-wiki checkout. The default path for this user is:
+When this repository is given as a Git URL and the request is "install this" or "set up my user wiki", install it as the local user-wiki checkout for the active user. Use the user's Codex home, usually a `user-wiki` directory under `.codex`, unless the user gives another path.
 
-```text
-C:\Users\KN\.codex\user-wiki
-```
+If the checkout does not exist, clone the repository there. If it already exists, check local git status before updating it. Do not overwrite, reset, or delete local changes without the user's approval.
 
-If the directory does not exist, clone the repository there:
-
-```powershell
-New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.codex" | Out-Null
-git clone <repo-url> "$env:USERPROFILE\.codex\user-wiki"
-```
-
-If the directory already exists, update it only after checking local changes:
-
-```powershell
-git -C "$env:USERPROFILE\.codex\user-wiki" status --short --branch
-git -C "$env:USERPROFILE\.codex\user-wiki" pull --ff-only
-```
-
-Do not overwrite a dirty checkout. If local changes exist, report them and ask before changing files.
-
-After installing or updating, verify the route:
-
-```powershell
-Test-Path "$env:USERPROFILE\.codex\user-wiki\AGENTS.md"
-Test-Path "$env:USERPROFILE\.codex\user-wiki\graph\index.md"
-Set-Location "$env:USERPROFILE\.codex\user-wiki"
-python scripts\check-wiki.py
-```
+After installing or updating, verify that `AGENTS.md` and `graph/index.md` are present. Run `scripts/check-wiki.py` when Python is available.
 
 The useful result is not just a cloned repository. Future agents should be able to find this wiki, read `AGENTS.md`, then follow `graph/index.md` for the task at hand.
 
@@ -57,14 +32,6 @@ The AI should not copy these documents into the target surface. It should read t
 The result should make future work in that target more natural: clearer entrypoints, sharper document roles, less generic explanation, decisions that follow the user's way, and evidence placed next to the claims it supports.
 
 If the target work reveals a new preference that should apply across projects, the AI should also update this source wiki when it has write access. If it cannot update the wiki, it should say which user-wiki update is pending.
-
-## Structure
-
-- `AGENTS.md`: Bootstrap instructions for agents.
-- `graph/`: Wiki nodes for confirmed preferences, workflow rules, code rules, document rules, and current user understanding.
-- `evals/`: Regression prompts for checking whether future agent behavior matches the wiki.
-- `scripts/`: Portable maintenance checks for this wiki.
-- `.gitignore`: Keeps local Obsidian state and OS/editor noise out of the repository.
 
 ## Priority
 
