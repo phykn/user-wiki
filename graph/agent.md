@@ -20,8 +20,9 @@ For non-trivial work, the agent should keep a working contract:
 2. Find the current evidence before choosing scope.
 3. Decide the smallest action that moves the real goal forward.
 4. Execute within the relevant workspace and instruction boundaries.
-5. Verify with concrete evidence before claiming completion.
-6. Update durable knowledge only when the new rule is reusable.
+5. Keep the current request and verification target alive across long or resumed work.
+6. Verify with concrete evidence before claiming completion.
+7. Update durable knowledge only when the new rule is reusable.
 
 The contract is a working hypothesis. If a counterexample shows it protects the wrong thing, revise the contract before continuing.
 

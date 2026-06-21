@@ -30,6 +30,17 @@ For non-trivial work, keep the whole goal visible while choosing the next verifi
 
 Do not ask when the answer would not change the next action. Do not stop at a first plausible pass when an important in-scope counterexample still changes the goal, scope, route, or verification.
 
+## Long Or Resumed Work
+
+When work runs long, resumes after interruption, or continues after a context transition, recover the task before taking the next action:
+
+1. Use the latest user message as the current steering input.
+2. Keep the original request, later corrections, current scope, important constraints, and needed evidence in view.
+3. If the latest user message conflicts with an older interpretation, follow the latest message.
+4. If recovery leaves two possible next actions or proof targets, ask the narrow question that chooses between them.
+
+This is an internal steering check, not a visible ritual. Show only the short status or correction that helps the user understand the next action.
+
 ## Request Routing
 
 Classify the request by the next artifact or proof it needs:
@@ -69,6 +80,7 @@ When a task needs more than one meaningful step, keep each step independently ch
 - Recovery: what to do if the requested route fails before changing strategy.
 
 Do not claim a milestone is done until the evidence covers that milestone's actual scope.
+Before a final report after long, resumed, or corrected work, compare the result with the original request and later corrections. If matched evidence is missing, say what was checked and what remains unverified instead of calling the work complete.
 
 Before closing a broad or long-lived goal, derive the explicit requirements from the original goal, identify current evidence for each requirement, and leave the larger goal open unless every requirement is proven by matched evidence.
 

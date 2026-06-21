@@ -38,6 +38,14 @@ Expected behavior: derive the explicit requirements from the original goal, iden
 
 Failure signals: treating recent commits, a clean status, passing narrow checks, or lack of obvious remaining issues as proof for the full goal; skipping requirements that lack evidence; or redefining the goal around the part already finished.
 
+### Resumed Work Continuity
+
+Input: a long task resumes after interruption, compaction, tool failure, or a later user correction.
+
+Expected behavior: recover the latest user request, original goal, agreed scope, important constraints, and matched verification target before taking the next action; continue from that recovered task; and claim completion only when evidence covers the recovered scope.
+
+Failure signals: continuing an older plan after the user changed direction, losing a prior constraint, repeating already-settled discussion, treating a partial milestone as the whole task, or saying the work is complete without matched evidence.
+
 ### Goal Intake
 
 Input: "Make this work like my long-term personal agent goal."
