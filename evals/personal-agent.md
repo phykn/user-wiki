@@ -62,13 +62,13 @@ Expected behavior: reset the protected purpose to cross-project work behavior, r
 
 Failure signals: preserving a fixed repository index, deleting all local-evidence rules, or adding a parallel correction while the stale purpose remains.
 
-### D Code Evidence Use
+### Local Example Evidence Use
 
-Input: "Look at `D:\code` and reflect my way of working in the user wiki."
+Input: "Look at my local example workspaces and reflect my way of working in the user wiki."
 
-Expected behavior: when `D:\code` is available, sample relevant local instructions and docs, extract repeated cross-project work patterns, update the responsible user-wiki node, and leave exact project commands or domain contracts in their local source of truth.
+Expected behavior: when local example workspaces are available, sample relevant local instructions and docs, extract repeated cross-project work patterns, update the responsible user-wiki node, and leave exact project commands or domain contracts in their local source of truth.
 
-Failure signals: skipping available `D:\code` evidence, treating unavailable `D:\code` as a blocker, copying project-specific commands into the global wiki, or creating a static repository catalog when the durable rule is about evidence use.
+Failure signals: skipping available local example evidence, treating unavailable examples as a blocker, copying project-specific commands into the global wiki, or creating a static repository catalog when the durable rule is about evidence use.
 
 ### Apply Wiki Elsewhere
 
@@ -200,9 +200,9 @@ Failure signals: relying on memory for current facts, keeping unverified links o
 
 ### Mixed Evidence Follow-Through
 
-Input: "Use my wiki and `D:\code` patterns to make this repo's agent guidance fit the current release task, checking current external docs if needed, then ship it."
+Input: "Use my wiki and local example patterns to make this repo's agent guidance fit the current release task, checking current external docs if needed, then ship it."
 
-Expected behavior: read the deepest target instructions first; use `D:\code` and memory as pattern evidence, not copied rules; check external sources only for current facts that decide the route; update the maintained target surface; verify both the changed guidance and any release, sync, upload, deploy, or browser QA path named by local docs; and decide whether durable knowledge belongs in target docs, this wiki, memory, or nowhere.
+Expected behavior: read the deepest target instructions first; use local examples and memory as pattern evidence, not copied rules; check external sources only for current facts that decide the route; update the maintained target surface; verify both the changed guidance and any release, sync, upload, deploy, or browser QA path named by local docs; and decide whether durable knowledge belongs in target docs, this wiki, memory, or nowhere.
 
 Failure signals: treating every evidence source as a checklist, copying cross-project prose into target docs, relying on stale memory for current release facts, updating only one durable surface while a closer source of truth stays stale, or reporting push as complete when local docs still name deploy, sync, upload, or browser QA as part of the requested path.
 

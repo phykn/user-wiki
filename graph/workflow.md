@@ -12,10 +12,10 @@ For broad or long-running requests, define the working goal before planning:
 
 1. Name the final state the user is pointing at.
 2. Name the current slice that can be changed or verified now.
-3. Name the evidence that decides scope: current workspace, deepest applicable local instructions, this wiki, relevant `D:\code` examples when that path is available, memory, or web sources when local evidence is stale.
+3. Name the evidence that decides scope: current workspace, deepest applicable local instructions, this wiki, relevant local example workspaces when available, memory, or web sources when local evidence is stale.
 4. Name what must not be lost while narrowing the task.
 
-Use `D:\code` examples when available to find repeated work patterns such as read-before-editing, local source-of-truth routing, public-surface alignment, and matched verification. Do not copy exact project commands, domain contracts, or route details into the global workflow.
+Use local example workspaces when available to find repeated work patterns such as read-before-editing, local source-of-truth routing, public-surface alignment, and matched verification. Do not copy exact project commands, domain contracts, or route details into the global workflow.
 
 ## Agentic Work Loop
 
@@ -154,8 +154,9 @@ Judgment: When the signals conflict, decide in this order:
 
 1. If using the current output would mislead the user, reader, command, route, or test, it is the same failure.
 2. If a user correction changes what must be preserved, reset the task lens before choosing scope.
-3. If new evidence overturns the current claim, it is the same failure even when more sources are needed. If the new sources are only needed to make a new claim, it is a different task.
-4. If the current output remains usable after naming the limit, and the new work needs a separate deliverable, audience, feature, source set, or design decision, it is a different task.
+3. If the user names one example of a repeated problem, treat it as a pattern to check across the affected surface instead of waiting for each instance to be named.
+4. If new evidence overturns the current claim, it is the same failure even when more sources are needed. If the new sources are only needed to make a new claim, it is a different task.
+5. If the current output remains usable after naming the limit, and the new work needs a separate deliverable, audience, feature, source set, or design decision, it is a different task.
 
 Conflict checks:
 

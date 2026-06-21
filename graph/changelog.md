@@ -4,6 +4,7 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 
 - Added work-continuity guidance so long or resumed tasks recover the latest request and verification target before continuing.
 - Added install/update guidance to the root entrypoints so a Git URL install request creates or updates the local user-wiki checkout instead of copying wiki prose into a target project.
+- Generalized install and evidence wording away from product-specific or personal machine paths, and removed temporary planning artifacts from the durable wiki.
 
 ## 2026-06-09
 
@@ -15,7 +16,7 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 
 - Added the personal work-agent goal as a maintained global contract with autonomy levels, non-goals, roadmap, and concrete capability tracks.
 - Aligned `graph/index.md`, `workflow.md`, `policy.md`, `code.md`, and `docs.md` around task-sized reading, goal intake, direct execution when the route is clear, matched verification, durable knowledge placement, and completion reporting.
-- Clarified evidence use across current workspaces, `D:\code`, memory, web sources, and target repositories while keeping project-specific commands and contracts local.
+- Clarified evidence use across current workspaces, local examples, memory, web sources, and target repositories while keeping project-specific commands and contracts local.
 - Reduced interpretation and maintenance drift by narrowing `theory.md`, adding portable wiki maintenance checks, and avoiding new nodes for completion reporting or independent review.
 - Expanded and bounded personal-agent regression prompts for cross-workspace application, current-request priority, route recovery, nested instructions, follow-through, completion report, independent review, stale evidence, reader-first explanation, clear task execution, and eval usage.
 
@@ -44,4 +45,4 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 ## 2026-05-30
 
 - Created the initial user-wiki structure and update loop.
-- Strengthened the connection for finding and checking the user-wiki from Desktop/CLI.
+- Strengthened the connection for finding and checking the user-wiki from local and CLI environments.

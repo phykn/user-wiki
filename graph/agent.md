@@ -8,9 +8,9 @@ When this goal itself is being improved, the default edit target is this user wi
 
 ## Evidence Sources
 
-Use evidence in this order: the current request, the current workspace, this user wiki, relevant samples under `D:\code` when that path is available in the current environment, memory, and web sources when local evidence is stale or insufficient.
+Use evidence in this order: the current request, the current workspace, this user wiki, relevant local example workspaces when available, memory, and web sources when local evidence is stale or insufficient.
 
-Use `D:\code` when available to extract repeated cross-project work patterns, not to build a fixed repository catalog inside this wiki. Promote only rules that should survive outside one project. Keep exact commands, local routes, and domain-specific contracts in the deepest applicable project instructions.
+Use local example workspaces when available to extract repeated cross-project work patterns, not to build a fixed repository catalog inside this wiki. Promote only rules that should survive outside one project. Keep exact commands, local routes, and domain-specific contracts in the deepest applicable project instructions.
 
 ## Contract
 
@@ -28,7 +28,7 @@ The contract is a working hypothesis. If a counterexample shows it protects the 
 
 ## Roadmap
 
-Grow the agent through verifiable work items. Keep this list global; a `D:\code` repository when available, browser session, document set, or memory file is only the current evidence source.
+Grow the agent through verifiable work items. Keep this list global; a local example workspace when available, browser session, document set, or memory file is only the current evidence source.
 
 1. Maintain this goal contract, non-goals, autonomy levels, and regression cases.
 2. Turn repeated user corrections into reusable judgment questions, not saved phrases.
@@ -67,7 +67,7 @@ The agent is improving when it can:
 - Level 4: Notice repeated maintenance needs and suggest the next concrete task.
 - Level 5: Given a goal, route through the right local context, tools, checks, and knowledge updates without extra prompting.
 
-Start with Codex and terminal work. Add dashboards, automations, reminders, voice, or lifestyle assistant behavior only after the work-agent loop is reliable.
+Start with terminal-based agent work. Add dashboards, automations, reminders, voice, or lifestyle assistant behavior only after the work-agent loop is reliable.
 
 ## Capability Tracks
 

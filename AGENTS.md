@@ -17,7 +17,7 @@ Current user requests, system/developer instructions, and project-local `AGENTS.
 When the user gives this repository as a Git URL, local checkout, or attached source and asks to "install this", "set up my user wiki", or similar:
 
 1. Treat the task as installing or updating the user's local user-wiki checkout, not as applying the wiki to the current target project.
-2. Use the active user's Codex home as the default install root, usually a `user-wiki` directory under `.codex`, unless the user gives another path. Report the actual path used.
+2. Use the path the user gives, an existing local checkout, or the current platform's configured location for user-level agent guidance. If no responsible location is discoverable, ask before choosing one. Report the actual path used.
 3. If the install path does not exist, clone the repository there.
 4. If the install path already exists, inspect `git status --short --branch` before changing it.
 5. Do not overwrite, reset, or delete local changes. If the checkout is dirty or the update cannot fast-forward, report the concrete state and ask before proceeding.

@@ -15,7 +15,7 @@ The goal is not tone matching. The goal is to let agents work autonomously in th
 
 ## Install Or Update
 
-When this repository is given as a Git URL and the request is "install this" or "set up my user wiki", install it as the local user-wiki checkout for the active user. Use the user's Codex home, usually a `user-wiki` directory under `.codex`, unless the user gives another path.
+When this repository is given as a Git URL and the request is "install this" or "set up my user wiki", install it as the local user-wiki checkout for the active user. Use the path the user gives, an existing local checkout, or the current platform's configured location for user-level agent guidance. If no responsible location is discoverable, ask before choosing one.
 
 If the checkout does not exist, clone the repository there. If it already exists, check local git status before updating it. Do not overwrite, reset, or delete local changes without the user's approval.
 
