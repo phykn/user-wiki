@@ -1,5 +1,10 @@
 Record only major user-wiki structural changes. Detailed rule text belongs in the responsible document.
 
+## 2026-06-21
+
+- Added work-continuity guidance so long or resumed tasks recover the latest request and verification target before continuing.
+- Added install/update guidance to the root entrypoints so a Git URL install request creates or updates the local user-wiki checkout instead of copying wiki prose into a target project.
+
 ## 2026-06-09
 
 - Added a portable `scripts/check-wiki.py` maintenance check and README structure entry so repeated wiki checks no longer live as a long inline command.

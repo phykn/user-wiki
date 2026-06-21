@@ -13,6 +13,41 @@ The goal is not tone matching. The goal is to let agents work autonomously in th
 - There is intentionally no root `index.md`; do not treat its absence as a fallback event.
 - Read only the graph pages related to the current task.
 
+## Install Or Update
+
+When this repository is given as a Git URL and the request is "install this" or "set up my user wiki", install it as the local user-wiki checkout. The default path for this user is:
+
+```text
+C:\Users\KN\.codex\user-wiki
+```
+
+If the directory does not exist, clone the repository there:
+
+```powershell
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.codex" | Out-Null
+git clone <repo-url> "$env:USERPROFILE\.codex\user-wiki"
+```
+
+If the directory already exists, update it only after checking local changes:
+
+```powershell
+git -C "$env:USERPROFILE\.codex\user-wiki" status --short --branch
+git -C "$env:USERPROFILE\.codex\user-wiki" pull --ff-only
+```
+
+Do not overwrite a dirty checkout. If local changes exist, report them and ask before changing files.
+
+After installing or updating, verify the route:
+
+```powershell
+Test-Path "$env:USERPROFILE\.codex\user-wiki\AGENTS.md"
+Test-Path "$env:USERPROFILE\.codex\user-wiki\graph\index.md"
+Set-Location "$env:USERPROFILE\.codex\user-wiki"
+python scripts\check-wiki.py
+```
+
+The useful result is not just a cloned repository. Future agents should be able to find this wiki, read `AGENTS.md`, then follow `graph/index.md` for the task at hand.
+
 ## Applying This Wiki Elsewhere
 
 Common use: give an AI this repository URL and ask it to reflect the wiki in another workspace, project, repository, or document set.
