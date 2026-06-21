@@ -5,6 +5,7 @@ Record only major user-wiki structural changes. Detailed rule text belongs in th
 - Added work-continuity guidance so long or resumed tasks recover the latest request and verification target before continuing.
 - Added install/update guidance to the root entrypoints so a Git URL install request creates or updates the local user-wiki checkout instead of copying wiki prose into a target project.
 - Generalized install and evidence wording away from product-specific or personal machine paths, and removed temporary planning artifacts from the durable wiki.
+- Trimmed `agent.md`, `policy.md`, and `docs.md` so long-term goals, update policy, and document-writing standards each keep a smaller role.
 
 ## 2026-06-09
 

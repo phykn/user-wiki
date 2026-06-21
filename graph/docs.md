@@ -14,6 +14,7 @@ Confirmed preferences for text artifacts that people read and execute, such as d
 - Do not repeat information already provided by the filename, path, parent context, title, or preceding sentence.
 - Treat writing the same information twice like code duplication: one side can change and create inconsistency.
 - When repeated explanation appears, remove one instance or turn it into a new non-repeating judgment criterion.
+- In problem/result sections, do not restate the same cause across multiple bullets; each bullet should have a distinct role such as current condition, practical risk, implemented change, or verified effect.
 - Keep usage restrictions only where needed; do not add long preventive restrictions before an actual problem has appeared.
 
 ## Wording
@@ -21,6 +22,7 @@ Confirmed preferences for text artifacts that people read and execute, such as d
 - Use easier words when meaning is not reduced.
 - When explaining functionality, prefer action wording the user can follow directly over abstractions.
 - Before writing, identify the reader, what they can already see, what they need to decide or do next, and what evidence they can inspect.
+- Section headings should be clear enough that a first-time reader can predict what belongs under them without knowing the author's internal shorthand.
 - Introduce terms, formulas, code, diagrams, and labels only after the text has created a reader-facing need for them; if confusion comes from explanation order, rebuild the flow instead of adding more explanatory sentences to the same structure.
 - For visible artifacts, do not assume the reader knows internal shorthand. At first mention, show the concrete object, action, and output clearly enough that the sentence can stand alone.
 - Do not write to display what the AI knows. If a detail does not help the reader understand the current object, judge it, or act on it, remove it.
@@ -43,17 +45,11 @@ Confirmed preferences for text artifacts that people read and execute, such as d
 
 ## Document Graph
 
-- Before creating or keeping a document or graph node, first decide whether the judgment is difficult enough to require an independent node.
-- If a short branch in the parent procedure is enough, do not leave it as an independent node.
-- A node may remain independent if removing it would make the next judgment longer or scatter it across multiple nodes.
+- Keep a document or graph node only when it owns a judgment that would become harder to find if absorbed elsewhere.
+- If a short branch in the parent procedure is enough, absorb it into the parent.
 - A node should have one core function and one visible work product.
-- If the next node has no artifact to read immediately, or only looks like preprocessing, treat it as an absorption candidate.
-- Separate candidate generation from candidate selection. A generation node should produce only a named candidate list, and a selection node should apply pass criteria from the first candidate onward.
-- If the previous node produced candidate order, do not create a separate filter node that repeats the same judgment.
-- A route-selection node should only choose the next node to read.
-- A route-selection node should distinguish default routes, conditional routes, and return routes, and one failure state should have only one return point.
-- Close the main execution path first; read auxiliary nodes only when the main execution path is actually blocked.
-- In a procedure graph, if a route-selection node or top-level router owns the next move, lower-level nodes should not repeat the next node. They should state only their own work and artifact.
+- Main routes should say what to read next. Lower-level nodes should not repeat routing that the parent already owns.
+- Close the main execution path before adding auxiliary branches.
 
 ## File Artifacts
 
