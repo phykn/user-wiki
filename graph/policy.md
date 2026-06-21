@@ -40,8 +40,6 @@ If these checks do not identify a reusable failure or confirmed preference, do n
 
 If the wiki was edited, check for empty documents, duplication, stale wording, broken links, and role overlap where relevant. `commands.md` may list repeated commands, but this document owns the requirement to check.
 
-Record major structural changes or changes spanning multiple documents in `changelog.md`. Do not repeat detailed rule text there.
-
 ## Placement
 
 - Put each rule in the one document future readers will use.
