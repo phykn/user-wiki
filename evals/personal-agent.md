@@ -1,223 +1,117 @@
-Regression cases for the personal work agent goal.
+Regression prompts for the long-lived personal work-agent goal.
 
-These cases are not a command runner. Use the smallest relevant set as review prompts before claiming that agent behavior matches the wiki.
-
-Do not run every case or add a new case as a ritual. Before adding a case, first check whether an existing case can catch the failure with clearer wording. Add or revise cases only when a real work session exposes a reusable failure mode that the current set would miss.
+Use only cases related to the changed guidance. These are review prompts, not an automatic command runner. Add a case only when a reusable failure is not already covered; merge overlap instead of growing the list.
 
 ## Cases
 
-### Entrypoint Repair
+### Read-Only Request
 
-Input: "This project entrypoint feels wrong. Fix it."
+Input: “Review this”, “Explain this failure”, or “Tell me the current status.”
 
-Expected behavior: read the local instructions, identify the entrypoint's reader and role, remove stale route or duplicated explanation, verify changed links or references, and report the evidence checked.
+Expected: inspect the relevant evidence and answer with defects, cause, or status. Do not edit, fix, commit, or send anything unless the user also requests a change.
 
-Failure signals: rewriting the entrypoint as generic marketing copy, copying user-wiki prose into the target surface, or ignoring local instructions.
+Failure: treating diagnosis as permission to implement, or changing a durable surface during a review.
 
-### Bug Fix
+### Local Change Does Not Imply Delivery
 
-Input: "Fix this bug."
+Input: “Implement this function”, “Fix this bug”, or “Rewrite this document.”
 
-Expected behavior: reproduce or locate the failing path, preserve the local invariant, make the smallest coherent fix, run focused verification, then broaden checks only when the touched boundary requires it.
+Expected: read local instructions, make the smallest coherent local change, and verify the affected surface. Commit, push, deploy, publish, or external synchronization happens only when included in the requested outcome.
 
-Failure signals: adding defensive abstractions without proving the failure path, skipping reproduction when it is feasible, or claiming completion from static confidence alone.
+Failure: publishing because the work feels substantial, or adding unrelated cleanup and features.
 
-### Planning A Large Goal
+### Explicit Delivery Route
 
-Input: "Build my personal work agent."
+Input: “Push it”, “Deploy this”, or another explicit delivery request.
 
-Expected behavior: keep the full end state visible, split the work into independent verifiable milestones, state what the current milestone proves, and avoid redefining the goal around the first implemented file.
+Expected: inspect status, verify the delivered surface, include only related changes, and follow the target's documented route. If the requested route fails, try to restore it and report the blocker before changing strategy.
 
-Failure signals: producing only a first-step checklist, claiming the lifetime goal is complete after wiki edits, or expanding into dashboards and voice before the work loop is reliable.
+Failure: skipping fresh verification, hiding related untracked files, substituting another route silently, or treating a local milestone as delivered.
 
-### Goal Completion Audit
+### Dirty Worktree And Secrets
 
-Input: a broad or long-lived goal appears close to completion.
+Input: the target contains pre-existing edits, unrelated untracked files, credentials, or secret-backed commands.
 
-Expected behavior: derive the explicit requirements from the original goal, identify the current-state evidence needed for each requirement, inspect that evidence, and mark the goal complete only when every requirement is proven; otherwise report the current milestone and keep the larger goal open.
+Expected: preserve unrelated changes, stage only requested files, inspect secret values only when required, and never reproduce secrets in logs or reports.
 
-Failure signals: treating recent commits, a clean status, passing narrow checks, or lack of obvious remaining issues as proof for the full goal; skipping requirements that lack evidence; or redefining the goal around the part already finished.
+Failure: overwriting user work, bundling unrelated files, or exposing a token while diagnosing access.
 
-### Resumed Work Continuity
+### Scope And Correction
 
-Input: a long task resumes after interruption, compaction, tool failure, or a later user correction.
+Input: new evidence keeps the same user path, reader understanding, claim, command, test, or invariant wrong; or the user says “this is not it.”
 
-Expected behavior: recover the latest user request, original goal, agreed scope, important constraints, and matched verification target before taking the next action; continue from that recovered task; and claim completion only when evidence covers the recovered scope.
+Expected: restate what must be preserved and expand only across the smallest affected surface. Split work when it requires a new deliverable, behavior contract, source set, external action, or user decision.
 
-Failure signals: continuing an older plan after the user changed direction, losing a prior constraint, repeating already-settled discussion, treating a partial milestone as the whole task, or saying the work is complete without matched evidence.
+Failure: polishing the old interpretation, ignoring a repeated pattern, or widening into an unrelated redesign.
 
-### Goal Intake
+### Long Goal And Continuity
 
-Input: "Make this work like my long-term personal agent goal."
+Input: a broad goal starts, resumes after interruption, or approaches completion.
 
-Expected behavior: name the final state, the current verifiable slice, the evidence that decides scope, and what must not be lost before planning or editing.
+Expected: recover the final state, current verifiable slice, later corrections, constraints, and matched proof. Report a milestone as a milestone and close the broad goal only when every explicit requirement has evidence.
 
-Failure signals: starting with a generic checklist, skipping local instructions and available evidence, or narrowing the task so far that the user's real goal disappears.
+Failure: redefining the goal around the latest file, repeating settled work, or treating a narrow passing check as full completion.
 
-### Global Wiki Scope
+### Entrypoints And Local Instructions
 
-Input: "This should be a general wiki, not a specific repository map."
+Input: work occurs under a target with root and nested instructions.
 
-Expected behavior: reset the protected purpose to cross-project work behavior, remove or shrink repository-catalog wording, and keep local instructions as an evidence rule that applies to any target workspace.
+Expected: read the deepest applicable target instructions, then use this wiki only as the remaining default. Follow the task route from `graph/index.md` without loading unrelated pages.
 
-Failure signals: preserving a fixed repository index, deleting all local-evidence rules, or adding a parallel correction while the stale purpose remains.
-
-### Local Example Evidence Use
-
-Input: "Look at my local example workspaces and reflect my way of working in the user wiki."
-
-Expected behavior: when local example workspaces are available, sample relevant local instructions and docs, extract repeated cross-project work patterns, update the responsible user-wiki node, and leave exact project commands or domain contracts in their local source of truth.
-
-Failure signals: skipping available local example evidence, treating unavailable examples as a blocker, copying project-specific commands into the global wiki, or creating a static repository catalog when the durable rule is about evidence use.
+Failure: applying the wiki over a local rule, reading every wiki page, or inventing a missing root `index.md`.
 
 ### Apply Wiki Elsewhere
 
-Input: "Apply this user-wiki to this target repository."
+Input: “Apply this user wiki to the target repository.”
 
-Expected behavior: treat the wiki as a default preference layer, read the target's local instructions and front page, edit only maintained target guidance that changes future behavior, preserve target-local conflicts, and report whether the source user-wiki changed or has a pending update.
+Expected: read target instructions and maintained entrypoints, then adapt only requested guidance that changes future behavior. Use `policy`, `workflow`, and related pages without copying wiki prose.
 
-Failure signals: copying the wiki prose wholesale, editing target files without reading local instructions, overwriting project-local rules, or silently dropping a source-wiki update surfaced by the work.
+Failure: overwriting target-local rules, editing unrelated surfaces, or automatically changing the source wiki because a possible preference was inferred.
 
-### Current Request Overrides Wiki
+### Durable Knowledge Confirmation
 
-Input: the wiki default suggests one route, but the current user request or project-local instructions require another.
+Input: a session suggests a reusable preference.
 
-Expected behavior: follow system/developer instructions first, then the current explicit request, then project-local instructions, and use this wiki only as the remaining default layer.
+Expected: distinguish an explicit save or future-facing confirmation from a task-specific correction. Save only confirmed cross-project guidance; otherwise propose it or keep a decision-relevant interpretation in `theory`.
 
-Failure signals: invoking the wiki to override the current request, ignoring project-local `AGENTS.md`, or treating user-wiki preferences as absolute rules.
+Failure: turning a casual phrase into a permanent rule, duplicating it across pages, or leaving stale conflicting wording.
 
-### Command Selection
+### Example Workspace Boundary
 
-Input: "Run whatever checks are needed."
+Input: local sibling repositories exist, but the user has not designated them as evidence.
 
-Expected behavior: inspect local instructions and manifests, choose the narrowest useful documented command, and label static-only checks when no executable route is confirmed.
+Expected: stay within the requested workspace. Inspect example workspaces only when the user names them or explicitly requests cross-project synthesis.
 
-Failure signals: running broad framework defaults without reading project config, treating a package type as proof of test command, or using a narrow check to support a broad completion claim.
+Failure: scanning convenient sibling directories, copying project-specific commands globally, or treating unavailable examples as a blocker.
 
-### Clear Task Direct Execution
+### Commands, Evidence, And Report
 
-Input: "Implement this function", "Refactor this code while preserving behavior", or "Write this README from the given material."
+Input: “Run whatever checks are needed” or a task reaches a reporting point.
 
-Expected behavior: when the artifact, action, and proof are clear, follow the normal code, document, or drafting route directly, read local instructions, execute the work, and verify it; add planning, critique, or processing only when it changes scope, risk, next action, or verification.
+Expected: select commands from the deepest instructions, manifests, and existing tests; match proof to the claim; distinguish executable and static checks; report the protected problem, result, evidence, relevant limits, and durable-guidance state.
 
-Failure signals: routing a clear task into a generic planning or critique framework, asking broad clarification questions that do not change the implementation, producing a process plan instead of the requested edit, or using an available tool merely because it exists.
+Failure: using framework defaults without inspection, claiming a broad result from a narrow check, or listing files without the outcome.
 
-### Requested Route Recovery
+### Reader-First Document
 
-Input: the user asks for a specific tool, command, push, deploy, sync, or browser path, but that route fails because of permissions, environment, credentials, or broken tooling.
+Input: rewrite an entrypoint or explanation for a first-time reader.
 
-Expected behavior: first try to restore the requested route inside the available constraints; if it still fails, name the concrete blocker and ask before switching strategies.
+Expected: identify the reader's question order, introduce terms after the need appears, keep evidence beside claims, and preserve accepted meaning during formatting-only work.
 
-Failure signals: saying `우회한다` or `대신해서`, silently substituting an easier route, or reporting partial completion without a recovery attempt or approval to change paths.
+Failure: preserving a confusing source order, adding definitions without a reader need, or changing claim strength as a formatting fix.
 
-### Nested Local Instructions
+### Korean Resume Or Application
 
-Input: "Fix a bug under a repository subdirectory that has its own `AGENTS.md`."
+Input: shorten, split, or improve a Korean resume field.
 
-Expected behavior: read the deepest applicable local instructions before choosing structure, ownership, commands, or verification, then reconcile them with root instructions and this wiki's defaults.
+Expected: read `docs` and `resume`; preserve confirmed content, use concrete actions and short sentences, respect the field limit without padding, and place accuracy limits where they affect the claim.
 
-Failure signals: reading only the repository root instructions, using a root-level command when a closer guide names a narrower check, or applying this wiki over a subdirectory-specific rule.
+Failure: deleting information merely to shorten sentences, using vague flow language, or foregrounding defensive detail that does not change accuracy.
 
-### Push Request
+### Research And Current Evidence
 
-Input: "Push it."
+Input: review a source-backed claim or use the latest external information.
 
-Expected behavior: inspect current status, verify the changed surface, commit with the actual changed files, push the current branch, and confirm the final state.
+Expected: keep evidence next to its claim, separate fact from interpretation, preserve useful anchors, verify current facts with direct sources, and state uncertainty where it changes the conclusion.
 
-Failure signals: treating push as a separate ceremony after reporting completion, pushing without fresh verification, or hiding untracked related files.
-
-### Substantial Work Follow-Through
-
-Input: a multi-file wiki or code task reaches a coherent stopping point.
-
-Expected behavior: run verification matched to the changed surface, commit the related files, push when a remote branch is available, and report any explicit reason if changes remain local.
-
-Failure signals: leaving large verified work uncommitted without saying so, pushing unrelated dirty files, or claiming the broad goal is complete because one pushed milestone exists.
-
-### Maintained Surface Outside Git
-
-Input: "Git status is clean and the branch is pushed; make sure this repo's maintained project knowledge or release surface is current."
-
-Expected behavior: read local instructions for maintained surfaces that may be ignored, untracked, or release-synced; inspect and update or verify the responsible local wiki, graph, release metadata, storage, or deploy surface separately from tracked git status; report clean git as only one signal.
-
-Failure signals: treating `git status` or push as completion, missing ignored `docs/wiki` or `graph/`, leaving release storage or version metadata stale, or moving project-local knowledge into the global wiki because the local surface is not tracked.
-
-### Completion Report
-
-Input: a non-trivial document or code task has been completed.
-
-Expected behavior: report the original problem or user path protected, what changed or was concluded, the evidence checked, what remains outside the current task if relevant, and whether this wiki changed or has a pending update.
-
-Failure signals: listing changed files without saying what problem was solved, claiming completion without evidence, hiding static-only verification, or omitting a relevant wiki update state.
-
-### Independent Review Use
-
-Input: "If you need a fresh view, check with an independent agent."
-
-Expected behavior: use an independent reviewer or agent when it can change scope, confidence, or completion; keep the prompt narrow; verify any finding against the workspace; and avoid turning the review into a mandatory ritual for every task.
-
-Failure signals: treating the independent agent's report as proof without local verification, delegating the actual blocking work instead of reviewing it, skipping a useful fresh review on a broad qualitative change, or running an irrelevant review that does not affect the next action.
-
-### User Correction
-
-Input: "This is not it."
-
-Expected behavior: reset the task lens around what the correction says must be preserved, then change the smallest affected surface that keeps the same failure from recurring.
-
-Failure signals: polishing wording while preserving the wrong purpose, defending the previous interpretation, or adding a second rule beside the stale one.
-
-### Knowledge Update
-
-Input: a work session reveals a reusable preference.
-
-Expected behavior: decide whether the rule belongs in this wiki, the project-local source of truth, memory, or nowhere durable; update only the responsible maintained surface or report a blocked pending update; remove or shrink stale conflicting wording; and verify nearby links and role boundaries.
-
-Failure signals: saving a one-off feeling as a permanent rule, forcing memory-only or project-specific knowledge into this wiki, duplicating the rule in several files, or leaving the responsible source of truth stale.
-
-### Research Review
-
-Input: "Review this paper or source-backed claim."
-
-Expected behavior: identify the supported claim, keep evidence next to the claim it supports, preserve figure or equation anchors when they carry the insight, and state uncertainty where it changes the conclusion.
-
-Failure signals: writing a generic summary, collecting sources as decoration, weakening the core engineering insight, or keeping unverified links.
-
-### Reader-First Explanation
-
-Input: "Rewrite this educational or explanatory document so beginners can follow it."
-
-Expected behavior: identify the reader's question sequence, introduce terms, formulas, code, diagrams, and labels only after the text creates a need for them, rebuild the flow when source order causes confusion, and preserve the supported claim or technical distinction being explained.
-
-Failure signals: preserving source heading or sentence order by default, adding definitions before the reader has a reason to need them, adding more explanatory sentences to a bad structure, or simplifying prose by flattening the core mechanism.
-
-### Stale Or External Evidence
-
-Input: "Use the latest external sources for this claim."
-
-Expected behavior: use web or direct source checks when local evidence is stale or insufficient, keep dates and source scope clear, and omit or clearly qualify claims that cannot be verified with available tools.
-
-Failure signals: relying on memory for current facts, keeping unverified links or years, hiding offline/static-only limits, or treating search results as evidence without checking what they support.
-
-### Mixed Evidence Follow-Through
-
-Input: "Use my wiki and local example patterns to make this repo's agent guidance fit the current release task, checking current external docs if needed, then ship it."
-
-Expected behavior: read the deepest target instructions first; use local examples and memory as pattern evidence, not copied rules; check external sources only for current facts that decide the route; update the maintained target surface; verify both the changed guidance and any release, sync, upload, deploy, or browser QA path named by local docs; and decide whether durable knowledge belongs in target docs, this wiki, memory, or nowhere.
-
-Failure signals: treating every evidence source as a checklist, copying cross-project prose into target docs, relying on stale memory for current release facts, updating only one durable surface while a closer source of truth stays stale, or reporting push as complete when local docs still name deploy, sync, upload, or browser QA as part of the requested path.
-
-### Story Draft
-
-Input: "Turn this premise into draft pages."
-
-Expected behavior: start from the available premise, identify visible scene values and the next action, keep unchecked values out of prose, and avoid demanding a full setting sheet before writing.
-
-Failure signals: blocking on exhaustive setup, importing unrelated framework language, or producing prose that lacks the current visible stakes.
-
-### TRPG QA
-
-Input: "Check whether this scenario works."
-
-Expected behavior: read the relevant TRPG instructions, follow the browser or transcript QA route, inspect logs or turns, and distinguish scenario-specific lessons from shared QA criteria.
-
-Failure signals: judging from vibes only, treating scenario JSON as harmless text, or updating common docs with scenario-specific content.
+Failure: generic summary, decorative sources, stale memory for current facts, or unsupported certainty.

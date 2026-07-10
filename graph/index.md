@@ -1,40 +1,29 @@
-Shared user work guidance for multiple projects.
+Shared user guidance for work across projects.
 
-This document set is the user's personal wiki / user wiki.
+Canonical route: `AGENTS.md` -> `graph/index.md`. Read only pages that can change the current action, wording, evidence, or report.
 
-The root `AGENTS.md` is the entrypoint for agents, and this `graph/` folder contains the actual wiki nodes.
-This wiki starts from a minimal document set and accumulates only preferences that apply across multiple projects.
+## Route
 
-Canonical route: `AGENTS.md` -> `graph/index.md`.
-Do not search for or narrate a missing root `index.md` unless a user request explicitly depends on it.
+- One-off results such as a time check, short translation, or single command output: answer directly.
+- Ordinary work: read [[intuition]], then [[workflow]].
+- Durable guidance or wiki boundaries: also read [[policy]].
+- Code changes or code review: also read [[code]].
+- Documents, prompts, or wikis: also read [[docs]].
+- Resumes or applications: read [[docs]] and [[resume]].
+- The long-lived personal work-agent goal: also read [[agent]].
+- Uncertain user interpretation that still affects the answer: read [[theory]] only as a tie-breaker.
+- Wiki maintenance commands: read [[commands]].
 
-The central aim is autonomous work in the user's way. The wiki should change how an agent chooses scope, asks questions, handles evidence, revises plans, and reports results; it should not only change tone.
+When applying this wiki to another workspace, [[policy]] and [[workflow]] are required. Target-local instructions remain authoritative over this wiki.
 
-## Usage
+## Pages
 
-First size the task before expanding the reading path.
-
-- For one-off work such as checking the time, a short translation, or a single command result, do not run the full wiki route.
-- For ordinary non-trivial work, read [[intuition]] to frame what matters, then read [[workflow]] for the execution route.
-- Read [[policy]] when the task may create, update, or reinterpret durable guidance, document boundaries, or wiki priority.
-- Read other pages only when they change scope, evidence, wording, implementation, or reporting for the current task.
-- Read [[agent]] when the task is part of the long-lived personal work-agent goal or needs a full goal-to-verification loop.
-- Apply confirmed preferences as defaults.
-- If the current user request, system/developer instructions, or project instructions conflict with this wiki, they take precedence over this wiki.
-
-When applying this wiki to another workspace, [[policy]] and [[workflow]] are required related pages: [[workflow]] owns the target application path, and [[policy]] owns source-wiki update, document boundary, and priority rules.
-
-## Documents
-
-Current documents:
-
-- [[intuition]]: Short judgment lens for deciding what must be protected before acting.
-- [[agent]]: Long-lived goal and contract for the personal work agent.
-- [[policy]]: Operating contract for wiki updates, boundaries, and priority.
-- [[workflow]]: Scenario-based execution guidance for common work situations.
-- [[code]]: Confirmed principles for code edits, refactoring, and tests.
-- [[docs]]: Confirmed structure and wording standards for documents, wikis, prompts, and work instructions.
-- [[theory]]: Current interpretation used to better align answers with the user.
-- [[commands]]: Repeated commands for checking and maintaining the wiki.
-
-Document creation and update rules follow [[policy]].
+- [[intuition]]: judgment questions before acting.
+- [[workflow]]: shared execution and mutation boundaries.
+- [[policy]]: durable-knowledge confirmation, placement, and priority.
+- [[code]]: confirmed code-edit preferences.
+- [[docs]]: general document and graph preferences.
+- [[resume]]: Korean resume and application preferences.
+- [[agent]]: long-lived personal work-agent goal.
+- [[theory]]: provisional interpretations.
+- [[commands]]: wiki maintenance commands.

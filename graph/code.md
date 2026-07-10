@@ -1,50 +1,24 @@
-Confirmed principles for code edits, refactoring, bug fixes, and test writing.
+Confirmed preferences that change how code work is scoped and verified.
 
-## Before Implementation
+## Decide
 
-- State only assumptions that affect behavior, API, data ownership, user-facing outcome, verification, or risk.
-- Surface multiple interpretations only when choosing among them changes implementation or verification.
-- If there is a simpler approach, say so.
-- Read the deepest applicable local instructions before choosing structure, tests, or ownership.
-- Do not list every possible technique or architecture. Tie coding questions and proposals to the user's intent, the current codebase, and the decision that would change the implementation.
-- Ask before coding only when the answer changes behavior, API, data ownership, user-facing outcome, or verification target.
-- If something is unclear, identify the confusion point and ask only the question that resolves it.
+- State only assumptions that change behavior, API, data ownership, user-visible outcome, verification, or risk.
+- Ask only when the answer changes one of those decisions.
+- Read the deepest applicable local instructions before choosing structure, ownership, or commands.
 
-## Simplicity
+## Scope
 
-- Do not add features that were not requested.
-- Do not create an abstraction for code used only once.
-- Do not add unrequested flexibility or configurability.
-- Do not add defensive code for impossible situations.
-- If the implementation grows large, look again for a smaller solution.
-- Prefer the smallest implementation that preserves the user's important intent and resolves the real structural cause over a broader design that only demonstrates knowledge.
+Prefer the smallest coherent change that preserves the user's intent and fixes the structural cause.
 
-## Edit Scope
+Touch neighboring code when leaving it unchanged would preserve the same failing path, command, test, public meaning, or local invariant. Broaden the structure only when a local patch would keep the wrong ownership or shape; report why.
 
-- Keep changes tied to the requested problem and the affected neighborhood it relies on.
-- If local structure blocks the requested behavior or makes the result incoherent, clean that neighborhood enough to make the requested work coherent and maintainable.
-- If a broader structure is clearly the durable fix and the local patch would preserve the wrong shape, prefer the broader structure and report why the scope expanded.
-- Do not edit neighboring code, comments, or formatting without a reason.
-- Do not refactor code that is unrelated to the requested problem.
-- Follow the existing style.
-- Do not delete unrelated dead code; mention it if needed.
-- Clean up unused imports, variables, and functions introduced by your changes.
+Do not use a new API, dependency, behavior contract, or unrelated cleanup to solve a narrower request without a separate decision.
 
-## Structure Cleanup
+For generated-output problems, fix the source data, prompt, or contract before adding correction layers when feasible.
 
-- If several files for the same sub-concept have accumulated, consider grouping them into a folder or package.
-- Even when cleaning up structure, preserve existing public paths when possible.
+## Verify
 
-## Generated Output Fixes
-
-- For generated output problems, do not first add more post-processing correction logic.
-- When possible, fix the source contract, prompt, or data first.
-
-## Success Criteria
-
-- Turn work into a verifiable goal.
-- For bug fixes, reproduce the issue before fixing it.
-- If a verifiable test exists, create or update it first.
-- For refactoring, confirm behavior is the same before and after.
-- For multi-step work, keep a short verification method for each step.
-- For public-surface or release-facing changes, verify the related README, wrappers, manifests, generated assets, or deploy/sync state that users actually consume.
+- Reproduce a bug before fixing it when reproduction is safe and practical. Otherwise state the static evidence and remaining risk.
+- When a focused regression test is suitable, make it demonstrate the failure and the fix.
+- For refactoring, compare behavior before and after.
+- Match verification to the affected surface: focused test, build, lint, reproduction, rendered output, public wrapper, manifest, or delivery state.

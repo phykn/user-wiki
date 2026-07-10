@@ -1,39 +1,30 @@
 ## User Wiki
 
-This project is the user's personal wiki.
+This repository is the user's cross-project guidance for agents.
 
-The canonical route is `AGENTS.md` -> `graph/index.md`.
-There is intentionally no root `index.md` entrypoint in this repo.
-Do not report those root files as missing unless their absence actually blocks the task.
+The canonical route is `AGENTS.md` -> `graph/index.md`. There is intentionally no root `index.md`.
+For work that needs user-specific guidance, read `graph/index.md` and only the pages it routes to.
 
-For non-trivial work, first read `graph/index.md` and follow its reading order.
-Read only the related user-wiki pages beyond that.
+Apply this wiki as a default after system and developer instructions, the current user request, and the target project's local instructions.
 
-Apply confirmed user-wiki documents as project-common default preferences.
-Current user requests, system/developer instructions, and project-local `AGENTS.md` files take precedence over the user wiki.
+## Install Or Update
 
-## Installing This Wiki
+When the user asks to install or update this wiki:
 
-When the user gives this repository as a Git URL, local checkout, or attached source and asks to "install this", "set up my user wiki", or similar:
+1. Use the path the user gives, an existing checkout, or the platform's configured user-guidance location. Ask before inventing a location.
+2. If the checkout exists, inspect `git status --short --branch`. Do not overwrite local changes or update a branch that cannot fast-forward.
+3. Clone or update the checkout, then verify `AGENTS.md` and `graph/index.md`.
+4. Check the configured user-level agent guidance. It must point to the installed checkout and tell future agents when to consult it. Preserve existing guidance; report a pending pointer update if it cannot be changed safely.
+5. Run `python scripts/check-wiki.py` when Python is available.
+6. Report the path, clone or update result, verification, pointer state, and untouched local changes.
 
-1. Treat the task as installing or updating the user's local user-wiki checkout, not as applying the wiki to the current target project.
-2. Use the path the user gives, an existing local checkout, or the current platform's configured location for user-level agent guidance. If no responsible location is discoverable, ask before choosing one. Report the actual path used.
-3. If the install path does not exist, clone the repository there.
-4. If the install path already exists, inspect `git status --short --branch` before changing it.
-5. Do not overwrite, reset, or delete local changes. If the checkout is dirty or the update cannot fast-forward, report the concrete state and ask before proceeding.
-6. After cloning or updating, verify that `AGENTS.md` and `graph/index.md` exist, then run `python scripts/check-wiki.py` when Python is available.
-7. Report the installed path, whether this was a clone or update, the verification result, and any local changes left untouched.
+## Apply To Another Workspace
 
-## Applying This Wiki Elsewhere
+When the user asks to apply this wiki elsewhere:
 
-When the user gives this wiki as a URL, local checkout, attached document set, or other source and asks to "reflect" or "apply" it to another workspace, repository, or document set:
-
-1. Treat this wiki as a default preference layer, not as content to copy wholesale.
-2. The goal is autonomous work in the user's way, not tone matching or copying wiki prose.
-3. Read `graph/index.md` and the related pages for the target task. For this cross-workspace task, `graph/policy.md` and `graph/workflow.md` are required related pages.
-4. Inspect the target's own instructions, front page, and relevant docs before editing.
-5. Create or update the target's agent-facing or front-page guidance only where it changes future behavior.
-6. Preserve target-local instructions when they conflict with this wiki.
-7. If the work reveals a new or corrected project-common preference, update this source user-wiki too when it is writable.
-8. If this source user-wiki is not writable or not checked out, report the pending user-wiki update explicitly instead of silently dropping it.
-9. Report which target files changed, whether this source wiki changed, and which wiki preferences drove the change.
+1. Read the target's deepest applicable instructions and maintained entrypoints.
+2. Read `graph/index.md`, `graph/policy.md`, `graph/workflow.md`, and task-related pages.
+3. Treat the wiki as defaults, not prose to copy. Preserve target-local rules.
+4. Change only requested maintained target surfaces where the guidance changes future behavior.
+5. Propose any newly inferred cross-project preference. Update this source wiki only when the user explicitly asks to save or apply it durably.
+6. Report target changes, verification, and whether the source wiki changed or has a proposed update.
