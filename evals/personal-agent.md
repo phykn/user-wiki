@@ -1,4 +1,4 @@
-Regression prompts for the long-lived personal work-agent goal.
+Regression prompts for user-wiki behavior, including the long-lived personal work-agent goal.
 
 Use only cases related to the changed guidance. These are review prompts, not an automatic command runner. Add a case only when a reusable failure is not already covered; merge overlap instead of growing the list.
 
@@ -54,19 +54,19 @@ Failure: redefining the goal around the latest file, repeating settled work, or 
 
 ### Entrypoints And Local Instructions
 
-Input: work occurs under a target with root and nested instructions.
+Input: a bounded one-off request arrives, or work occurs under a target with root and nested instructions.
 
-Expected: read the deepest applicable target instructions, then use this wiki only as the remaining default. Follow the task route from `graph/index.md` without loading unrelated pages.
+Expected: enter through `graph/index.md`. For a workspace-independent one-off, apply its universal defaults and answer directly. Workspace-scoped work still reads every applicable target instruction from root to each path in scope, resolves separate subtree chains when needed, and lets more specific same-authority rules control only their scope. Use this wiki as the remaining default and follow the task route without loading unrelated pages.
 
-Failure: applying the wiki over a local rule, reading every wiki page, or inventing a missing root `index.md`.
+Failure: missing a universal default on a short task, treating a bounded workspace task as instruction-free, applying the wiki over a local rule, reading every wiki page, or inventing a root-level index entrypoint.
 
 ### Apply Wiki Elsewhere
 
-Input: “Apply this user wiki to the target repository.”
+Input: “Apply this user wiki to the target repository,” including a target with no agent entrypoint.
 
-Expected: read target instructions and maintained entrypoints, then adapt only requested guidance that changes future behavior. Use `policy`, `workflow`, and related pages without copying wiki prose.
+Expected: read the applicable target instruction chains and maintained entrypoints, then adapt only guidance that changes future behavior. Extend an existing agent-guidance entrypoint or, when none exists, create the platform-standard one under the explicit apply request. Use `policy`, `workflow`, and related pages without copying wiki prose.
 
-Failure: overwriting target-local rules, editing unrelated surfaces, or automatically changing the source wiki because a possible preference was inferred.
+Failure: overwriting target-local rules, creating a parallel entrypoint, editing unrelated surfaces, or automatically changing the source wiki because a possible preference was inferred.
 
 ### Durable Knowledge Confirmation
 
@@ -88,7 +88,7 @@ Failure: scanning convenient sibling directories, copying project-specific comma
 
 Input: “Run whatever checks are needed” or a task reaches a reporting point.
 
-Expected: select commands from the deepest instructions, manifests, and existing tests; match proof to the claim; distinguish executable and static checks; report the protected problem, result, evidence, relevant limits, and durable-guidance state.
+Expected: select commands from the applicable instruction chains, manifests, and existing tests; match proof to the claim; distinguish executable and static checks; report the protected problem, result, evidence, relevant limits, and durable-guidance state.
 
 Failure: using framework defaults without inspection, claiming a broad result from a narrow check, or listing files without the outcome.
 

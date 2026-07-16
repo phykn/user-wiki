@@ -30,8 +30,9 @@ After a wiki edit, check the main reading route, duplication, stale wording, rol
 
 ## Priority
 
-1. System and developer instructions.
-2. The current explicit user request.
-3. Target-project instructions.
-4. Confirmed pages in this wiki.
-5. [[theory]] as a final tie-breaker.
+Follow system and developer instructions, including applicable local instruction files at the authority level where they are supplied. For choices they leave open:
+
+1. The current explicit user request where it does not conflict with higher-authority instructions.
+2. Target-local conventions and maintained documentation not already covered above.
+3. Confirmed pages in this wiki.
+4. [[theory]] as a final tie-breaker.

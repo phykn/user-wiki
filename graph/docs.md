@@ -1,4 +1,4 @@
-Confirmed preferences for documents, wikis, prompts, and work instructions.
+Confirmed preferences for documents, research, wikis, prompts, and work instructions.
 
 ## Reader And Order
 
@@ -32,6 +32,7 @@ Do not turn a device that worked for one document into a rule for every document
 
 - Extract the transferable structure from a strong example instead of copying its domain details.
 - Put evidence directly beside the claim it supports.
+- Verify time-sensitive external facts against current direct sources, and show the relevant date or scope when it changes the conclusion.
 - Use caveats to narrow a claim, not to make the whole document vague.
 - Separate fact from interpretation and make uncertainty visible where it changes the conclusion.
 - A compact problem summary should state what exists, what is needed, and why the gap is difficult.
@@ -40,10 +41,13 @@ A strong explanatory section often moves through the starting condition, practic
 
 ## Document Graph
 
+- Put always-on defaults in the entrypoint; put conditional guidance behind the route that names its trigger.
+- Keep graph nodes flat. Register every page in both `graph/index.md` sections: `Route` names its reading trigger, and `Pages` names its responsibility.
+- Link each eval file from the graph page or maintenance route that tells future agents when to review it.
 - Keep a page only when it owns a judgment that would be harder to find inside its parent.
 - A page has one core function and one visible work product.
 - Absorb a short conditional branch into the parent when a separate page adds no routing value.
-- Entrypoints own reading routes; lower pages do not repeat them.
+- Entrypoints own task-to-page reading routes; lower-page links only name a dependency or responsible source.
 - Close the main execution path before adding auxiliary branches.
 
 ## Files, Sources, And Records

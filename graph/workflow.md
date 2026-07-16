@@ -1,7 +1,5 @@
 Shared execution guidance after [[intuition]].
 
-Default response language is Korean unless the user asks otherwise or the artifact requires another language.
-
 Ask only when the answer changes the next action, implementation, claim, or risk. If available evidence decides the route, proceed.
 
 ## Authority
@@ -19,12 +17,14 @@ Preserve pre-existing and unrelated working-tree changes. Stage only files that 
 
 Do not read secret values unless the requested operation requires them. Never reproduce secrets in tool output or the final report.
 
+Read every applicable instruction file from the target root to each path in scope, resolving the chain separately for each affected subtree. Within the same authority, a more specific nested rule controls only its scope.
+
 ## Work Loop
 
 For work with a local change or more than one proof target:
 
 1. Name the requested outcome and what would make it a different task.
-2. Read the deepest applicable local instructions and the smallest reliable evidence.
+2. Read the applicable local instruction chains and the smallest reliable evidence.
 3. Make the smallest coherent change that resolves the protected failure.
 4. Verify with evidence matched to the changed surface.
 5. Check whether a confirmed durable update was explicitly requested.
@@ -37,7 +37,7 @@ Do not turn planning, critique, or tool use into a separate ritual when the arti
 
 Prefer commands run, reproduced behavior, rendered output, checked sources, inspected diffs, or direct rereading. If execution is unavailable, state what static reasoning proves and what remains uncertain.
 
-Choose commands from the deepest applicable instructions, README, manifest, or existing tests. Label inferred commands and static-only checks. A narrow passing check does not prove a broader outcome.
+Choose commands from the applicable instruction chains, README, manifest, or existing tests. Label inferred commands and static-only checks. A narrow passing check does not prove a broader outcome.
 
 For work with several meaningful surfaces, keep each surface independently checkable. Before reporting completion, compare the result with the original request and later corrections.
 

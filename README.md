@@ -6,7 +6,7 @@ The goal is practical behavior: choosing scope, asking only consequential questi
 
 ## Start
 
-Agents start at `AGENTS.md`, then follow `graph/index.md` to the smallest set of related pages. There is intentionally no root `index.md`.
+Agents start at `AGENTS.md`, then follow `graph/index.md` to the smallest set of related pages. There is intentionally no root-level index entrypoint.
 
 ## Install And Apply
 
@@ -16,4 +16,4 @@ See `AGENTS.md` for the authoritative install and application procedures.
 
 ## Priority
 
-This wiki is a default layer. System and developer instructions, the current request, and target-local instructions take precedence.
+This wiki is a default layer. Follow the platform's instruction hierarchy and use the wiki only within the discretion left by the current request and applicable target-local guidance.
