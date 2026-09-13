@@ -2,69 +2,47 @@ Confirmed preferences for documents, research, wikis, prompts, and work instruct
 
 ## Reader And Order
 
-Before writing, identify the reader, what they can already see, what they need to decide or do next, and what evidence they can inspect.
+Write for the reader's next question or decision and the evidence they can inspect.
 
 - A README or first screen should explain what the project is, why it matters, and whether the reader needs it before internal structure.
-- Use headings whose contents a first-time reader can predict.
-- Introduce a term, formula, diagram, label, or code only after the text creates a need for it.
-- When explanation order causes confusion, rebuild the flow instead of adding sentences to the same structure.
-- At first mention, name the concrete object, action, and output closely enough to stand without hidden context.
-- Prefer easy words and direct actions. Replace abstractions with what executes, changes, returns, displays, or remains.
-- If a rule list hides execution order, rewrite it as the actual sequence of actions.
-- Remove details that do not help the reader understand, judge, or act.
+- Use predictable headings and introduce terms, diagrams, or code after the need appears.
+- Fix confusing explanation order before adding sentences. Express procedures in execution order.
+- Name concrete objects, actions, and outputs with easy words, without relying on hidden context.
+- Prefer reducing content to adding it. Add only what the reader needs to understand, judge, or act; preserve necessary meaning.
 
 ## Names And Duplication
 
-- Prefer short noun filenames. Do not repeat type prefixes already supplied by the path or parent.
-- If the filename already acts as the title, do not repeat it as the first body line.
-- In a graph, avoid base filenames that look like duplicate nodes.
-- Do not repeat information supplied by a filename, heading, preceding sentence, or responsible page.
-- When two passages express the same rule, keep it in the page future readers will use.
-- In problem and result sections, give each bullet a distinct role rather than restating the same cause.
+- Prefer short noun filenames without redundant type prefixes or duplicate-looking graph names.
+- Avoid repeating what a filename, heading, nearby sentence, or responsible page already supplies. Give each bullet a distinct role.
 
 ## Editing Boundaries
 
-Formatting-only edits preserve accepted claims, names, technical scope, and meaning. Follow [[workflow]] when a wording change could alter interpretation or claim strength.
+Formatting-only edits preserve accepted claims, names, technical scope, and meaning. Resolve consequential ambiguity under the question rule in `graph/index.md`.
 
-Do not turn a device that worked for one document into a rule for every document. Keep it only when the task type or evidence provides the trigger.
+Use a technique from another document only when the task calls for it.
 
 ## Evidence
 
-- Extract the transferable structure from a strong example instead of copying its domain details.
-- Put evidence directly beside the claim it supports.
-- Verify time-sensitive external facts against current direct sources, and show the relevant date or scope when it changes the conclusion.
-- Use caveats to narrow a claim, not to make the whole document vague.
-- Separate fact from interpretation and make uncertainty visible where it changes the conclusion.
-- A compact problem summary should state what exists, what is needed, and why the gap is difficult.
-
-A strong explanatory section often moves through the starting condition, practical effect, limit, cost of alternatives, supported claim, and next question. Use that order only when each part helps the reader.
+- Extract an example's transferable structure without copying domain details.
+- Put evidence beside its claim. Verify time-sensitive facts with current direct sources.
+- Separate fact from interpretation; state dates, scope, and uncertainty where they change the conclusion.
+- A problem summary should state what exists, what is needed, and why the gap is difficult.
 
 ## Document Graph
 
-- Put always-on defaults in the entrypoint; put conditional guidance behind the route that names its trigger.
+- Entrypoints own task-to-page routes; lower-page links identify dependencies or responsible sources.
 - Keep graph nodes flat. Register every page in both `graph/index.md` sections: `Route` names its reading trigger, and `Pages` names its responsibility.
 - Link each eval file from the graph page or maintenance route that tells future agents when to review it.
-- Keep a page only when it owns a judgment that would be harder to find inside its parent.
-- A page has one core function and one visible work product.
-- Absorb a short conditional branch into the parent when a separate page adds no routing value.
-- Entrypoints own task-to-page reading routes; lower-page links only name a dependency or responsible source.
-- Close the main execution path before adding auxiliary branches.
+- Keep a separate page only when its responsibility and conditional route make guidance easier to find.
 
 ## Files, Sources, And Records
 
-- Route a file-producing process by the file that remains and the next file to read.
-- Keep rule documents separate from runtime work files. Create work files only during actual execution.
-- When several inputs are processed, preserve their identity in summaries and filenames.
-- Preserve a source list as one baseline before adding interpretation. Put claims, priorities, or positioning in a separate maintained surface.
+- Make the output file and next input clear in file-producing processes; keep runtime work files separate from rules.
+- Preserve input identities in summaries and filenames, and keep source lists separate from interpretation.
 - When copied browser or form text lacks a value, mark it text-unverified unless the visible state proves it is empty.
-- A reusable process record stores question order, judgment criteria, and next-action selection rather than a result log.
+- Reusable process records store question order, judgment criteria, and next-action selection.
 - Express a long-term goal as an operating contract with success criteria, non-goals, and verification signals.
 
 ## Check
 
-Before finishing:
-
-1. Remove duplicate wording, unnecessary prohibitions, and detail that does not change understanding or action.
-2. Read the main path from the entrypoint through the changed page.
-3. Check neighboring roles, wikilinks, stale filenames, deleted references, and misplaced work files.
-4. If the route or ownership is wrong, fix that structure instead of polishing the local paragraph.
+Read the changed path from the entrypoint, checking meaning, page responsibilities, duplication, and references. Use [[commands]] for wiki checks.

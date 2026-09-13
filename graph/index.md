@@ -4,16 +4,17 @@ Canonical route: `AGENTS.md` -> `graph/index.md`. Read only pages that can chang
 
 Default response language is Korean unless the user asks otherwise or the artifact requires another language.
 
+Proceed when the request and available evidence support a decision. Ask only when an unresolved choice would materially change the outcome, scope, or risk; continue independent authorized work meanwhile.
+
 Workspace-scoped work still follows applicable target instructions; a bounded result does not make it workspace-independent.
 
 ## Route
 
 - Workspace-independent one-off results such as a time check or short translation: apply the defaults above and answer directly.
-- Ordinary work, including bounded workspace-scoped work: read [[intuition]], then [[workflow]].
+- Workspace-scoped work or multi-step execution: read [[workflow]].
 - Durable guidance or wiki boundaries: also read [[policy]].
 - Code changes or code review: also read [[code]].
-- Documents, prompts, or wikis: also read [[docs]].
-- Research or source-backed writing: also read [[docs]].
+- Documents, prompts, wikis, or source-backed writing: read [[docs]].
 - Resumes or applications: read [[docs]] and [[resume]].
 - The long-lived personal work-agent goal: also read [[agent]].
 - Uncertain user interpretation that still affects the answer: read [[theory]] only as a tie-breaker.
@@ -23,8 +24,7 @@ When applying this wiki to another workspace, [[policy]] and [[workflow]] are re
 
 ## Pages
 
-- [[intuition]]: judgment questions before acting.
-- [[workflow]]: shared execution and mutation boundaries.
+- [[workflow]]: scope, action boundaries, and verification.
 - [[policy]]: durable-knowledge confirmation, placement, and priority.
 - [[code]]: confirmed code-edit preferences.
 - [[docs]]: document, research, and graph preferences.

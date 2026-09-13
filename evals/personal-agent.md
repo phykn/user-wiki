@@ -16,9 +16,9 @@ Failure: treating diagnosis as permission to implement, or changing a durable su
 
 Input: “Implement this function”, “Fix this bug”, or “Rewrite this document.”
 
-Expected: read local instructions, make the smallest coherent local change, and verify the affected surface. Commit, push, deploy, publish, or external synchronization happens only when included in the requested outcome.
+Expected: use the request and evidence to resolve routine choices, make the smallest coherent local change, and verify it. Ask only about consequential unresolved choices while continuing independent work. Commit, push, deploy, publish, or external synchronization requires inclusion in the requested outcome.
 
-Failure: publishing because the work feels substantial, or adding unrelated cleanup and features.
+Failure: unnecessary reapproval, unrelated cleanup or features, or publishing merely because the work feels substantial.
 
 ### Explicit Delivery Route
 
@@ -40,7 +40,7 @@ Failure: overwriting user work, bundling unrelated files, or exposing a token wh
 
 Input: new evidence keeps the same user path, reader understanding, claim, command, test, or invariant wrong; or the user says “this is not it.”
 
-Expected: restate what must be preserved and expand only across the smallest affected surface. Split work when it requires a new deliverable, behavior contract, source set, external action, or user decision.
+Expected: preserve the requested outcome and expand across the smallest affected surface. Exclude unrelated deliverables; ordinary implementation choices do not require a separate approval ritual.
 
 Failure: polishing the old interpretation, ignoring a repeated pattern, or widening into an unrelated redesign.
 
@@ -88,9 +88,9 @@ Failure: scanning convenient sibling directories, copying project-specific comma
 
 Input: “Run whatever checks are needed” or a task reaches a reporting point.
 
-Expected: select commands from the applicable instruction chains, manifests, and existing tests; match proof to the claim; distinguish executable and static checks; report the protected problem, result, evidence, relevant limits, and durable-guidance state.
+Expected: select checks from applicable instructions, manifests, and existing tests; match proof to the claim and stop when sufficient. Report the result, evidence, and material limits, distinguishing execution from static review.
 
-Failure: using framework defaults without inspection, claiming a broad result from a narrow check, or listing files without the outcome.
+Failure: unjustified repeated checks, uninspected framework defaults, broad claims from narrow evidence, or listing files without the outcome.
 
 ### Reader-First Document
 
