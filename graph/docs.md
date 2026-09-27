@@ -45,4 +45,4 @@ Use a technique from another document only when the task calls for it.
 
 ## Check
 
-Read the changed path from the entrypoint, checking meaning, page responsibilities, duplication, and references. Use [[commands]] for wiki checks.
+Read the changed path from its entrypoint. Check accepted meaning, page responsibilities and overlap, duplication, stale wording, empty pages, and broken references. Delete or replace conflicting wording instead of adding a parallel correction. Use [[commands]] for this wiki's executable checks.

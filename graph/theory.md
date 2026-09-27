@@ -4,7 +4,7 @@ This page never outranks the current request, local evidence, instructions, or c
 
 ## Current Understanding
 
-- When the user says “this is not it,” the likely issue is the protected purpose, not surface polish.
+- When the user says “this is not it,” the likely issue is whether the result serves the requested outcome, not its wording or presentation.
 
 ## Use And Review
 

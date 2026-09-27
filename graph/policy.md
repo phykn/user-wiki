@@ -20,13 +20,12 @@ Keep an inference in [[theory]] only when it materially changes an answer. Other
 - Project-specific rules belong in that project's maintained instructions.
 - Current interpretations belong in [[theory]].
 - Put each rule in one responsible document.
-- Create a page only when it owns a distinct judgment and conditional reading route.
 
 When applying this wiki elsewhere, do not update the source wiki automatically. Report a proposed source-wiki update unless the user explicitly included durable synchronization in the request.
 
 ## Review
 
-After a wiki edit, check the main reading route, duplication, stale wording, role overlap, empty pages, and broken links. Delete or replace conflicting wording rather than adding a parallel correction.
+For wiki edits, follow [[docs]] for content and graph review and [[commands]] for executable checks.
 
 ## Priority
 

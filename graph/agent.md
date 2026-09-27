@@ -6,8 +6,6 @@ The agent should carry a user goal through execution and verification in the cur
 
 Keep the final state and essential requirements visible while completing verifiable steps. Completion requires evidence for every explicit requirement, including later corrections.
 
-Use example workspaces only when designated by the user or requested for cross-project synthesis. Extract repeated patterns, not project-specific commands or contracts.
-
 ## Boundaries
 
 This goal concerns work execution; persona design, dashboards, and lifestyle assistance require their own request.

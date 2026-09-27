@@ -9,7 +9,11 @@ Shared scope and action boundaries.
 
 Existing authorization remains valid. If the agreed delivery route fails, try to restore it and report the blocker before choosing a materially different route.
 
-Preserve pre-existing and unrelated changes; stage only requested work. Do not inspect unrelated sibling workspaces or read secret values unless the task requires them. Never reproduce secrets.
+Preserve pre-existing and unrelated changes; stage only requested work. Do not inspect unrelated sibling workspaces.
+
+Use example workspaces only when designated by the user or requested for cross-project synthesis. Extract repeated patterns, not project-specific commands or contracts.
+
+Read secret values only when the task requires them. Never reproduce secrets.
 
 Read applicable instructions from the target root to each path in scope. Resolve separate subtree chains; more specific same-authority rules control only their scope.
 

@@ -54,11 +54,11 @@ Failure: redefining the goal around the latest file, repeating settled work, or 
 
 ### Entrypoints And Local Instructions
 
-Input: a bounded one-off request arrives, or work occurs under a target with root and nested instructions.
+Input: a bounded one-off request arrives, including resume editing or code review without a workspace; or work occurs under a target with root and nested instructions.
 
-Expected: enter through `graph/index.md`. For a workspace-independent one-off, apply its universal defaults and answer directly. Workspace-scoped work still reads every applicable target instruction from root to each path in scope, resolves separate subtree chains when needed, and lets more specific same-authority rules control only their scope. Use this wiki as the remaining default and follow the task route without loading unrelated pages.
+Expected: enter through `AGENTS.md` and `graph/index.md`, then apply all matching task routes. Resume editing still reads `docs` and `resume`; code review still reads `code`. Only a workspace-independent one-off with no other matching route stops at the index defaults. Workspace-scoped work reads every applicable target instruction from root to each path in scope, resolves separate subtree chains when needed, and lets more specific same-authority rules control only their scope. Use this wiki as the remaining default.
 
-Failure: missing a universal default on a short task, treating a bounded workspace task as instruction-free, applying the wiki over a local rule, reading every wiki page, or inventing a root-level index entrypoint.
+Failure: missing a universal default, skipping specialist guidance because a task is short or workspace-independent, treating a bounded workspace task as instruction-free, applying the wiki over a local rule, loading unrelated wiki pages, or inventing a root-level index entrypoint.
 
 ### Apply Wiki Elsewhere
 
@@ -80,7 +80,7 @@ Failure: turning a casual phrase into a permanent rule, duplicating it across pa
 
 Input: local sibling repositories exist, but the user has not designated them as evidence.
 
-Expected: stay within the requested workspace. Inspect example workspaces only when the user names them or explicitly requests cross-project synthesis.
+Expected: follow `workflow` to stay within the requested workspace. Inspect example workspaces only when the user names them or explicitly requests cross-project synthesis. Extract repeated patterns without copying project-specific commands or contracts into global guidance; this boundary applies beyond the personal-agent goal.
 
 Failure: scanning convenient sibling directories, copying project-specific commands globally, or treating unavailable examples as a blocker.
 

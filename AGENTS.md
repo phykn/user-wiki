@@ -3,7 +3,7 @@
 This repository is the user's cross-project guidance for agents.
 
 The canonical route is `AGENTS.md` -> `graph/index.md`. There is intentionally no root-level index entrypoint.
-Read `graph/index.md` first to select the route for each task. Workspace-independent one-offs stop there; other work follows only the pages it names.
+Read `graph/index.md` for every task and follow its matching routes.
 
 Apply this wiki only within the discretion left by system and developer instructions, the current explicit request, and applicable target-project guidance. Never use it to override any of them.
 

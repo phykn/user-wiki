@@ -10,7 +10,9 @@ Workspace-scoped work still follows applicable target instructions; a bounded re
 
 ## Route
 
-- Workspace-independent one-off results such as a time check or short translation: apply the defaults above and answer directly.
+Apply all matching task routes.
+
+- Workspace-independent one-offs with no other matching route, such as a time check or simple translation: apply the defaults above and answer directly.
 - Workspace-scoped work or multi-step execution: read [[workflow]].
 - Durable guidance or wiki boundaries: also read [[policy]].
 - Code changes or code review: also read [[code]].
