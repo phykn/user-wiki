@@ -38,6 +38,9 @@ def make_fixture(root: Path) -> None:
     )
     (root / "scripts").mkdir(exist_ok=True)
     shutil.copy2(SOURCE_SCRIPT, root / "scripts/check-wiki.py")
+    shutil.copy2(
+        SOURCE_SCRIPT.with_name("wiki_markdown.py"), root / "scripts/wiki_markdown.py"
+    )
 
 
 def run_check(root: Path) -> subprocess.CompletedProcess:
@@ -269,6 +272,96 @@ class WikiCheckTests(unittest.TestCase):
             ),
             ["WIKI_CHECK_OK"],
         )
+
+    def test_code_spans_match_backtick_lengths(self) -> None:
+        self.assert_check(
+            lambda root: write_file(
+                root,
+                "README.md",
+                "# README\n\nExamples: ``code ` [[missing]] "
+                "[Bad](graph/missing.md) `MISSING.md` ``.\n",
+            ),
+            ["WIKI_CHECK_OK"],
+        )
+
+    def test_multiline_code_span_is_not_a_link(self) -> None:
+        self.assert_check(
+            lambda root: write_file(
+                root, "README.md", "# README\n\nExample: `code\n[[missing]]`.\n"
+            ),
+            ["WIKI_CHECK_OK"],
+        )
+
+    def test_unmatched_backtick_does_not_hide_links(self) -> None:
+        self.assert_check(
+            lambda root: write_file(
+                root, "README.md", "# README\n\nLiteral ` and [[missing]].\n"
+            ),
+            ["BROKEN_WIKILINK README.md -> missing"],
+        )
+
+    def test_code_span_does_not_cross_paragraphs(self) -> None:
+        self.assert_check(
+            lambda root: write_file(
+                root, "README.md", "# README\n\nLiteral `\n\n[[missing]]\n\n`\n"
+            ),
+            ["BROKEN_WIKILINK README.md -> missing"],
+        )
+
+    def test_fenced_examples_in_containers_are_not_links(self) -> None:
+        for example in (
+            "- Examples:\n  - Nested:\n    ```markdown\n"
+            "    [[missing]]\n    [Bad](graph/missing.md)\n    ```\n",
+            "- ```markdown\n  [[missing]]\n  ```\n",
+            "> ```markdown\n> [[missing]]\n> ```\n",
+        ):
+            with self.subTest(example=example):
+                self.assert_check(
+                    lambda root: write_file(
+                        root, "README.md", "# README\n\nExamples only.\n\n" + example
+                    ),
+                    ["WIKI_CHECK_OK"],
+                )
+
+    def test_leaving_a_container_ends_its_unclosed_fence(self) -> None:
+        for example in (
+            "- Examples:\n  - ```markdown\n    [[inside-code]]\n",
+            "> ```markdown\n> [[inside-code]]\n",
+        ):
+            with self.subTest(example=example):
+                self.assert_check(
+                    lambda root: write_file(
+                        root,
+                        "README.md",
+                        "# README\n\n" + example + "\n[[outside-code]]\n",
+                    ),
+                    ["BROKEN_WIKILINK README.md -> outside-code"],
+                )
+
+    def test_code_span_cannot_register_a_route(self) -> None:
+        self.assert_check(
+            lambda root: write_file(
+                root,
+                "graph/index.md",
+                "# Index\n\n## Route\n\n- Example: `code\n- [[commands]]\n`\n\n"
+                "## Pages\n\n- [[commands]]: maintenance commands.\n",
+            ),
+            ["UNROUTED_GRAPH_DOC graph/commands.md"],
+        )
+
+    def test_all_unordered_list_markers_register_pages(self) -> None:
+        for marker in ("-", "*", "+"):
+            with self.subTest(marker=marker):
+                self.assert_check(
+                    lambda root: write_file(
+                        root,
+                        "graph/index.md",
+                        "# Index\n\n## Route\n\n"
+                        f"{marker} [[commands]].\n\n## Pages\n\n"
+                        f"{marker} [[commands]]: maintenance commands.\n",
+                    ),
+                    ["WIKI_CHECK_OK"],
+                )
 
     def test_unrouted_graph_document(self) -> None:
         def mutate(root: Path) -> None:
