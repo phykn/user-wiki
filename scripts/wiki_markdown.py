@@ -77,7 +77,9 @@ def strip_fenced_code(text: str) -> str:
         indent = len(rest) - len(stripped)
         marker = re.match(r"(`{3,}|~{3,})", stripped) if indent <= 3 else None
         if fence_char is None:
-            if marker is None:
+            if marker is None or (
+                marker.group(1)[0] == "`" and "`" in stripped[marker.end() :]
+            ):
                 output.append(line)
                 continue
             fence_char = marker.group(1)[0]
@@ -162,7 +164,8 @@ def heading_keys(text: str) -> Set[str]:
 
 def section_text(text: str, heading: str) -> Optional[str]:
     match = re.search(
-        rf"^##[ \t]+{re.escape(heading)}[ \t]*$\n?(.*?)(?=^##[ \t]+|\Z)",
+        rf"^##[ \t]+{re.escape(heading)}(?:[ \t]+#+)?[ \t]*$\n?"
+        r"(.*?)(?=^##[ \t]+|\Z)",
         semantic_text(text),
         flags=re.MULTILINE | re.DOTALL,
     )

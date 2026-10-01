@@ -7,6 +7,8 @@ import tempfile
 from typing import List
 import unittest
 
+from wiki_check import check_wiki
+
 
 SOURCE_SCRIPT = Path(__file__).resolve().with_name("check-wiki.py")
 
@@ -36,20 +38,6 @@ def make_fixture(root: Path) -> None:
         "evals/personal-agent.md",
         "# Personal Agent\n\nReview behavior changes.\n",
     )
-    (root / "scripts").mkdir(exist_ok=True)
-    shutil.copy2(SOURCE_SCRIPT, root / "scripts/check-wiki.py")
-    shutil.copy2(
-        SOURCE_SCRIPT.with_name("wiki_markdown.py"), root / "scripts/wiki_markdown.py"
-    )
-
-
-def run_check(root: Path) -> subprocess.CompletedProcess:
-    return subprocess.run(
-        [sys.executable, "scripts/check-wiki.py"],
-        cwd=root,
-        text=True,
-        capture_output=True,
-    )
 
 
 class WikiCheckTests(unittest.TestCase):
@@ -58,11 +46,33 @@ class WikiCheckTests(unittest.TestCase):
             root = Path(tmp)
             make_fixture(root)
             mutate(root)
-            result = run_check(root)
-            expected_code = 0 if expected == ["WIKI_CHECK_OK"] else 1
-            self.assertEqual(result.returncode, expected_code, result.stderr)
-            self.assertEqual(result.stdout.splitlines(), expected)
-            self.assertEqual(result.stderr, "")
+            problems = [] if expected == ["WIKI_CHECK_OK"] else expected
+            self.assertEqual(check_wiki(root), problems)
+
+    def test_check_roots_are_independent(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            first = Path(tmp) / "first"
+            second = Path(tmp) / "second"
+            make_fixture(first)
+            make_fixture(second)
+            write_file(second, "README.md", "# README\n\nSee [[missing]].\n")
+            cwd = Path.cwd()
+            self.assertEqual(check_wiki(first), [])
+            self.assertEqual(
+                check_wiki(second), ["BROKEN_WIKILINK README.md -> missing"]
+            )
+            self.assertEqual(check_wiki(first), [])
+            self.assertEqual(Path.cwd(), cwd)
+
+    def test_path_outside_wiki_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "wiki"
+            make_fixture(root)
+            write_file(Path(tmp), "outside.md", "# Outside\n\nNot wiki guidance.\n")
+            write_file(root, "README.md", "# README\n\n[Outside](../outside.md)\n")
+            self.assertEqual(
+                check_wiki(root), ["BROKEN_PATH_REF README.md -> ../outside.md"]
+            )
 
     def test_valid_fixture(self) -> None:
         self.assert_check(lambda root: None, ["WIKI_CHECK_OK"])
@@ -273,6 +283,37 @@ class WikiCheckTests(unittest.TestCase):
             ["WIKI_CHECK_OK"],
         )
 
+    def test_backtick_in_info_text_does_not_open_a_fence(self) -> None:
+        self.assert_check(
+            lambda root: write_file(
+                root,
+                "README.md",
+                "# README\n\n```not`a-fence\n[[missing]]\n",
+            ),
+            ["BROKEN_WIKILINK README.md -> missing"],
+        )
+
+    def test_tilde_fence_allows_backticks_in_info_text(self) -> None:
+        self.assert_check(
+            lambda root: write_file(
+                root,
+                "README.md",
+                "# README\n\nExamples only.\n\n~~~text`code\n[[missing]]\n~~~\n",
+            ),
+            ["WIKI_CHECK_OK"],
+        )
+
+    def test_index_sections_allow_closing_hashes(self) -> None:
+        self.assert_check(
+            lambda root: write_file(
+                root,
+                "graph/index.md",
+                "# Index\n\n## Route ##\n\n- [[commands]].\n\n"
+                "## Pages ##\n\n- [[commands]]: maintenance commands.\n",
+            ),
+            ["WIKI_CHECK_OK"],
+        )
+
     def test_code_spans_match_backtick_lengths(self) -> None:
         self.assert_check(
             lambda root: write_file(
@@ -454,6 +495,47 @@ class WikiCheckTests(unittest.TestCase):
                 "<!-- `evals/personal-agent.md` -->\n",
             ),
             ["UNROUTED_EVAL_DOC evals/personal-agent.md"],
+        )
+
+
+class WikiCliTests(unittest.TestCase):
+    def assert_cli(self, mutate, expected: List[str], code: int) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "wiki"
+            make_fixture(root)
+            (root / "scripts").mkdir()
+            for name in ("check-wiki.py", "wiki_check.py", "wiki_markdown.py"):
+                shutil.copy2(SOURCE_SCRIPT.with_name(name), root / "scripts" / name)
+            mutate(root)
+            result = subprocess.run(
+                [sys.executable, str(root / "scripts/check-wiki.py")],
+                cwd=tmp,
+                text=True,
+                capture_output=True,
+            )
+            self.assertEqual(result.returncode, code, result.stderr)
+            self.assertEqual(result.stdout.splitlines(), expected)
+            self.assertEqual(result.stderr, "")
+
+    def test_valid_wiki_from_another_directory(self) -> None:
+        self.assert_cli(lambda root: None, ["WIKI_CHECK_OK"], 0)
+
+    def test_failure_output_order_and_deduplication(self) -> None:
+        def mutate(root: Path) -> None:
+            write_file(
+                root, "README.md", "# README\n\nSee [[missing]] and [[missing]].\n"
+            )
+            (root / "graph/index.md").unlink()
+
+        self.assert_cli(
+            mutate,
+            [
+                "MISSING_DOC graph/index.md",
+                "BROKEN_PATH_REF AGENTS.md -> graph/index.md",
+                "MISSING_ENTRYPOINT_REF AGENTS.md -> graph/index.md",
+                "BROKEN_WIKILINK README.md -> missing",
+            ],
+            1,
         )
 
 
