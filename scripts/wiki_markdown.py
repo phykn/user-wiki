@@ -19,7 +19,7 @@ WIKILINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
 INLINE_CODE_RE = re.compile(
     r"(?<!`)(`+)(?!`)((?:(?!\n[ \t]*\n).)*?)(?<!`)\1(?!`)", re.DOTALL
 )
-HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
+INLINE_TOKEN_RE = re.compile(r"<!--|`+")
 HEADING_RE = re.compile(r"^#{1,6}[ \t]+(.+?)[ \t]*#*[ \t]*$", re.MULTILINE)
 BULLET = r"[ \t]*[-+*][ \t]+"
 PAGE_ENTRY_RE = re.compile(rf"^{BULLET}\[\[([^\]]+)\]\][ \t]*:", re.MULTILINE)
@@ -32,15 +32,20 @@ class PathReference(NamedTuple):
     path: str
     fragment: Optional[str]
     display: str
-    allow_glob: bool
+    is_link: bool
 
 
-def strip_fenced_code(text: str) -> str:
+def semantic_text(text: str) -> str:
     output: List[str] = []
     containers: List[Tuple[str, int]] = []
     fence_char: Optional[str] = None
     fence_length = 0
+    offset = 0
+    comment_end = 0
+    code_end = 0
     for line in text.splitlines(keepends=True):
+        start = offset
+        offset += len(line)
         rest = line.expandtabs(4)
         depth = 0
         for kind, width in containers:
@@ -77,13 +82,41 @@ def strip_fenced_code(text: str) -> str:
         indent = len(rest) - len(stripped)
         marker = re.match(r"(`{3,}|~{3,})", stripped) if indent <= 3 else None
         if fence_char is None:
-            if marker is None or (
+            if start < comment_end or marker is None or (
                 marker.group(1)[0] == "`" and "`" in stripped[marker.end() :]
             ):
-                output.append(line)
+                pos = start
+                while pos < offset:
+                    if pos < comment_end:
+                        end = min(offset, comment_end)
+                        output.append(re.sub(r"[^\r\n]", " ", text[pos:end]))
+                    elif pos < code_end:
+                        end = min(offset, code_end)
+                        output.append(text[pos:end])
+                    else:
+                        token = INLINE_TOKEN_RE.search(text, pos, offset)
+                        if token is None:
+                            output.append(text[pos:offset])
+                            break
+                        output.append(text[pos:token.start()])
+                        pos = token.start()
+                        if token.group() == "<!--":
+                            close = text.find("-->", token.end())
+                            if close >= 0:
+                                comment_end = close + 3
+                                continue
+                        else:
+                            code = INLINE_CODE_RE.match(text, pos)
+                            if code is not None:
+                                code_end = code.end()
+                                continue
+                        end = token.end()
+                        output.append(text[pos:end])
+                    pos = end
                 continue
             fence_char = marker.group(1)[0]
             fence_length = len(marker.group(1))
+            code_end = 0
         elif (
             marker is not None
             and marker.group(1)[0] == fence_char
@@ -95,14 +128,6 @@ def strip_fenced_code(text: str) -> str:
         if line.endswith(("\n", "\r")):
             output.append("\n")
     return "".join(output)
-
-
-def semantic_text(text: str) -> str:
-    without_fences = strip_fenced_code(text)
-    return HTML_COMMENT_RE.sub(
-        lambda match: "\n" * match.group(0).count("\n"),
-        without_fences,
-    )
 
 
 def link_text(text: str) -> str:
@@ -123,7 +148,7 @@ def has_body(text: str) -> bool:
 def path_refs(text: str) -> List[PathReference]:
     semantic = semantic_text(text)
     refs = [
-        PathReference(match.group(2), None, match.group(2), True)
+        PathReference(match.group(2), None, match.group(2), False)
         for match in INLINE_CODE_RE.finditer(semantic)
         if PATH_REF_RE.fullmatch(match.group(2))
     ]
@@ -139,7 +164,7 @@ def path_refs(text: str) -> List[PathReference]:
                 path=unquote(path),
                 fragment=unquote(fragment) if has_fragment else None,
                 display=raw,
-                allow_glob=False,
+                is_link=True,
             )
         )
     return refs

@@ -30,4 +30,6 @@ git diff --check
 
 The checker prints `WIKI_CHECK_OK` on success, or one diagnostic per line and exits with status 1 on failure. See `graph/commands.md` for maintenance and manual review guidance.
 
+Markdown links resolve from the containing document. Backtick path mentions use the wiki root for paths under `graph`, `evals`, or `scripts`; bare filenames look beside the document, then at the root. Explicit `./` and `../` paths always start beside the document. References must stay inside the checkout. Fenced examples and HTML comments do not register links or routes.
+
 `scripts/check-wiki.py` locates the checkout and handles CLI output. `scripts/wiki_check.py` owns repository validation; `scripts/wiki_markdown.py` extracts Markdown references and routes. Regression tests in `scripts/test_check_wiki.py` exercise validation on temporary wiki fixtures and check CLI output and exit status separately.

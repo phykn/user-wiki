@@ -167,6 +167,45 @@ class WikiCheckTests(unittest.TestCase):
             ["BROKEN_PATH_REF graph/commands.md -> ../missing.md"],
         )
 
+    def test_markdown_paths_are_relative_to_the_source(self) -> None:
+        def mutate(root: Path) -> None:
+            write_file(root, "evals/nested/case.md", "# Case\n\nReview case.\n")
+            write_file(
+                root, "graph/commands.md",
+                "# Commands\n\nReview `evals/personal-agent.md` and "
+                "[case](../evals/nested/case.md).\n",
+            )
+            write_file(
+                root, "evals/personal-agent.md",
+                "# Review\n\n[Case](nested/case.md#case)\n",
+            )
+
+        self.assert_check(mutate, ["WIKI_CHECK_OK"])
+
+    def test_markdown_paths_do_not_fall_back_to_the_root(self) -> None:
+        for target in ("README.md", "evals/personal-agent.md"):
+            with self.subTest(target=target):
+                self.assert_check(
+                    lambda root: write_file(
+                        root, "graph/commands.md",
+                        "# Commands\n\nReview `evals/personal-agent.md`.\n"
+                        f"[Wrong location]({target})\n",
+                    ),
+                    [f"BROKEN_PATH_REF graph/commands.md -> {target}"],
+                )
+
+    def test_invalid_markdown_path_cannot_route_an_eval(self) -> None:
+        self.assert_check(
+            lambda root: write_file(
+                root, "graph/commands.md",
+                "# Commands\n\n[Review](evals/personal-agent.md)\n",
+            ),
+            [
+                "BROKEN_PATH_REF graph/commands.md -> evals/personal-agent.md",
+                "UNROUTED_EVAL_DOC evals/personal-agent.md",
+            ],
+        )
+
     def test_markdown_query_does_not_bypass_path_check(self) -> None:
         self.assert_check(
             lambda root: write_file(
@@ -271,6 +310,44 @@ class WikiCheckTests(unittest.TestCase):
             ),
             ["WIKI_CHECK_OK"],
         )
+
+    def test_commented_fences_do_not_hide_visible_links(self) -> None:
+        for comment in (
+            "<!--\n```\n-->\n",
+            "<!-- ``` -->\n",
+            "> <!--\n> ```\n> -->\n",
+            "- <!--\n  ~~~\n  -->\n",
+        ):
+            with self.subTest(comment=comment):
+                self.assert_check(
+                    lambda root: write_file(
+                        root, "README.md", "# README\n\n" + comment + "[[missing]]\n"
+                    ),
+                    ["BROKEN_WIKILINK README.md -> missing"],
+                )
+
+    def test_comment_openers_in_fences_do_not_hide_visible_links(self) -> None:
+        for example in ("```html\n<!--\n```", "~~~html <!--\n~~~"):
+            with self.subTest(example=example):
+                self.assert_check(
+                    lambda root: write_file(
+                        root, "README.md",
+                        "# README\n\n" + example + "\n[[missing]]\n<!-- end -->\n",
+                    ),
+                    ["BROKEN_WIKILINK README.md -> missing"],
+                )
+
+    def test_comment_openers_in_inline_code_do_not_hide_visible_links(self) -> None:
+        for example in ("`<!--`", "``code ` <!-- ``", "`code\n<!--`"):
+            for suffix in ("", "<!-- real comment -->"):
+                with self.subTest(example=example, suffix=suffix):
+                    self.assert_check(
+                        lambda root: write_file(
+                            root, "README.md",
+                            "# README\n\nExample: " + example + " [[missing]]. " + suffix,
+                        ),
+                        ["BROKEN_WIKILINK README.md -> missing"],
+                    )
 
     def test_fence_with_info_text_does_not_close_an_outer_fence(self) -> None:
         self.assert_check(

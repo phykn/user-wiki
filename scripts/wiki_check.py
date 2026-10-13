@@ -2,7 +2,7 @@
 
 from collections import Counter
 from pathlib import Path
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional, Set, Tuple
 from urllib.parse import unquote
 
 from wiki_markdown import (
@@ -36,15 +36,13 @@ def check_wiki(root: Path) -> List[str]:
     refs = {path: path_refs(text) for path, text in texts.items()}
 
     problems = check_layout(root, texts)
-    problems.extend(check_path_refs(root, texts, refs))
+    ref_problems, targets = check_path_refs(root, texts, refs)
+    problems.extend(ref_problems)
     problems.extend(check_graph(root, graph_files, texts))
 
     referenced_paths: Set[Path] = set()
     for source in sources:
-        for ref in refs.get(source, []):
-            target = existing_repo_path(root, source, ref.path)
-            if target is not None:
-                referenced_paths.add(target)
+        referenced_paths.update(targets.get(source, set()))
     for path in eval_files:
         if path not in referenced_paths:
             problems.append(f"UNROUTED_EVAL_DOC {path.relative_to(root).as_posix()}")
@@ -75,33 +73,32 @@ def check_path_refs(
     root: Path,
     texts: Dict[Path, str],
     refs: Dict[Path, List[PathReference]],
-) -> List[str]:
+) -> Tuple[List[str], Dict[Path, Set[Path]]]:
     problems: List[str] = []
+    targets: Dict[Path, Set[Path]] = {}
     for source, entries in refs.items():
         name = source.relative_to(root).as_posix()
+        targets[source] = set()
         for ref in entries:
-            if ref.allow_glob and any(char in ref.path for char in GLOB_CHARS):
+            if not ref.is_link and any(char in ref.path for char in GLOB_CHARS):
                 continue
-            target = existing_repo_path(root, source, ref.path)
+            target = existing_repo_path(root, source, ref)
             if target is None:
                 problems.append(f"BROKEN_PATH_REF {name} -> {ref.display}")
-            elif ref.fragment is not None and not anchor_exists(
-                target, ref.fragment, texts
-            ):
+                continue
+            targets[source].add(target)
+            if ref.fragment is not None and not anchor_exists(target, ref.fragment, texts):
                 problems.append(f"BROKEN_ANCHOR {name} -> {ref.display}")
 
     agents_doc = root / "AGENTS.md"
     index_doc = (root / "graph/index.md").resolve()
-    if not any(
-        existing_repo_path(root, agents_doc, ref.path) == index_doc
-        for ref in refs.get(agents_doc, [])
-    ):
+    if index_doc not in targets.get(agents_doc, set()):
         problems.append("MISSING_ENTRYPOINT_REF AGENTS.md -> graph/index.md")
-    return problems
+    return problems, targets
 
 
-def existing_repo_path(root: Path, source: Path, target: str) -> Optional[Path]:
-    for candidate in candidate_paths(root, source, target):
+def existing_repo_path(root: Path, source: Path, ref: PathReference) -> Optional[Path]:
+    for candidate in candidate_paths(root, source, ref):
         resolved = candidate.resolve()
         try:
             resolved.relative_to(root)
@@ -112,14 +109,14 @@ def existing_repo_path(root: Path, source: Path, target: str) -> Optional[Path]:
     return None
 
 
-def candidate_paths(root: Path, source: Path, target: str) -> List[Path]:
-    if not target:
+def candidate_paths(root: Path, source: Path, ref: PathReference) -> List[Path]:
+    if not ref.path:
         return [source]
-    normalized = target.replace("\\", "/")
-    if normalized.startswith(("./", "../")):
-        return [source.parent / normalized]
+    normalized = ref.path.replace("\\", "/")
     if normalized.startswith("/"):
         return []
+    if ref.is_link or normalized.startswith(("./", "../")):
+        return [source.parent / normalized]
     if "/" in normalized:
         return [root / normalized]
     return [source.parent / normalized, root / normalized]
