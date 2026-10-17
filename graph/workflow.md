@@ -1,32 +1,20 @@
-Shared scope and action boundaries.
+Boundaries, scope, and verification for work in a workspace. Whether to edit or deliver at all is decided by the defaults in [[index]].
 
-## Authority
+## Workspace
 
-- Question, explanation, review, diagnosis, or status: inspect and answer. Do not edit or fix unless the user also asks for a change.
-- Build or change: edit the requested local workspace and verify the changed surface.
-- Commit, push, deploy, publish, send, delete, credential change, or external durable write: act only when the user explicitly includes it or requests an outcome whose agreed delivery route requires it.
-- Durable preference update: follow [[policy]].
-
-Existing authorization remains valid. If the agreed delivery route fails, try to restore it and report the blocker before choosing a materially different route.
-
-Preserve pre-existing and unrelated changes; stage only requested work. Do not inspect unrelated sibling workspaces.
-
-Use example workspaces only when designated by the user or requested for cross-project synthesis. Extract repeated patterns, not project-specific commands or contracts.
-
-Read secret values only when the task requires them. Never reproduce secrets.
-
-Read applicable instructions from the target root to each path in scope. Resolve separate subtree chains; more specific same-authority rules control only their scope.
+- Before working, read the target's instruction files from its root down to each path you touch. A more specific file overrides a general one only inside its own folder.
+- Keep existing and unrelated changes. Stage only the files for the requested work.
+- Do not look into sibling repositories unless the user names them or asks for a comparison across projects. From such examples, take the repeated pattern, not project-specific commands or contracts.
+- Read secret values only when the task needs them, and never repeat them.
+- An approved delivery route stays approved. If it fails, try to fix it and report the blocker before switching to a different route.
 
 ## Scope
 
-Preserve the requested outcome and accepted meaning. A smaller or more polished result is not an improvement if it solves a different problem.
-
-Make the smallest coherent change that fixes the cause. Include neighboring work when the same user path, claim, command, test, or invariant would otherwise remain wrong; exclude unrelated deliverables and cleanup.
-
-After interruption or correction, recover the original goal, latest steering, completed work, and remaining requirements. A verified milestone is not completion of a broader goal.
+- Solve the problem the user asked about. A smaller or more polished result that solves a different problem is not an improvement.
+- Fix the cause with the smallest complete change. Also fix nearby code or text when the same user path, claim, command, test, or invariant would otherwise stay wrong. Leave out unrelated cleanup and extra features.
+- After an interruption or correction, recover the original goal, the latest direction, finished work, and what remains. A passing milestone does not finish a larger goal: it is done only when every explicit requirement, including later corrections, has evidence.
 
 ## Verify And Report
 
-Choose checks from applicable instructions, maintained docs, manifests, or existing tests. Match them to the affected surface and claim; distinguish executed checks from static reasoning.
-
-Stop checking once the relevant evidence is sufficient, unless a change or unresolved concern justifies more. Report the result, supporting evidence, and material limits without a fixed checklist for every task.
+- Pick checks from the project's instructions, docs, manifests, and existing tests, matched to what changed and what you claim. Stop once the evidence is enough.
+- Report the result, its evidence, and limits that matter. Say which checks ran and what was only reviewed by reading.

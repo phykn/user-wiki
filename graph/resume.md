@@ -15,5 +15,5 @@ Confirmed preferences for Korean resumes and applications.
 
 ## Accuracy
 
-- A formatting-only edit preserves confirmed claims, project names, technical scope, and duty wording.
+- A formatting-only edit also keeps project names and duty wording.
 - State a scope limit where it prevents overclaiming or changes how evidence should be read. Do not lead with defensive limitations that do not affect the claim.

@@ -10,7 +10,7 @@ Commands for inspecting and checking this wiki.
 - `rg -n '\[\[' graph`: Inspect wikilinks before or after renaming documents.
 - `python scripts/check-wiki.py`: Check the canonical entrypoint route, intentionally absent root index, routed graph pages, maintained path references, empty docs, and broken wikilinks.
 - `python -m unittest discover -s scripts -p 'test_*.py' -v`: Run discoverable regression tests against small fixture repos.
-- `evals/personal-agent.md`: Review only cases related to behavior-changing guidance edits; these are manual evidence, not automatic tests.
+- `evals/behavior.md`: Review only the cases related to a guidance edit that changes behavior. These are manual review prompts, not automatic tests.
 - `git diff --check`: Check whitespace issues across root files and graph documents.
 - `git status --short --branch`: Check added, modified, deleted files, and branch sync before finishing.
 

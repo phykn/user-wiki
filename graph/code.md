@@ -2,13 +2,13 @@ Confirmed preferences that change how code work is scoped and verified.
 
 ## Scope
 
-Follow [[workflow]] for scope and verification. Add an API, dependency, or behavior contract only when needed for the requested outcome.
-
-For generated-output problems, fix the source data, prompt, or contract before adding correction layers when feasible.
+- Add an API, dependency, or behavior contract only when the requested outcome needs it.
+- When generated output is wrong, fix the source data, prompt, or contract first when you can, before adding a layer that corrects the output.
 
 ## Errors
 
-Keep exception handling tied to a concrete failure path, contract, cleanup requirement, or recovery path. When its purpose is unclear, inspect before judging; missing evidence alone does not make it a defect. Avoid speculative robustness layers.
+- Add exception handling only for a concrete failure, contract, cleanup, or recovery path. Do not add handling for failures that may never happen.
+- When existing handling has no obvious purpose, investigate before calling it a defect.
 
 ## Refactor
 

@@ -2,10 +2,9 @@
 
 This repository is the user's cross-project guidance for agents.
 
-The canonical route is `AGENTS.md` -> `graph/index.md`. There is intentionally no root-level index entrypoint.
-Read `graph/index.md` for every task and follow its matching routes.
+For every task, read `graph/index.md` next and follow the routes that match. There is intentionally no root-level index file.
 
-Apply this wiki only within the discretion left by system and developer instructions, the current explicit request, and applicable target-project guidance. Never use it to override any of them.
+This wiki is a default layer and never overrides system or developer instructions, the current request, or project guidance. `graph/policy.md` defines the full priority order.
 
 ## Install Or Update
 

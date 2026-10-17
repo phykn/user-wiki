@@ -1,37 +1,42 @@
-## Purpose
-
-Keep only confirmed preferences and reusable understanding that should affect work across projects.
+What gets saved as durable guidance, where it goes, and which instructions win.
 
 ## Confirmation
 
-Write durable guidance when the user:
+Save durable guidance only when the user:
 
-- explicitly asks to save, apply, or use it going forward;
-- directly confirms a proposed rule; or
-- corrects existing wiki content as stale or wrong.
+- asks to save it, apply it, or use it from now on;
+- confirms a rule you proposed; or
+- says existing wiki content is stale or wrong.
 
-A direct statement clearly framed as a future cross-project preference counts as confirmation. Do not turn a task-specific correction, casual wording, or agent inference into a permanent rule.
+A direct statement framed as a preference for future work across projects counts as confirmation. A correction for one task, casual wording, or your own inference does not.
 
-Keep an inference in [[theory]] only when it materially changes an answer. Otherwise propose it without editing a durable surface.
+If an inference would change answers, record it under [[#Provisional Interpretations]]. Otherwise propose it in chat without editing any durable file.
 
 ## Placement
 
-- Cross-project confirmed preferences belong in this wiki.
-- Project-specific rules belong in that project's maintained instructions.
-- Current interpretations belong in [[theory]].
-- Put each rule in one responsible document.
+- Confirmed preferences that apply across projects go in this wiki.
+- Rules for one project go in that project's instruction files.
+- Each rule lives in exactly one page.
 
-When applying this wiki elsewhere, do not update the source wiki automatically. Report a proposed source-wiki update unless the user explicitly included durable synchronization in the request.
+When applying this wiki to another workspace, do not edit this source wiki unless the user also asked for that. Report the proposed update instead.
 
 ## Review
 
-For wiki edits, follow [[docs]] for content and graph review and [[commands]] for executable checks.
+For wiki edits, review content with [[docs]] and run the checks in [[commands]].
 
 ## Priority
 
-Follow system and developer instructions, including applicable local instruction files at the authority level where they are supplied. For choices they leave open:
+System and developer instructions come first, including instruction files the platform loads at that level. For anything they leave open:
 
-1. The current explicit user request where it does not conflict with higher-authority instructions.
-2. Target-local conventions and maintained documentation not already covered above.
+1. The user's current explicit request.
+2. The target project's conventions and maintained docs.
 3. Confirmed pages in this wiki.
-4. [[theory]] as a final tie-breaker.
+4. [[#Provisional Interpretations]], only as a final tie-breaker.
+
+## Provisional Interpretations
+
+Use these only when the evidence leaves more than one plausible reading and the choice changes the answer.
+
+- When the user says “this is not it,” the result probably misses the requested outcome. Wording or presentation is the less likely cause.
+
+When the user corrects an interpretation, replace or remove it. Remove one that no longer changes decisions. Move one to a confirmed page only after the user confirms it.

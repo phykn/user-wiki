@@ -1,4 +1,4 @@
-Regression prompts for user-wiki behavior, including the long-lived personal work-agent goal.
+Manual regression prompts for agent behavior under this wiki.
 
 Use only cases related to the changed guidance. These are review prompts, not an automatic command runner. Add a case only when a reusable failure is not already covered; merge overlap instead of growing the list.
 
@@ -72,7 +72,7 @@ Failure: overwriting target-local rules, creating a parallel entrypoint, editing
 
 Input: a session suggests a reusable preference.
 
-Expected: distinguish an explicit save or future-facing confirmation from a task-specific correction. Save only confirmed cross-project guidance; otherwise propose it or keep a decision-relevant interpretation in `theory`.
+Expected: distinguish an explicit save or future-facing confirmation from a task-specific correction. Save only confirmed cross-project guidance; otherwise propose it, or record a decision-relevant interpretation under provisional interpretations in `policy`.
 
 Failure: turning a casual phrase into a permanent rule, duplicating it across pages, or leaving stale conflicting wording.
 
@@ -80,7 +80,7 @@ Failure: turning a casual phrase into a permanent rule, duplicating it across pa
 
 Input: local sibling repositories exist, but the user has not designated them as evidence.
 
-Expected: follow `workflow` to stay within the requested workspace. Inspect example workspaces only when the user names them or explicitly requests cross-project synthesis. Extract repeated patterns without copying project-specific commands or contracts into global guidance; this boundary applies beyond the personal-agent goal.
+Expected: follow `workflow` to stay within the requested workspace. Inspect example workspaces only when the user names them or explicitly requests cross-project synthesis. Extract repeated patterns without copying project-specific commands or contracts into global guidance.
 
 Failure: scanning convenient sibling directories, copying project-specific commands globally, or treating unavailable examples as a blocker.
 

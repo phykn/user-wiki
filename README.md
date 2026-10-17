@@ -8,15 +8,13 @@ The goal is practical behavior: choosing scope, asking only consequential questi
 
 Agents start at `AGENTS.md`, then follow `graph/index.md` to the smallest set of related pages. There is intentionally no root-level index entrypoint.
 
+The wiki is a default layer below platform, request, and project instructions; `graph/policy.md` defines the priority order.
+
 ## Install And Apply
 
 Installation places or updates this checkout and ensures the platform's user-level agent guidance points future sessions to it. Applying the wiki to another workspace means adapting that workspace's maintained guidance, not copying this wiki into it.
 
 See `AGENTS.md` for the authoritative install and application procedures.
-
-## Priority
-
-This wiki is a default layer. Follow the platform's instruction hierarchy and use the wiki only within the discretion left by the current request and applicable target-local guidance.
 
 ## Maintain
 
