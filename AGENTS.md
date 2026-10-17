@@ -25,5 +25,5 @@ When the user asks to apply this wiki elsewhere:
 2. Read `graph/index.md`, `graph/policy.md`, `graph/workflow.md`, and task-related pages.
 3. Treat the wiki as defaults, not prose to copy. Preserve target-local rules.
 4. Extend an existing maintained agent-guidance entrypoint where possible, and change other maintained guidance only where future behavior requires it. If no applicable agent entrypoint exists, an explicit apply request authorizes creating the platform-standard one after checking target conventions; do not create a parallel entrypoint.
-5. Propose any newly inferred cross-project preference. Update this source wiki only when the user explicitly asks to save or apply it durably.
+5. Propose any newly inferred cross-project preference instead of editing this source wiki, unless the user also asked to save it.
 6. Report target changes, verification, and whether the source wiki changed or has a proposed update.

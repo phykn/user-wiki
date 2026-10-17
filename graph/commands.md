@@ -10,8 +10,8 @@ Commands for inspecting and checking this wiki.
 - `rg -n '\[\[' graph`: Inspect wikilinks before or after renaming documents.
 - `python scripts/check-wiki.py`: Check the canonical entrypoint route, intentionally absent root index, routed graph pages, maintained path references, empty docs, and broken wikilinks.
 - `python -m unittest discover -s scripts -p 'test_*.py' -v`: Run discoverable regression tests against small fixture repos.
-- `evals/behavior.md`: Review only the cases related to a guidance edit that changes behavior. These are manual review prompts, not automatic tests.
+- `evals/behavior.md`: Manual review prompts, not automatic tests. Review only the cases a behavior-changing edit touches.
 - `git diff --check`: Check whitespace issues across root files and graph documents.
 - `git status --short --branch`: Check added, modified, deleted files, and branch sync before finishing.
 
-After wiki edits, run the wiki checker and whitespace check, then inspect status. Run the regression suite when checker behavior changes. Review relevant manual cases when guidance changes; these do not establish model performance. If execution is unavailable, report static review only.
+After every wiki edit, run the checker and the whitespace check, then inspect status. Run the regression tests when checker code changes. If commands cannot run, report that the review was static only.

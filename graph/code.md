@@ -1,4 +1,4 @@
-Confirmed preferences that change how code work is scoped and verified.
+Confirmed preferences for writing, refactoring, and verifying code.
 
 ## Scope
 
