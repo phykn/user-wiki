@@ -7,7 +7,7 @@ Confirmed preferences for writing, refactoring, and verifying code.
 
 ## Errors
 
-- Add exception handling only for a concrete failure, contract, cleanup, or recovery path. Do not add handling for failures that may never happen.
+- Add exception handling only for a concrete failure, contract, cleanup, or recovery path.
 - When existing handling has no obvious purpose, investigate before calling it a defect.
 
 ## Refactor

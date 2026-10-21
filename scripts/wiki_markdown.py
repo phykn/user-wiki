@@ -1,5 +1,3 @@
-"""Extract maintained references and routes from wiki Markdown."""
-
 import re
 from typing import Dict, List, NamedTuple, Optional, Set, Tuple
 from urllib.parse import unquote
@@ -20,7 +18,7 @@ INLINE_CODE_RE = re.compile(
     r"(?<!`)(`+)(?!`)((?:(?!\n[ \t]*\n).)*?)(?<!`)\1(?!`)", re.DOTALL
 )
 INLINE_TOKEN_RE = re.compile(r"<!--|`+")
-HEADING_RE = re.compile(r"^#{1,6}[ \t]+(.+?)[ \t]*#*[ \t]*$", re.MULTILINE)
+HEADING_RE = re.compile(r"^#{1,6}[ \t]+(.+?)(?:[ \t]+#+)?[ \t]*$", re.MULTILINE)
 BULLET = r"[ \t]*[-+*][ \t]+"
 PAGE_ENTRY_RE = re.compile(rf"^{BULLET}\[\[([^\]]+)\]\][ \t]*:", re.MULTILINE)
 EXTERNAL_LINK_RE = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*:")
@@ -197,13 +195,17 @@ def section_text(text: str, heading: str) -> Optional[str]:
     return match.group(1) if match else None
 
 
+def split_wikilink(target: str) -> Tuple[str, Optional[str], str]:
+    display = target.split("|", 1)[0].strip()
+    node, has_fragment, fragment = display.partition("#")
+    return node.strip(), fragment.strip() if has_fragment else None, display
+
+
 def wikilink_parts(text: str) -> List[Tuple[str, Optional[str], str]]:
-    parts: List[Tuple[str, Optional[str], str]] = []
-    for match in WIKILINK_RE.finditer(link_text(text)):
-        display = match.group(1).split("|", 1)[0].strip()
-        node, has_fragment, fragment = display.partition("#")
-        parts.append((node.strip(), fragment.strip() if has_fragment else None, display))
-    return parts
+    return [
+        split_wikilink(match.group(1))
+        for match in WIKILINK_RE.finditer(link_text(text))
+    ]
 
 
 def wikilink_nodes(text: str) -> Set[str]:
@@ -217,10 +219,8 @@ def bullet_text(text: str) -> str:
 
 
 def page_entry_nodes(text: str) -> List[str]:
-    nodes: List[str] = []
-    for match in PAGE_ENTRY_RE.finditer(link_text(text)):
-        display = match.group(1).split("|", 1)[0].strip()
-        node, _separator, _fragment = display.partition("#")
-        if node.strip():
-            nodes.append(node.strip())
-    return nodes
+    nodes = [
+        split_wikilink(match.group(1))[0]
+        for match in PAGE_ENTRY_RE.finditer(link_text(text))
+    ]
+    return [node for node in nodes if node]

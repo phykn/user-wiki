@@ -44,4 +44,4 @@ Write for the reader's next question or decision.
 
 ## Check
 
-Read the changed page starting from its entrypoint. Check that accepted meaning survived, that page responsibilities do not overlap, and that nothing is duplicated, stale, empty, or broken. Replace conflicting wording instead of adding a correction beside it. Run this wiki's checks from [[commands]].
+Read the changed page starting from its entrypoint. Check that accepted meaning survived, that page responsibilities do not overlap, and that nothing is duplicated, stale, empty, or broken. Replace conflicting wording instead of adding a correction beside it.

@@ -1,5 +1,3 @@
-"""Validate a wiki checkout and return ordered, unique diagnostics."""
-
 from collections import Counter
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
@@ -33,10 +31,9 @@ def check_wiki(root: Path) -> List[str]:
         for path in [*sources, *eval_files]
         if path.is_file()
     }
-    refs = {path: path_refs(text) for path, text in texts.items()}
 
     problems = check_layout(root, texts)
-    ref_problems, targets = check_path_refs(root, texts, refs)
+    ref_problems, targets = check_path_refs(root, texts)
     problems.extend(ref_problems)
     problems.extend(check_graph(root, graph_files, texts))
 
@@ -70,16 +67,14 @@ def check_layout(root: Path, texts: Dict[Path, str]) -> List[str]:
 
 
 def check_path_refs(
-    root: Path,
-    texts: Dict[Path, str],
-    refs: Dict[Path, List[PathReference]],
+    root: Path, texts: Dict[Path, str]
 ) -> Tuple[List[str], Dict[Path, Set[Path]]]:
     problems: List[str] = []
     targets: Dict[Path, Set[Path]] = {}
-    for source, entries in refs.items():
+    for source, text in texts.items():
         name = source.relative_to(root).as_posix()
         targets[source] = set()
-        for ref in entries:
+        for ref in path_refs(text):
             if not ref.is_link and any(char in ref.path for char in GLOB_CHARS):
                 continue
             target = existing_repo_path(root, source, ref)

@@ -46,8 +46,7 @@ class WikiCheckTests(unittest.TestCase):
             root = Path(tmp)
             make_fixture(root)
             mutate(root)
-            problems = [] if expected == ["WIKI_CHECK_OK"] else expected
-            self.assertEqual(check_wiki(root), problems)
+            self.assertEqual(check_wiki(root), expected)
 
     def test_check_roots_are_independent(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -75,7 +74,7 @@ class WikiCheckTests(unittest.TestCase):
             )
 
     def test_valid_fixture(self) -> None:
-        self.assert_check(lambda root: None, ["WIKI_CHECK_OK"])
+        self.assert_check(lambda root: None, [])
 
     def test_missing_required_entrypoint(self) -> None:
         self.assert_check(
@@ -143,7 +142,7 @@ class WikiCheckTests(unittest.TestCase):
                 "graph/commands.md",
                 "# Commands\n\nReview `evals/personal-agent.md` and `graph/*.md`.\n",
             ),
-            ["WIKI_CHECK_OK"],
+            [],
         )
 
     def test_missing_markdown_path_reference(self) -> None:
@@ -180,7 +179,7 @@ class WikiCheckTests(unittest.TestCase):
                 "# Review\n\n[Case](nested/case.md#case)\n",
             )
 
-        self.assert_check(mutate, ["WIKI_CHECK_OK"])
+        self.assert_check(mutate, [])
 
     def test_markdown_paths_do_not_fall_back_to_the_root(self) -> None:
         for target in ("README.md", "evals/personal-agent.md"):
@@ -233,7 +232,7 @@ class WikiCheckTests(unittest.TestCase):
                 "README.md",
                 "# README\n\n[Commands](graph/commands.md#commands)\n",
             ),
-            ["WIKI_CHECK_OK"],
+            [],
         )
 
     def test_missing_root_path_reference(self) -> None:
@@ -255,7 +254,7 @@ class WikiCheckTests(unittest.TestCase):
                 "README.md",
                 "# README\n\nThere is no root-level index entrypoint.\n",
             ),
-            ["WIKI_CHECK_OK"],
+            [],
         )
 
     def test_explicit_root_relative_index_reference_is_checked(self) -> None:
@@ -308,7 +307,7 @@ class WikiCheckTests(unittest.TestCase):
                 "# README\n\nExamples only.\n\n```markdown\n"
                 "[[missing]]\n[Bad](graph/missing.md)\n```\n",
             ),
-            ["WIKI_CHECK_OK"],
+            [],
         )
 
     def test_commented_fences_do_not_hide_visible_links(self) -> None:
@@ -357,7 +356,7 @@ class WikiCheckTests(unittest.TestCase):
                 "# README\n\nExamples only.\n\n```text\n```python\n"
                 "[[missing-inside-code]]\n```\n```\n",
             ),
-            ["WIKI_CHECK_OK"],
+            [],
         )
 
     def test_backtick_in_info_text_does_not_open_a_fence(self) -> None:
@@ -377,7 +376,7 @@ class WikiCheckTests(unittest.TestCase):
                 "README.md",
                 "# README\n\nExamples only.\n\n~~~text`code\n[[missing]]\n~~~\n",
             ),
-            ["WIKI_CHECK_OK"],
+            [],
         )
 
     def test_index_sections_allow_closing_hashes(self) -> None:
@@ -388,7 +387,17 @@ class WikiCheckTests(unittest.TestCase):
                 "# Index\n\n## Route ##\n\n- [[commands]].\n\n"
                 "## Pages ##\n\n- [[commands]]: maintenance commands.\n",
             ),
-            ["WIKI_CHECK_OK"],
+            [],
+        )
+
+    def test_closing_hashes_need_a_space(self) -> None:
+        self.assert_check(
+            lambda root: write_file(
+                root,
+                "README.md",
+                "# README\n\n## C#\n\n[C#](#c#)\n",
+            ),
+            [],
         )
 
     def test_code_spans_match_backtick_lengths(self) -> None:
@@ -399,7 +408,7 @@ class WikiCheckTests(unittest.TestCase):
                 "# README\n\nExamples: ``code ` [[missing]] "
                 "[Bad](graph/missing.md) `MISSING.md` ``.\n",
             ),
-            ["WIKI_CHECK_OK"],
+            [],
         )
 
     def test_multiline_code_span_is_not_a_link(self) -> None:
@@ -407,7 +416,7 @@ class WikiCheckTests(unittest.TestCase):
             lambda root: write_file(
                 root, "README.md", "# README\n\nExample: `code\n[[missing]]`.\n"
             ),
-            ["WIKI_CHECK_OK"],
+            [],
         )
 
     def test_unmatched_backtick_does_not_hide_links(self) -> None:
@@ -438,7 +447,7 @@ class WikiCheckTests(unittest.TestCase):
                     lambda root: write_file(
                         root, "README.md", "# README\n\nExamples only.\n\n" + example
                     ),
-                    ["WIKI_CHECK_OK"],
+                    [],
                 )
 
     def test_leaving_a_container_ends_its_unclosed_fence(self) -> None:
@@ -478,7 +487,7 @@ class WikiCheckTests(unittest.TestCase):
                         f"{marker} [[commands]].\n\n## Pages\n\n"
                         f"{marker} [[commands]]: maintenance commands.\n",
                     ),
-                    ["WIKI_CHECK_OK"],
+                    [],
                 )
 
     def test_unrouted_graph_document(self) -> None:

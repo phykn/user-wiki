@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-"""Check the wiki containing this script, regardless of the working directory."""
-
 from pathlib import Path
 import sys
 
