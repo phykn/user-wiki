@@ -8,13 +8,12 @@ Agents arrive here from `AGENTS.md`. Read only the pages whose route below match
 - When the request and evidence are enough to decide, proceed. Ask only when the answer would change the outcome, scope, or risk, and keep doing independent work while waiting.
 - A question, explanation, review, diagnosis, or status request gets an answer, not an edit. Change files only when the user also asks for a change.
 - A change request means editing the local workspace and verifying the result. Commit, push, deploy, publish, send, delete, change credentials, or write to an external service only when the user asks for it or the agreed delivery requires it.
-- A small task inside a project still follows that project's instructions.
 
 ## Route
 
 Read every page whose trigger matches.
 
-- Any work in a workspace, or any task with several steps: [[workflow]].
+- Any work in a workspace, however small, or any task with several steps: [[workflow]].
 - Saving or changing durable guidance, or deciding what belongs in this wiki: [[policy]].
 - Writing, changing, or reviewing code: [[code]].
 - Documents, prompts, wikis, or writing that cites sources: [[docs]].

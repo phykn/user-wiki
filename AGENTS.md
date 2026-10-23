@@ -14,7 +14,7 @@ When the user asks to install or update this wiki:
 2. If the checkout exists, inspect `git status --short --branch`. Do not overwrite local changes or update a branch that cannot fast-forward.
 3. Clone or update the checkout, then verify `AGENTS.md` and `graph/index.md`.
 4. Check the configured user-level agent guidance. It must point to the installed checkout and tell future agents when to consult it. Preserve existing guidance; report a pending pointer update if it cannot be changed safely.
-5. Run `python scripts/check-wiki.py` when Python is available.
+5. Run `python3 scripts/check-wiki.py` when Python 3 is available.
 6. Report the path, clone or update result, verification, pointer state, and untouched local changes.
 
 ## Apply To Another Workspace

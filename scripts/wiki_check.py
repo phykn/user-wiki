@@ -5,13 +5,12 @@ from urllib.parse import unquote
 
 from wiki_markdown import (
     PathReference,
-    bullet_text,
     has_body,
     heading_keys,
     page_entry_nodes,
     path_refs,
+    route_nodes,
     section_text,
-    wikilink_nodes,
     wikilink_parts,
 )
 
@@ -35,15 +34,8 @@ def check_wiki(root: Path) -> List[str]:
     problems = check_layout(root, texts)
     ref_problems, targets = check_path_refs(root, texts)
     problems.extend(ref_problems)
+    problems.extend(check_routes(root, sources, eval_files, targets))
     problems.extend(check_graph(root, graph_files, texts))
-
-    referenced_paths: Set[Path] = set()
-    for source in sources:
-        referenced_paths.update(targets.get(source, set()))
-    for path in eval_files:
-        if path not in referenced_paths:
-            problems.append(f"UNROUTED_EVAL_DOC {path.relative_to(root).as_posix()}")
-
     return list(dict.fromkeys(problems))
 
 
@@ -84,11 +76,6 @@ def check_path_refs(
             targets[source].add(target)
             if ref.fragment is not None and not anchor_exists(target, ref.fragment, texts):
                 problems.append(f"BROKEN_ANCHOR {name} -> {ref.display}")
-
-    agents_doc = root / "AGENTS.md"
-    index_doc = (root / "graph/index.md").resolve()
-    if index_doc not in targets.get(agents_doc, set()):
-        problems.append("MISSING_ENTRYPOINT_REF AGENTS.md -> graph/index.md")
     return problems, targets
 
 
@@ -126,6 +113,23 @@ def anchor_exists(path: Path, fragment: str, texts: Dict[Path, str]) -> bool:
     return unquote(fragment).strip().casefold() in heading_keys(text)
 
 
+def check_routes(
+    root: Path,
+    sources: List[Path],
+    eval_files: List[Path],
+    targets: Dict[Path, Set[Path]],
+) -> List[str]:
+    problems: List[str] = []
+    index_doc = (root / "graph/index.md").resolve()
+    if index_doc not in targets.get(root / "AGENTS.md", set()):
+        problems.append("MISSING_ENTRYPOINT_REF AGENTS.md -> graph/index.md")
+    routed = set().union(*(targets.get(path, set()) for path in sources))
+    for path in eval_files:
+        if path not in routed:
+            problems.append(f"UNROUTED_EVAL_DOC {path.relative_to(root).as_posix()}")
+    return problems
+
+
 def check_graph(
     root: Path, graph_files: List[Path], texts: Dict[Path, str]
 ) -> List[str]:
@@ -159,7 +163,7 @@ def check_graph(
             problems.append("MISSING_INDEX_SECTION graph/index.md -> Pages")
 
         expected = set(nodes) - {"index"}
-        routed = wikilink_nodes(bullet_text(route or ""))
+        routed = route_nodes(route or "")
         entries = Counter(page_entry_nodes(pages or ""))
         for node in sorted(expected - routed):
             problems.append(f"UNROUTED_GRAPH_DOC graph/{node}.md")

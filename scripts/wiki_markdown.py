@@ -9,9 +9,14 @@ OPTIONAL_MAINTAINED_DIR_REF = rf"(?:{MAINTAINED_DIR_REF})?"
 RELATIVE_PREFIX = r"(?:\.\.?[/\\])+"
 PATH_TARGET = rf"(?:{RELATIVE_PREFIX})?(?:{OPTIONAL_MAINTAINED_DIR_REF}{ROOT_FILE_REF}|{MAINTAINED_DIR_REF}[^`\s)#]+)"
 PATH_REF_RE = re.compile(PATH_TARGET)
+LINK_TITLE = r"(?:\"[^\"]*\"|'[^']*'|\([^)]*\))"
 MARKDOWN_LINK_RE = re.compile(
-    r"\]\(\s*(?:<([^>]+)>|([^\s)]+))"
-    r"(?:\s+(?:\"[^\"]*\"|'[^']*'|\([^)]*\)))?\s*\)"
+    rf"\]\(\s*(?:<([^>]+)>|([^\s)]+))(?:\s+{LINK_TITLE})?\s*\)"
+)
+REFERENCE_DEF_RE = re.compile(
+    r"^ {0,3}\[(?!\^)[^\]]+\]:[ \t]*(?:<([^>]+)>|(\S+))"
+    rf"(?:[ \t]+{LINK_TITLE})?[ \t]*$",
+    re.MULTILINE,
 )
 WIKILINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
 INLINE_CODE_RE = re.compile(
@@ -19,6 +24,8 @@ INLINE_CODE_RE = re.compile(
 )
 INLINE_TOKEN_RE = re.compile(r"<!--|`+")
 HEADING_RE = re.compile(r"^#{1,6}[ \t]+(.+?)(?:[ \t]+#+)?[ \t]*$", re.MULTILINE)
+HEADING_MARKER_RE = re.compile(r"#{1,6}(?:[ \t]|$)")
+EMPHASIS_RE = re.compile(r"[*~`]+|(?<![^\W_])_+|_+(?![^\W_])")
 BULLET = r"[ \t]*[-+*][ \t]+"
 PAGE_ENTRY_RE = re.compile(rf"^{BULLET}\[\[([^\]]+)\]\][ \t]*:", re.MULTILINE)
 EXTERNAL_LINK_RE = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*:")
@@ -138,7 +145,7 @@ def strip_inline_code(text: str) -> str:
 
 def has_body(text: str) -> bool:
     return any(
-        line.strip() and not line.lstrip().startswith("#")
+        line.strip() and not HEADING_MARKER_RE.match(line.lstrip())
         for line in semantic_text(text).splitlines()
     )
 
@@ -146,12 +153,14 @@ def has_body(text: str) -> bool:
 def path_refs(text: str) -> List[PathReference]:
     semantic = semantic_text(text)
     refs = [
-        PathReference(match.group(2), None, match.group(2), False)
+        PathReference(token, None, token, False)
         for match in INLINE_CODE_RE.finditer(semantic)
-        if PATH_REF_RE.fullmatch(match.group(2))
+        for token in match.group(2).split()
+        if PATH_REF_RE.fullmatch(token)
     ]
     markdown = strip_inline_code(semantic)
-    for match in MARKDOWN_LINK_RE.finditer(markdown):
+    links = [*MARKDOWN_LINK_RE.finditer(markdown), *REFERENCE_DEF_RE.finditer(markdown)]
+    for match in links:
         raw = (match.group(1) or match.group(2)).strip()
         if raw.startswith("//") or EXTERNAL_LINK_RE.match(raw):
             continue
@@ -170,26 +179,36 @@ def path_refs(text: str) -> List[PathReference]:
 
 def heading_keys(text: str) -> Set[str]:
     keys: Set[str] = set()
-    slug_counts: Dict[str, int] = {}
+    counts: Dict[str, int] = {}
     for match in HEADING_RE.finditer(semantic_text(text)):
-        heading = match.group(1).strip()
-        heading = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", heading)
-        heading = re.sub(r"[*_~`]", "", heading).strip()
-        keys.add(heading.casefold())
-        slug = re.sub(r"[^\w\s-]", "", heading.casefold())
-        slug = re.sub(r"[\s-]+", "-", slug).strip("-")
-        if slug:
-            count = slug_counts.get(slug, 0)
-            keys.add(slug if count == 0 else f"{slug}-{count}")
-            slug_counts[slug] = count + 1
+        label = heading_label(match.group(1)).casefold()
+        slug = re.sub(r"[^\w\- ]", "", label).replace(" ", "-")
+        key = slug
+        while key in counts:
+            counts[slug] += 1
+            key = f"{slug}-{counts[slug]}"
+        counts[key] = 0
+        keys.update((label, key))
     return keys
+
+
+def heading_label(heading: str) -> str:
+    heading = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", heading)
+    parts: List[str] = []
+    pos = 0
+    for code in INLINE_CODE_RE.finditer(heading):
+        parts.append(EMPHASIS_RE.sub("", heading[pos : code.start()]))
+        parts.append(code.group(2))
+        pos = code.end()
+    parts.append(EMPHASIS_RE.sub("", heading[pos:]))
+    return "".join(parts).strip()
 
 
 def section_text(text: str, heading: str) -> Optional[str]:
     match = re.search(
         rf"^##[ \t]+{re.escape(heading)}(?:[ \t]+#+)?[ \t]*$\n?"
         r"(.*?)(?=^##[ \t]+|\Z)",
-        semantic_text(text),
+        link_text(text),
         flags=re.MULTILINE | re.DOTALL,
     )
     return match.group(1) if match else None
@@ -208,19 +227,16 @@ def wikilink_parts(text: str) -> List[Tuple[str, Optional[str], str]]:
     ]
 
 
-def wikilink_nodes(text: str) -> Set[str]:
-    return {node for node, _fragment, _display in wikilink_parts(text) if node}
+def route_nodes(section: str) -> Set[str]:
+    nodes = {
+        split_wikilink(target)[0]
+        for line in section.splitlines()
+        if re.match(BULLET, line)
+        for target in WIKILINK_RE.findall(line)
+    }
+    return nodes - {""}
 
 
-def bullet_text(text: str) -> str:
-    return "\n".join(
-        line for line in link_text(text).splitlines() if re.match(rf"^{BULLET}", line)
-    )
-
-
-def page_entry_nodes(text: str) -> List[str]:
-    nodes = [
-        split_wikilink(match.group(1))[0]
-        for match in PAGE_ENTRY_RE.finditer(link_text(text))
-    ]
+def page_entry_nodes(section: str) -> List[str]:
+    nodes = [split_wikilink(target)[0] for target in PAGE_ENTRY_RE.findall(section)]
     return [node for node in nodes if node]
