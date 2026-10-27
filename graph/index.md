@@ -1,7 +1,5 @@
 Shared user guidance for work across projects.
 
-Agents arrive here from `AGENTS.md`. Read only the pages whose route below matches the task.
-
 ## Defaults
 
 - Answer in Korean unless the user asks otherwise or the output must be in another language.
@@ -11,15 +9,16 @@ Agents arrive here from `AGENTS.md`. Read only the pages whose route below match
 
 ## Route
 
-Read every page whose trigger matches.
+Read every page whose trigger matches, and no others.
 
 - Any work in a workspace, however small, or any task with several steps: [[workflow]].
 - Saving or changing durable guidance, or deciding what belongs in this wiki: [[policy]].
 - Writing, changing, or reviewing code: [[code]].
 - Documents, prompts, wikis, or writing that cites sources: [[docs]].
 - Resumes or job applications: [[docs]] and [[resume]].
-- Applying this wiki to another workspace: [[policy]] and [[workflow]].
 - Two plausible readings of the user's intent that lead to different answers: [[policy#Provisional Interpretations]].
+- Installing or updating this wiki: [[setup]].
+- Applying this wiki to another workspace: [[setup]], [[policy]], and [[workflow]].
 - Checking or maintaining this wiki: [[commands]].
 
 A one-off task with no workspace and no matching route, such as a time check or a short translation, needs only the defaults above.
@@ -31,4 +30,5 @@ A one-off task with no workspace and no matching route, such as a time check or 
 - [[code]]: confirmed code-edit preferences.
 - [[docs]]: document, research, and graph preferences.
 - [[resume]]: Korean resume and application preferences.
+- [[setup]]: install, update, and apply procedures.
 - [[commands]]: wiki maintenance commands.

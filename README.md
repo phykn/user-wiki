@@ -12,7 +12,7 @@ The wiki is a default layer below platform, request, and project instructions; `
 
 ## Install And Apply
 
-Ask an agent to install, update, or apply this wiki; it follows the procedures in `AGENTS.md`. Installation places or updates this checkout and makes the platform's user-level agent guidance point future sessions to it. Applying the wiki to another workspace adapts that workspace's maintained guidance instead of copying this wiki into it.
+Ask an agent to install, update, or apply this wiki; it follows the procedures in `graph/setup.md`. Installation places or updates this checkout and makes the platform's user-level agent guidance point future sessions to it. Applying the wiki to another workspace adapts that workspace's maintained guidance instead of copying this wiki into it.
 
 ## Maintain
 

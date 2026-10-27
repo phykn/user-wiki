@@ -10,15 +10,13 @@ Save durable guidance only when the user:
 
 A direct statement framed as a preference for future work across projects counts as confirmation. A correction for one task, casual wording, or your own inference does not.
 
-If an inference would change answers, record it under [[#Provisional Interpretations]]. Otherwise propose it in chat without editing any durable file.
+If an inference about how to read the user's words would change answers, record it under [[#Provisional Interpretations]]. Otherwise propose it in chat without editing any durable file.
 
 ## Placement
 
 - Confirmed preferences that apply across projects go in this wiki.
 - Rules for one project go in that project's instruction files.
 - Each rule lives in exactly one page.
-
-When applying this wiki to another workspace, do not edit this source wiki unless the user also asked for that. Report the proposed update instead.
 
 ## Review
 

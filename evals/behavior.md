@@ -76,7 +76,7 @@ Failure: skipping a specialist page because the task is short, treating a small 
 
 ### Apply Wiki Elsewhere
 
-Rule: `AGENTS.md` apply procedure and `graph/policy.md` placement.
+Rule: `graph/setup.md` apply procedure and `graph/policy.md` confirmation.
 
 Input: “Apply this user wiki to the target repository,” including a target with no agent entrypoint.
 
