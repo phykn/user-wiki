@@ -23,16 +23,14 @@ Confirmed preferences for writing, refactoring, and verifying code.
 - Keep local variable names short and conventional, such as `cfg`, `vol`, `idx`, and `img`. Keep descriptive names for public APIs and domain concepts.
 - Name functions with concise verb phrases. Use singular and plural names consistently, such as `prob` for one value and `probs` for a collection.
 - Use the same name and public call shape for the same operation across related classes and modules.
-- Keep comments minimal; add them only when the reason behind a choice needs explanation.
+- Show purpose through names and structure. Keep comments short and limited to why: a constraint, workaround, or decision the code cannot show. Write no file-top docstrings or comments that restate the code, and leave no commented-out code or placeholder TODOs.
 
 ## Refactor
 
 - When refactoring is requested, also fix potential bugs supported by concrete code paths or evidence in the affected scope.
-- Preserve external contracts such as public APIs, file formats, and model checkpoints. Remove stale internal paths and aliases unless a real consumer needs compatibility.
-- Treat a boundary change as one coherent update: move files, update imports and callers, adjust tests and docs, and remove stale paths together.
+- Remove stale internal paths and aliases unless a real consumer needs compatibility.
+- When refactoring, remove comments and docstrings that restate the code. If code reads a docstring, such as `__doc__` for CLI help, move its text to that use.
 
 ## Verify
 
-- Reproduce a bug before fixing it when reproduction is safe and practical. Otherwise state the static evidence and remaining risk.
-- When a focused regression test is suitable, make it demonstrate the failure and the fix.
 - For refactoring, compare behavior before and after, distinguishing intentional bug fixes from unintended changes.

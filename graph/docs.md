@@ -5,7 +5,7 @@ Confirmed preferences for documents, research, wikis, prompts, and work instruct
 Write for the reader's next question or decision.
 
 - A README or first screen explains what the project is, why it matters, and whether the reader needs it, before any internal structure.
-- Use predictable headings. Introduce a term, diagram, or code block only after the reader needs it.
+- Introduce a term, diagram, or code block only after the reader needs it.
 - When an explanation is confusing, fix its order before adding sentences. Write procedures in the order they run.
 - Name concrete objects, actions, and outputs in easy words that do not depend on hidden context.
 - Prefer removing content to adding it. Add only what the reader needs to understand, judge, or act, and keep necessary meaning.
@@ -23,8 +23,7 @@ Write for the reader's next question or decision.
 ## Evidence
 
 - From an example, take the structure that transfers, not its domain details.
-- Put evidence next to the claim it supports. Check time-sensitive facts against current direct sources.
-- Keep facts apart from interpretation. State dates, scope, and uncertainty where they change the conclusion.
+- State dates, scope, and uncertainty where they change the conclusion.
 - A problem summary states what exists, what is needed, and why the gap is hard to close.
 
 ## Document Graph
@@ -42,4 +41,4 @@ Write for the reader's next question or decision.
 
 ## Check
 
-Read the changed page starting from its entrypoint. Check that accepted meaning survived, that page responsibilities do not overlap, and that nothing is duplicated, stale, empty, or broken. Replace conflicting wording instead of adding a correction beside it.
+Replace conflicting wording instead of adding a correction beside it.

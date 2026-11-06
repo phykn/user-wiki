@@ -38,11 +38,11 @@ Failure: skipping fresh verification, leaving related untracked files out, switc
 
 Rule: [[workflow#Workspace]] and [[index#Defaults]]
 
-Input: work in a project with root and nested instruction files, existing edits or unrelated untracked files, credentials or commands that need secrets, or sibling repositories on disk that the user has not named.
+Input: work in a project with its own instruction files, existing edits or unrelated untracked files, or sibling repositories on disk that the user has not named.
 
-Expected: read instruction files from the root down to each touched path; a nested file overrides only inside its folder. Keep unrelated changes, stage only requested files, read secrets only when required, and never repeat them. Stay in the requested workspace: read other repositories only when the user names them or asks for a cross-project comparison, and take repeated patterns, not project-specific commands.
+Expected: follow the project's instruction files over this wiki. Keep unrelated changes and stage only requested files. Stay in the requested workspace: read other repositories only when the user names them or asks for a cross-project comparison, and take repeated patterns, not project-specific commands.
 
-Failure: treating a small project task as free of project rules, applying the wiki over a local rule, overwriting user work, bundling unrelated files, printing a token while debugging access, scanning nearby directories for convenience, copying project commands into global guidance, or treating missing examples as a blocker.
+Failure: applying the wiki over a local rule, overwriting user work, bundling unrelated files, scanning nearby directories for convenience, copying project commands into global guidance, or treating missing examples as a blocker.
 
 ### Routes
 
@@ -90,17 +90,17 @@ Rule: [[code#Refactor]] and [[code#Verify]]
 
 Input: “Refactor this module,” and a concrete code path in the affected scope can fail.
 
-Expected: preserve public APIs, file formats, and checkpoints; move files, callers, tests, and docs together and remove stale internal paths; fix the bug the code path shows, reproducing it first when that is safe and practical and otherwise stating the static evidence and remaining risk; add a regression test that shows the failure and the fix when one is suitable; and report behavior before and after, separating intended fixes from unintended changes.
+Expected: fix the bug the code path shows, remove stale internal paths and aliases that no consumer needs, and report behavior before and after, separating intended fixes from unintended changes.
 
-Failure: breaking an external contract without need, leaving stale aliases or half-moved callers, calling a suspected bug fixed without evidence, or reporting the refactor without comparing behavior.
+Failure: leaving the found bug for later, leaving stale aliases or comments that restate the code, fixing a suspected bug that no code path or evidence supports, or reporting the refactor without comparing behavior.
 
 ### Reader-First Document
 
-Rule: [[docs#Reader And Order]], [[docs#Evidence]], and [[docs#Editing Boundaries]]
+Rule: [[docs#Reader And Order]] and [[docs#Editing Boundaries]]
 
 Input: rewrite an entrypoint or explanation for a first-time reader.
 
-Expected: follow the reader's question order, introduce terms when they are needed, keep evidence beside claims, and keep accepted meaning in formatting-only work.
+Expected: follow the reader's question order, introduce terms when they are needed, and keep accepted meaning in formatting-only work.
 
 Failure: keeping a confusing source order, adding definitions nobody needs, or changing how strong a claim is during a formatting fix.
 
@@ -108,11 +108,11 @@ Failure: keeping a confusing source order, adding definitions nobody needs, or c
 
 Rule: [[docs#Evidence]]
 
-Input: review a claim backed by sources, or use the latest external information.
+Input: review a claim backed by sources, or summarize a problem.
 
-Expected: keep evidence next to its claim, separate fact from interpretation, check current facts against direct sources, and state uncertainty where it changes the conclusion.
+Expected: state dates, scope, and uncertainty where they change the conclusion, and say what exists, what is needed, and why the gap is hard to close.
 
-Failure: a generic summary, decorative sources, stale memory used for current facts, or unsupported certainty.
+Failure: a generic summary, or unsupported certainty.
 
 ### Korean Resume Field
 

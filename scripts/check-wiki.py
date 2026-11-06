@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Check the wiki in this checkout. graph/maintenance.md describes the rules."""
 from __future__ import annotations
 
 import re
