@@ -1,4 +1,4 @@
-What gets saved as durable guidance, where it goes, and which instructions win.
+What gets saved as durable guidance, where it goes, and how unconfirmed readings are kept.
 
 ## Confirmation
 
@@ -17,19 +17,6 @@ If an inference about how to read the user's words would change answers, record 
 - Confirmed preferences that apply across projects go in this wiki.
 - Rules for one project go in that project's instruction files.
 - Each rule lives in exactly one page.
-
-## Review
-
-For wiki edits, review content with [[docs]] and run the checks in [[commands]].
-
-## Priority
-
-System and developer instructions come first, including instruction files the platform loads at that level. For anything they leave open:
-
-1. The user's current explicit request.
-2. The target project's conventions and maintained docs.
-3. Confirmed pages in this wiki.
-4. [[#Provisional Interpretations]], only as a final tie-breaker.
 
 ## Provisional Interpretations
 

@@ -6,10 +6,19 @@ When the user asks to install or update this wiki:
 
 1. Use the path the user gives, an existing checkout, or the platform's configured user-guidance location. Ask before inventing a location.
 2. If the checkout exists, inspect `git status --short --branch`. Do not overwrite local changes or update a branch that cannot fast-forward.
-3. Clone or update the checkout, then verify `AGENTS.md` and `graph/index.md`.
-4. Check the configured user-level agent guidance. It must point to the installed checkout and tell future agents when to consult it. Preserve existing guidance; report a pending pointer update if it cannot be changed safely.
-5. Run `python3 scripts/check-wiki.py` when Python 3 is available.
-6. Report the path, clone or update result, verification, pointer state, and untouched local changes.
+3. Clone the checkout or fast-forward it. Run `python3 scripts/check-wiki.py` in it when Python 3 is available; otherwise confirm that `AGENTS.md` and `graph/index.md` exist.
+4. Make the platform's user-level agent guidance contain the pointer below, with `<checkout>` replaced by the checkout path. Replace an older wiki pointer and preserve all other guidance. If the file cannot be changed safely, report the pending pointer update.
+5. Report the path, the clone or update result, the check result, the pointer state, and any local changes left untouched.
+
+```markdown
+# User Wiki
+
+My cross-project guidance lives in `<checkout>` (https://github.com/phykn/user-wiki).
+
+At the start of every task, read `<checkout>/graph/index.md` and follow only the routes that match the task. Paths in the wiki resolve from `<checkout>`.
+
+Treat the wiki as a default layer: system and developer instructions, the current request, and project-local guidance take precedence.
+```
 
 ## Apply To Another Workspace
 

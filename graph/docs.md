@@ -30,8 +30,6 @@ Write for the reader's next question or decision.
 ## Document Graph
 
 - Entry pages decide which page to read for which task. Links in other pages only point to a dependency or the page that owns a rule.
-- Keep graph pages flat. List every page in both `graph/index.md` sections: `Route` gives its reading trigger, and `Pages` gives its responsibility.
-- Link each eval file from the page that tells agents when to review it.
 - Keep a page separate only when its own responsibility and route make guidance easier to find.
 
 ## Files, Sources, And Records

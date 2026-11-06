@@ -1,561 +1,247 @@
 #!/usr/bin/env python3
-from pathlib import Path
+from __future__ import annotations
+
+import importlib.util
 import shutil
 import subprocess
 import sys
 import tempfile
-from typing import List
 import unittest
+from pathlib import Path
+from typing import Dict, List, Sequence
 
-from wiki_check import check_wiki
+SCRIPT = Path(__file__).resolve().with_name("check-wiki.py")
+SPEC = importlib.util.spec_from_file_location("check_wiki", SCRIPT)
+wiki = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(wiki)
+
+FIXTURE = {
+    "AGENTS.md": "## Agents\n\nRead `graph/index.md` next.\n",
+    "README.md": "# README\n\nA small wiki.\n",
+    "graph/index.md": "Entry page.\n\n## Route\n\n- Maintenance: [[maintenance]].\n",
+    "graph/maintenance.md": "How the wiki is checked.\n\n## Check\n\nReview `evals/cases.md`.\n",
+    "evals/cases.md": "Review cases.\n\n### First Case\n\nRule: [[maintenance#Check]]\n",
+}
 
 
-SOURCE_SCRIPT = Path(__file__).resolve().with_name("check-wiki.py")
-INDEX = (
-    "# Index\n\n## Route\n\n- Maintenance: [[commands]].\n\n"
-    "## Pages\n\n- [[commands]]: maintenance commands.\n"
-)
-COMMANDS = "# Commands\n\nReview `evals/personal-agent.md`.\n"
-
-
-def write_file(root: Path, path: str, text: str) -> None:
+def write(root: Path, path: str, text: str) -> None:
     target = root / path
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(text, encoding="utf-8")
 
 
-def make_fixture(root: Path) -> None:
-    write_file(root, "AGENTS.md", "# Agents\nCanonical: `graph/index.md`.\n")
-    write_file(root, "README.md", "# README\nSee `AGENTS.md`.\n")
-    write_file(root, "graph/index.md", INDEX)
-    write_file(root, "graph/commands.md", COMMANDS)
-    write_file(
-        root,
-        "evals/personal-agent.md",
-        "# Personal Agent\n\nReview behavior changes.\n",
-    )
+def make_wiki(root: Path, files: Dict[str, str], remove: Sequence[str] = ()) -> None:
+    for path, text in {**FIXTURE, **files}.items():
+        write(root, path, text)
+    for path in remove:
+        (root / path).unlink()
 
 
-class WikiCheckTests(unittest.TestCase):
-    def assert_check(self, mutate, expected: List[str]) -> None:
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            make_fixture(root)
-            mutate(root)
-            self.assertEqual(check_wiki(root), expected)
-
-    def assert_doc(self, path: str, text: str, expected: List[str]) -> None:
-        self.assert_check(lambda root: write_file(root, path, text), expected)
-
-    def test_check_roots_are_independent(self) -> None:
-        with tempfile.TemporaryDirectory() as tmp:
-            first = Path(tmp) / "first"
-            second = Path(tmp) / "second"
-            make_fixture(first)
-            make_fixture(second)
-            write_file(second, "README.md", "# README\n\nSee [[missing]].\n")
-            cwd = Path.cwd()
-            self.assertEqual(check_wiki(first), [])
-            self.assertEqual(
-                check_wiki(second), ["BROKEN_WIKILINK README.md -> missing"]
-            )
-            self.assertEqual(check_wiki(first), [])
-            self.assertEqual(Path.cwd(), cwd)
-
-    def test_path_outside_wiki_is_rejected(self) -> None:
+class CheckTests(unittest.TestCase):
+    def assert_problems(self, files: Dict[str, str], expected: List[str], remove: Sequence[str] = ()) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "wiki"
-            make_fixture(root)
-            write_file(Path(tmp), "outside.md", "# Outside\n\nNot wiki guidance.\n")
-            write_file(root, "README.md", "# README\n\n[Outside](../outside.md)\n")
-            self.assertEqual(
-                check_wiki(root), ["BROKEN_PATH_REF README.md -> ../outside.md"]
-            )
+            make_wiki(root, files, remove)
+            write(Path(tmp), "outside.md", "Outside the wiki.\n")
+            self.assertEqual(wiki.check(root), expected)
 
     def test_valid_fixture(self) -> None:
-        self.assert_check(lambda root: None, [])
+        self.assert_problems({}, [])
 
-    def test_missing_required_entrypoint(self) -> None:
-        self.assert_check(
-            lambda root: (root / "graph/index.md").unlink(),
-            [
-                "MISSING_DOC graph/index.md",
-                "BROKEN_PATH_REF AGENTS.md -> graph/index.md",
-                "MISSING_ENTRYPOINT_REF AGENTS.md -> graph/index.md",
-            ],
+    def test_missing_docs(self) -> None:
+        self.assert_problems(
+            {},
+            ["MISSING_DOC README.md", "MISSING_DOC graph/index.md", "BROKEN_PATH AGENTS.md -> graph/index.md"],
+            remove=["README.md", "graph/index.md"],
         )
 
-    def test_missing_canonical_route_reference(self) -> None:
-        self.assert_doc(
-            "AGENTS.md",
-            "# Agents\n\nNo route.\n",
-            ["MISSING_ENTRYPOINT_REF AGENTS.md -> graph/index.md"],
+    def test_root_holds_only_agents_and_readme(self) -> None:
+        self.assert_problems(
+            {"index.md": "Wrong entry.\n", "CLAUDE.md": "Second entry.\n"},
+            ["UNEXPECTED_DOC CLAUDE.md", "UNEXPECTED_DOC index.md"],
         )
 
-    def test_canonical_route_requires_an_exact_path_reference(self) -> None:
-        self.assert_doc(
-            "AGENTS.md",
-            "# Agents\n\nThe unrelated name badgraph/index.md.bak appears here.\n",
-            ["MISSING_ENTRYPOINT_REF AGENTS.md -> graph/index.md"],
-        )
+    def test_nested_graph_doc(self) -> None:
+        self.assert_problems({"graph/old/page.md": "Old page.\n"}, ["NESTED_GRAPH_DOC graph/old/page.md"])
 
-    def test_unexpected_root_index(self) -> None:
-        self.assert_doc(
-            "index.md", "# Wrong\n\nWrong route.\n", ["UNEXPECTED_DOC index.md"]
-        )
-
-    def test_heading_only_document_is_empty(self) -> None:
-        self.assert_doc(
-            "evals/personal-agent.md",
-            "# Empty\n",
-            ["EMPTY_DOC evals/personal-agent.md"],
-        )
-
-    def test_comment_only_document_is_empty(self) -> None:
-        self.assert_doc(
-            "evals/personal-agent.md",
-            "# Empty\n\n<!-- This is not guidance. -->\n",
-            ["EMPTY_DOC evals/personal-agent.md"],
-        )
+    def test_empty_doc(self) -> None:
+        for text in ("# Empty\n", "# Empty\n\n```\n[[missing]]\n```\n"):
+            with self.subTest(text=text):
+                self.assert_problems({"evals/cases.md": text}, ["EMPTY_DOC evals/cases.md"])
 
     def test_hashtag_line_is_body(self) -> None:
-        self.assert_doc("evals/personal-agent.md", "# Tags\n\n#todo\n", [])
+        self.assert_problems({"README.md": "#todo\n"}, [])
 
-    def test_missing_backtick_path_reference(self) -> None:
-        self.assert_doc(
-            "graph/commands.md",
-            COMMANDS + "Run `scripts/missing.py`.\n",
-            ["BROKEN_PATH_REF graph/commands.md -> scripts/missing.py"],
-        )
-
-    def test_command_path_arguments_are_checked(self) -> None:
-        self.assert_doc(
-            "graph/commands.md",
-            COMMANDS + "- `python3 scripts/missing.py --strict`: Run it.\n",
-            ["BROKEN_PATH_REF graph/commands.md -> scripts/missing.py"],
-        )
-
-    def test_glob_path_reference_is_allowed(self) -> None:
-        self.assert_doc(
-            "graph/commands.md",
-            "# Commands\n\nReview `evals/personal-agent.md` and `graph/*.md`.\n",
-            [],
-        )
-
-    def test_missing_markdown_path_reference(self) -> None:
-        self.assert_doc(
-            "README.md",
-            "# README\n\n[Missing](graph/missing.md)\n",
-            ["BROKEN_PATH_REF README.md -> graph/missing.md"],
-        )
-
-    def test_missing_relative_markdown_path_reference(self) -> None:
-        self.assert_doc(
-            "graph/commands.md",
-            COMMANDS + "See [missing](../missing.md).\n",
-            ["BROKEN_PATH_REF graph/commands.md -> ../missing.md"],
-        )
-
-    def test_markdown_paths_are_relative_to_the_source(self) -> None:
-        def mutate(root: Path) -> None:
-            write_file(root, "evals/nested/case.md", "# Case\n\nReview case.\n")
-            write_file(
-                root, "graph/commands.md",
-                "# Commands\n\nReview `evals/personal-agent.md` and "
-                "[case](../evals/nested/case.md).\n",
-            )
-            write_file(
-                root, "evals/personal-agent.md",
-                "# Review\n\n[Case](nested/case.md#case)\n",
-            )
-
-        self.assert_check(mutate, [])
-
-    def test_markdown_paths_do_not_fall_back_to_the_root(self) -> None:
-        for target in ("README.md", "evals/personal-agent.md"):
-            with self.subTest(target=target):
-                self.assert_doc(
-                    "graph/commands.md",
-                    COMMANDS + f"[Wrong location]({target})\n",
-                    [f"BROKEN_PATH_REF graph/commands.md -> {target}"],
+    def test_page_must_open_with_a_sentence(self) -> None:
+        for bom in ("", "\ufeff"):
+            with self.subTest(bom=bool(bom)):
+                self.assert_problems(
+                    {"graph/maintenance.md": bom + "# Maintenance\n\nReview `evals/cases.md`.\n\n## Check\n"},
+                    ["MISSING_SUMMARY graph/maintenance.md"],
                 )
 
-    def test_invalid_markdown_path_cannot_route_an_eval(self) -> None:
-        self.assert_doc(
-            "graph/commands.md",
-            "# Commands\n\n[Review](evals/personal-agent.md)\n",
+    def test_unsupported_syntax(self) -> None:
+        self.assert_problems(
+            {"README.md": "# README\n\n[Setup](graph/maintenance.md)\n\n[g]: graph/maintenance.md\n\n<!-- note -->\n"},
             [
-                "BROKEN_PATH_REF graph/commands.md -> evals/personal-agent.md",
-                "UNROUTED_EVAL_DOC evals/personal-agent.md",
+                "UNSUPPORTED_SYNTAX README.md -> [Setup](graph/maintenance.md)",
+                "UNSUPPORTED_SYNTAX README.md -> [g]: graph/maintenance.md",
+                "UNSUPPORTED_SYNTAX README.md -> <!--",
             ],
         )
 
-    def test_markdown_query_does_not_bypass_path_check(self) -> None:
-        self.assert_doc(
-            "README.md",
-            "# README\n\n[Missing](graph/missing.md?raw=1)\n",
-            ["BROKEN_PATH_REF README.md -> graph/missing.md?raw=1"],
+    def test_external_links_are_allowed(self) -> None:
+        self.assert_problems(
+            {"README.md": "See [the site](https://example.com \"Site\") or [mail](mailto:a@example.com).\n"}, []
         )
 
-    def test_reference_definitions_are_checked(self) -> None:
-        missing = "BROKEN_PATH_REF README.md -> graph/missing.md"
-        anchor = "BROKEN_ANCHOR README.md -> graph/commands.md#missing"
-        for definition, expected in (
-            ("[g]: graph/missing.md", [missing]),
-            ('[g]: <graph/commands.md#commands> "Title"', []),
-            ("[g]: graph/commands.md#missing", [anchor]),
-            ("[^1]: A footnote, not a link.", []),
-            ("[g]: not a definition because of trailing words", []),
+    def test_code_is_not_read_for_links_or_syntax(self) -> None:
+        for text in (
+            "Example: `[[missing]]`, `<!--`, and `[x](y.md)`.\n",
+            "Example: ``a ` [[missing]] b``.\n",
+            "```text\n[[missing]]\n```python\n[x](y.md)\n```\n",
+            "~~~text`info\n[[missing]]\n~~~\n",
+            "- Nested:\n\n  ```\n  [[missing]]\n  ```\n",
         ):
-            with self.subTest(definition=definition):
-                self.assert_doc(
-                    "README.md",
-                    f"# README\n\nSee [the guide][g].\n\n{definition}\n",
-                    expected,
-                )
+            with self.subTest(text=text):
+                self.assert_problems({"README.md": "Examples.\n\n" + text}, [])
 
-    def test_missing_markdown_anchor(self) -> None:
-        self.assert_doc(
-            "README.md",
-            "# README\n\n[Bad](graph/commands.md#does-not-exist)\n",
-            ["BROKEN_ANCHOR README.md -> graph/commands.md#does-not-exist"],
+    def test_fences_inside_lists_and_quotes(self) -> None:
+        self.assert_problems(
+            {
+                "README.md": "Examples.\n\n- ```text\n  [[missing]]\n  ```\n\n> ```\n> [[missing]]\n> ```\n\n"
+                "1. ~~~\n   [[missing]]\n   ~~~\n\nSee [[gone]].\n"
+            },
+            ["BROKEN_LINK README.md -> gone"],
         )
 
-    def test_existing_markdown_anchor(self) -> None:
-        self.assert_doc(
-            "README.md", "# README\n\n[Commands](graph/commands.md#commands)\n", []
+    def test_unmatched_backticks_do_not_hide_links(self) -> None:
+        for text in ("Literal ` and [[missing]].\n", "```inline``` and [[missing]].\n"):
+            with self.subTest(text=text):
+                self.assert_problems({"README.md": text}, ["BROKEN_LINK README.md -> missing"])
+
+    def test_broken_paths(self) -> None:
+        self.assert_problems(
+            {
+                "graph/maintenance.md": FIXTURE["graph/maintenance.md"]
+                + "Run `scripts/missing.py`, `python3 scripts/absent.py --strict`, and `graph/../../outside.md`.\n"
+                + "Globs and folders such as `graph/*.md`, `graph/`, and bare `CLAUDE.md` are fine.\n"
+            },
+            [
+                "BROKEN_PATH graph/maintenance.md -> scripts/missing.py",
+                "BROKEN_PATH graph/maintenance.md -> scripts/absent.py",
+                "BROKEN_PATH graph/maintenance.md -> graph/../../outside.md",
+            ],
         )
 
-    def test_anchors_follow_github_slugs(self) -> None:
-        for heading, anchor in (
-            ("A - B", "a---b"),
-            ("The `snake_case` option", "the-snake_case-option"),
-            ("**Bold** _note_", "bold-note"),
-            ("Files, Sources, And Records", "files-sources-and-records"),
+    def test_wikilinks_and_anchors(self) -> None:
+        self.assert_problems(
+            {
+                "README.md": "# README\n\n## Local\n\n"
+                "[[missing]], [[maintenance#Missing]], [[#Nowhere]], "
+                "[[maintenance|alias]], [[maintenance#check]], [[#local]].\n"
+            },
+            [
+                "BROKEN_LINK README.md -> missing",
+                "BROKEN_ANCHOR README.md -> maintenance#Missing",
+                "BROKEN_ANCHOR README.md -> #Nowhere",
+            ],
+        )
+
+    def test_heading_closing_marks_are_ignored(self) -> None:
+        self.assert_problems(
+            {"graph/maintenance.md": "How the wiki is checked.\n\n## Check ##\n\nReview `evals/cases.md`.\n"}, []
+        )
+
+    def test_agents_must_reference_the_index(self) -> None:
+        self.assert_problems(
+            {"AGENTS.md": "## Agents\n\nThe plain words graph/index.md are not a reference.\n"},
+            ["MISSING_ENTRY_REF AGENTS.md -> graph/index.md"],
+        )
+
+    def test_index_needs_a_route_section(self) -> None:
+        self.assert_problems(
+            {"graph/index.md": "Entry page.\n\n## Routes\n\n- [[maintenance]]\n"},
+            ["MISSING_ROUTE_SECTION graph/index.md"],
+        )
+
+    def test_only_route_bullets_register_pages(self) -> None:
+        for route in (
+            "- Maintenance: [[maintenance]].\nExtra: [[extra]].\n",
+            "- Maintenance: [[maintenance]].\n- Extra: `[[extra]]`.\n",
+            "- Maintenance: [[maintenance]].\n\n## Pages\n\n- [[extra]]\n",
         ):
-            with self.subTest(heading=heading):
-                self.assert_doc(
-                    "README.md", f"# README\n\n## {heading}\n\n[x](#{anchor})\n", []
+            with self.subTest(route=route):
+                self.assert_problems(
+                    {"graph/extra.md": "Extra page.\n", "graph/index.md": "Entry page.\n\n## Route\n\n" + route},
+                    ["UNROUTED_PAGE graph/extra.md"],
                 )
 
-    def test_anchor_slugs_are_not_collapsed(self) -> None:
-        self.assert_doc(
-            "README.md",
-            "# README\n\n## A - B\n\n[x](#a-b)\n",
-            ["BROKEN_ANCHOR README.md -> #a-b"],
-        )
-
-    def test_duplicate_heading_anchors_get_unique_suffixes(self) -> None:
-        self.assert_doc(
-            "README.md",
-            "# README\n\n## A\n\n## A\n\n## A 1\n\n[x](#a-1) [y](#a-1-1)\n",
-            [],
-        )
-
-    def test_missing_root_path_reference(self) -> None:
-        self.assert_doc(
-            "README.md",
-            "# README\n\n`MISSING.md`\n",
-            ["BROKEN_PATH_REF README.md -> MISSING.md"],
-        )
-
-    def test_missing_root_dotfile_reference(self) -> None:
-        self.assert_doc(
-            "README.md",
-            "# README\n\n`.gitignore`\n",
-            ["BROKEN_PATH_REF README.md -> .gitignore"],
-        )
-
-    def test_intentional_missing_root_index_mention(self) -> None:
-        self.assert_doc(
-            "README.md", "# README\n\nThere is no root-level index entrypoint.\n", []
-        )
-
-    def test_explicit_root_relative_index_reference_is_checked(self) -> None:
-        self.assert_doc(
-            "graph/commands.md",
-            "# Commands\n\nReview `evals/personal-agent.md` and `../index.md`.\n",
-            ["BROKEN_PATH_REF graph/commands.md -> ../index.md"],
-        )
-
-    def test_broken_wikilink(self) -> None:
-        self.assert_doc(
-            "graph/index.md",
-            "# Index\n\n## Route\n\n- [[commands]] and [[missing]].\n\n"
-            "## Pages\n\n- [[commands]]: commands.\n- [[missing]]: missing.\n",
-            ["BROKEN_WIKILINK graph/index.md -> missing"],
-        )
-
-    def test_missing_wikilink_anchor(self) -> None:
-        self.assert_doc(
-            "graph/index.md",
-            "# Index\n\n## Route\n\n- [[commands#missing]].\n\n"
-            "## Pages\n\n- [[commands]]: commands.\n",
-            ["BROKEN_WIKILINK_ANCHOR graph/index.md -> commands#missing"],
-        )
-
-    def test_wikilinks_are_checked_outside_graph(self) -> None:
-        self.assert_doc(
-            "README.md",
-            "# README\n\nSee [[missing]].\n",
-            ["BROKEN_WIKILINK README.md -> missing"],
-        )
-
-    def test_fenced_examples_are_not_links(self) -> None:
-        self.assert_doc(
-            "README.md",
-            "# README\n\nExamples only.\n\n```markdown\n"
-            "[[missing]]\n[Bad](graph/missing.md)\n`scripts/missing.py`\n```\n",
-            [],
-        )
-
-    def test_commented_fences_do_not_hide_visible_links(self) -> None:
-        for comment in (
-            "<!--\n```\n-->\n",
-            "<!-- ``` -->\n",
-            "> <!--\n> ```\n> -->\n",
-            "- <!--\n  ~~~\n  -->\n",
-        ):
-            with self.subTest(comment=comment):
-                self.assert_doc(
-                    "README.md",
-                    "# README\n\n" + comment + "[[missing]]\n",
-                    ["BROKEN_WIKILINK README.md -> missing"],
-                )
-
-    def test_comment_openers_in_fences_do_not_hide_visible_links(self) -> None:
-        for example in ("```html\n<!--\n```", "~~~html <!--\n~~~"):
-            with self.subTest(example=example):
-                self.assert_doc(
-                    "README.md",
-                    "# README\n\n" + example + "\n[[missing]]\n<!-- end -->\n",
-                    ["BROKEN_WIKILINK README.md -> missing"],
-                )
-
-    def test_comment_openers_in_inline_code_do_not_hide_visible_links(self) -> None:
-        for example in ("`<!--`", "``code ` <!-- ``", "`code\n<!--`"):
-            for suffix in ("", "<!-- real comment -->"):
-                with self.subTest(example=example, suffix=suffix):
-                    self.assert_doc(
-                        "README.md",
-                        "# README\n\nExample: " + example + " [[missing]]. " + suffix,
-                        ["BROKEN_WIKILINK README.md -> missing"],
-                    )
-
-    def test_fence_with_info_text_does_not_close_an_outer_fence(self) -> None:
-        self.assert_doc(
-            "README.md",
-            "# README\n\nExamples only.\n\n```text\n```python\n"
-            "[[missing-inside-code]]\n```\n```\n",
-            [],
-        )
-
-    def test_backtick_in_info_text_does_not_open_a_fence(self) -> None:
-        self.assert_doc(
-            "README.md",
-            "# README\n\n```not`a-fence\n[[missing]]\n",
-            ["BROKEN_WIKILINK README.md -> missing"],
-        )
-
-    def test_tilde_fence_allows_backticks_in_info_text(self) -> None:
-        self.assert_doc(
-            "README.md",
-            "# README\n\nExamples only.\n\n~~~text`code\n[[missing]]\n~~~\n",
-            [],
-        )
-
-    def test_index_sections_allow_closing_hashes(self) -> None:
-        self.assert_doc(
-            "graph/index.md",
-            "# Index\n\n## Route ##\n\n- [[commands]].\n\n"
-            "## Pages ##\n\n- [[commands]]: maintenance commands.\n",
-            [],
-        )
-
-    def test_closing_hashes_need_a_space(self) -> None:
-        self.assert_doc("README.md", "# README\n\n## C#\n\n[C#](#c#)\n", [])
-
-    def test_code_spans_match_backtick_lengths(self) -> None:
-        self.assert_doc(
-            "README.md",
-            "# README\n\nExamples: ``code ` [[missing]] "
-            "[Bad](graph/missing.md) `MISSING.md` ``.\n",
-            [],
-        )
-
-    def test_multiline_code_span_is_not_a_link(self) -> None:
-        self.assert_doc("README.md", "# README\n\nExample: `code\n[[missing]]`.\n", [])
-
-    def test_unmatched_backtick_does_not_hide_links(self) -> None:
-        self.assert_doc(
-            "README.md",
-            "# README\n\nLiteral ` and [[missing]].\n",
-            ["BROKEN_WIKILINK README.md -> missing"],
-        )
-
-    def test_code_span_does_not_cross_paragraphs(self) -> None:
-        self.assert_doc(
-            "README.md",
-            "# README\n\nLiteral `\n\n[[missing]]\n\n`\n",
-            ["BROKEN_WIKILINK README.md -> missing"],
-        )
-
-    def test_fenced_examples_in_containers_are_not_links(self) -> None:
-        for example in (
-            "- Examples:\n  - Nested:\n    ```markdown\n"
-            "    [[missing]]\n    [Bad](graph/missing.md)\n    ```\n",
-            "- ```markdown\n  [[missing]]\n  ```\n",
-            "> ```markdown\n> [[missing]]\n> ```\n",
-        ):
-            with self.subTest(example=example):
-                self.assert_doc(
-                    "README.md", "# README\n\nExamples only.\n\n" + example, []
-                )
-
-    def test_leaving_a_container_ends_its_unclosed_fence(self) -> None:
-        for example in (
-            "- Examples:\n  - ```markdown\n    [[inside-code]]\n",
-            "> ```markdown\n> [[inside-code]]\n",
-        ):
-            with self.subTest(example=example):
-                self.assert_doc(
-                    "README.md",
-                    "# README\n\n" + example + "\n[[outside-code]]\n",
-                    ["BROKEN_WIKILINK README.md -> outside-code"],
-                )
-
-    def test_code_span_cannot_register_a_route(self) -> None:
-        self.assert_doc(
-            "graph/index.md",
-            "# Index\n\n## Route\n\n- Example: `code\n- [[commands]]\n`\n\n"
-            "## Pages\n\n- [[commands]]: maintenance commands.\n",
-            ["UNROUTED_GRAPH_DOC graph/commands.md"],
-        )
-
-    def test_all_unordered_list_markers_register_pages(self) -> None:
+    def test_route_bullets_accept_all_markers_and_anchors(self) -> None:
         for marker in ("-", "*", "+"):
             with self.subTest(marker=marker):
-                self.assert_doc(
-                    "graph/index.md",
-                    f"# Index\n\n## Route\n\n{marker} [[commands]].\n\n"
-                    f"## Pages\n\n{marker} [[commands]]: maintenance commands.\n",
-                    [],
+                self.assert_problems(
+                    {"graph/index.md": f"Entry page.\n\n## Route\n\n{marker} Check: [[maintenance#Check]].\n"}, []
                 )
 
-    def test_unrouted_graph_document(self) -> None:
-        def mutate(root: Path) -> None:
-            write_file(root, "graph/orphan.md", "# Orphan\n\nOrphan guidance.\n")
-            write_file(root, "graph/index.md", INDEX + "- [[orphan]]: orphan.\n")
-
-        self.assert_check(mutate, ["UNROUTED_GRAPH_DOC graph/orphan.md"])
-
-    def test_unlisted_graph_document(self) -> None:
-        def mutate(root: Path) -> None:
-            write_file(root, "graph/orphan.md", "# Orphan\n\nOrphan guidance.\n")
-            write_file(
-                root,
-                "graph/index.md",
-                "# Index\n\n## Route\n\n- [[commands]].\n- [[orphan]].\n\n"
-                "## Pages\n\n- [[commands]]: commands.\n",
-            )
-
-        self.assert_check(mutate, ["UNLISTED_GRAPH_DOC graph/orphan.md"])
-
-    def test_comment_only_route_registration_is_ignored(self) -> None:
-        def mutate(root: Path) -> None:
-            write_file(root, "graph/orphan.md", "# Orphan\n\nOrphan guidance.\n")
-            write_file(
-                root,
-                "graph/index.md",
-                "# Index\n\n## Route\n\n- [[commands]].\n"
-                "<!-- - [[orphan]]. -->\n\n## Pages\n\n"
-                "- [[commands]]: commands.\n- [[orphan]]: orphan.\n",
-            )
-
-        self.assert_check(mutate, ["UNROUTED_GRAPH_DOC graph/orphan.md"])
-
-    def test_comment_only_page_registration_is_ignored(self) -> None:
-        def mutate(root: Path) -> None:
-            write_file(root, "graph/orphan.md", "# Orphan\n\nOrphan guidance.\n")
-            write_file(
-                root,
-                "graph/index.md",
-                "# Index\n\n## Route\n\n- [[commands]].\n- [[orphan]].\n\n"
-                "## Pages\n\n- [[commands]]: commands.\n"
-                "<!-- - [[orphan]]: orphan. -->\n",
-            )
-
-        self.assert_check(mutate, ["UNLISTED_GRAPH_DOC graph/orphan.md"])
-
-    def test_duplicate_page_entry(self) -> None:
-        self.assert_doc(
-            "graph/index.md",
-            INDEX + "- [[commands]]: second.\n",
-            ["DUPLICATE_PAGE_ENTRY graph/index.md -> commands"],
+    def test_unrouted_eval(self) -> None:
+        self.assert_problems(
+            {"evals/other.md": "Other cases.\n\n### Case\n\nRule: [[maintenance#Check]]\n"},
+            ["UNROUTED_EVAL evals/other.md"],
         )
 
-    def test_nested_graph_document_is_rejected(self) -> None:
-        self.assert_doc(
-            "graph/nested/page.md",
-            "# Nested\n\nUnsupported nested node.\n",
-            ["UNSUPPORTED_NESTED_GRAPH_DOC graph/nested/page.md"],
+    def test_eval_cases_need_a_rule_link(self) -> None:
+        self.assert_problems(
+            {
+                "evals/cases.md": "Review cases.\n\n### First Case\n\nRule: none.\n\n"
+                "### Page Only\n\nRule: [[maintenance]]\n\n"
+                "### Link Elsewhere\n\nRule: the check.\n\nExpected: follow [[maintenance#Check]].\n\n"
+                "### Second Case\n\n#### Detail\n\nRule: [[maintenance#Check]]\n"
+            },
+            [
+                "CASE_WITHOUT_RULE evals/cases.md -> First Case",
+                "CASE_WITHOUT_RULE evals/cases.md -> Page Only",
+                "CASE_WITHOUT_RULE evals/cases.md -> Link Elsewhere",
+            ],
         )
 
-    def test_unrouted_eval_document(self) -> None:
-        self.assert_doc(
-            "evals/other.md",
-            "# Other\n\nUnrouted review prompts.\n",
-            ["UNROUTED_EVAL_DOC evals/other.md"],
-        )
-
-    def test_comment_only_eval_reference_is_ignored(self) -> None:
-        self.assert_doc(
-            "graph/commands.md",
-            "# Commands\n\nNo active eval route.\n"
-            "<!-- `evals/personal-agent.md` -->\n",
-            ["UNROUTED_EVAL_DOC evals/personal-agent.md"],
+    def test_entry_budget(self) -> None:
+        agents_words = len(FIXTURE["AGENTS.md"].split())
+        index = FIXTURE["graph/index.md"]
+        room = wiki.ENTRY_LIMIT - agents_words - len(index.split())
+        self.assert_problems({"graph/index.md": index + "word " * room + "\n"}, [])
+        self.assert_problems(
+            {"graph/index.md": index + "word " * (room + 1) + "\n"},
+            [f"ENTRY_OVER_BUDGET AGENTS.md + graph/index.md -> {wiki.ENTRY_LIMIT + 1} words (limit {wiki.ENTRY_LIMIT})"],
         )
 
 
-class WikiCliTests(unittest.TestCase):
-    def assert_cli(self, mutate, expected: List[str], code: int) -> None:
+class CliTests(unittest.TestCase):
+    def run_cli(self, files: Dict[str, str], remove: Sequence[str] = ()) -> subprocess.CompletedProcess:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "wiki"
-            make_fixture(root)
+            make_wiki(root, files, remove)
             (root / "scripts").mkdir()
-            for name in ("check-wiki.py", "wiki_check.py", "wiki_markdown.py"):
-                shutil.copy2(SOURCE_SCRIPT.with_name(name), root / "scripts" / name)
-            mutate(root)
-            result = subprocess.run(
-                [sys.executable, str(root / "scripts/check-wiki.py")],
+            shutil.copy2(SCRIPT, root / "scripts" / SCRIPT.name)
+            return subprocess.run(
+                [sys.executable, str(root / "scripts" / SCRIPT.name)],
                 cwd=tmp,
-                text=True,
                 capture_output=True,
+                text=True,
             )
-            self.assertEqual(result.returncode, code, result.stderr)
-            self.assertEqual(result.stdout.splitlines(), expected)
-            self.assertEqual(result.stderr, "")
 
-    def test_valid_wiki_from_another_directory(self) -> None:
-        self.assert_cli(lambda root: None, ["WIKI_CHECK_OK"], 0)
+    def test_success_from_another_directory(self) -> None:
+        result = self.run_cli({})
+        self.assertEqual((result.returncode, result.stdout, result.stderr), (0, "WIKI_CHECK_OK\n", ""))
 
-    def test_failure_output_order_and_deduplication(self) -> None:
-        def mutate(root: Path) -> None:
-            write_file(
-                root, "README.md", "# README\n\nSee [[missing]] and [[missing]].\n"
-            )
-            (root / "graph/index.md").unlink()
-
-        self.assert_cli(
-            mutate,
-            [
-                "MISSING_DOC graph/index.md",
-                "BROKEN_PATH_REF AGENTS.md -> graph/index.md",
-                "MISSING_ENTRYPOINT_REF AGENTS.md -> graph/index.md",
-                "BROKEN_WIKILINK README.md -> missing",
-            ],
-            1,
+    def test_failure_lines_are_ordered_and_unique(self) -> None:
+        result = self.run_cli({"README.md": "See [[missing]] and [[missing]].\n"}, remove=["graph/index.md"])
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(
+            result.stdout.splitlines(),
+            ["MISSING_DOC graph/index.md", "BROKEN_PATH AGENTS.md -> graph/index.md", "BROKEN_LINK README.md -> missing"],
         )
+        self.assertEqual(result.stderr, "")
 
 
 if __name__ == "__main__":
