@@ -9,7 +9,7 @@ Confirmed preferences for writing and refactoring code.
 ## Structure
 
 - Keep behavior with the data or lifecycle that owns it; avoid routing unrelated concerns through shared config, metadata, or utilities.
-- Keep folder nesting shallow. Accept broad coordinated changes when the structural benefit justifies them.
+- Divide folders and files along clear boundaries, so each one's role is evident from where it sits. Accept broad coordinated changes when the structural benefit justifies them.
 - Keep the main path linear and visible. Use small helpers when they isolate a real concept or repeated operation, not merely to reduce line count.
 - Keep functions and methods in the order a reader encounters them during execution. Put one-use behavior with the class or lifecycle that owns it instead of creating a distant utility.
 - Avoid unnecessary keyword-only separators, wrappers, helper classes, aliases, and configuration options. Keep them only when they prevent real ambiguity, duplication, or misuse.
