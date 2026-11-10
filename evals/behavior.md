@@ -48,9 +48,9 @@ Failure: applying the wiki over a local rule, overwriting user work, bundling un
 
 Rule: [[index#Route]]
 
-Input: a short one-off request such as a resume edit or a code review without a workspace.
+Input: a short one-off request such as a document edit or a code review without a workspace.
 
-Expected: enter through `graph/index.md`, directly or through `AGENTS.md`, and read every matching route: a resume edit reads [[docs]] and [[resume]], a code review reads [[code]]. Only a one-off with no workspace and no matching route stops at the defaults.
+Expected: enter through `graph/index.md`, directly or through `AGENTS.md`, and read every matching route: a document edit reads [[docs]], a code review reads [[code]]. Only a one-off with no workspace and no matching route stops at the defaults.
 
 Failure: skipping a specialist page because the task is short, or loading unrelated pages.
 
@@ -113,16 +113,6 @@ Input: review a claim backed by sources, or summarize a problem.
 Expected: state dates, scope, and uncertainty where they change the conclusion, and say what exists, what is needed, and why the gap is hard to close.
 
 Failure: a generic summary, or unsupported certainty.
-
-### Korean Resume Field
-
-Rule: [[resume#Sentences]], [[resume#Content]], and [[resume#Accuracy]]
-
-Input: shorten, split, or improve a Korean resume field.
-
-Expected: read [[docs]] and [[resume]], keep confirmed content, use concrete actions in short sentences, fill the field limit without padding, and place accuracy limits only where they affect a claim.
-
-Failure: deleting information just to shorten sentences, using vague flow wording, or leading with defensive detail.
 
 ### Saving A Preference
 

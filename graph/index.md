@@ -32,7 +32,6 @@ Read every page whose trigger matches, and no others. Paths in these pages resol
 
 - Writing, changing, or reviewing code: [[code]].
 - Documents, prompts, wikis, or writing that cites sources: [[docs]].
-- Resumes or job applications: [[docs]] and [[resume]].
 - Two plausible readings of the user's intent that lead to different answers: [[policy#Provisional Interpretations]].
 - Saving or changing durable guidance, or deciding what belongs in this wiki: [[policy]].
 - Editing or checking this wiki: [[maintenance]] and [[docs]].
