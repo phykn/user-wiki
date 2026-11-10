@@ -2,18 +2,13 @@ Confirmed preferences for documents, research, wikis, prompts, and work instruct
 
 ## Reader And Order
 
-Write for the reader's next question or decision.
-
 - A README or first screen explains what the project is, why it matters, and whether the reader needs it, before any internal structure.
-- Introduce a term, diagram, or code block only after the reader needs it.
 - When an explanation is confusing, fix its order before adding sentences. Write procedures in the order they run.
-- Name concrete objects, actions, and outputs in easy words that do not depend on hidden context.
 - Prefer removing content to adding it. Add only what the reader needs to understand, judge, or act, and keep necessary meaning.
 
 ## Editing
 
 - Do not repeat what a filename, heading, nearby sentence, or responsible page already says. Give each bullet a distinct role.
-- A formatting-only edit keeps accepted claims, names, technical scope, and meaning.
 - Do not bring in a technique from another document unless the task needs it.
 - Replace conflicting wording instead of adding a correction beside it.
 

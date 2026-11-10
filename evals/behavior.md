@@ -16,33 +16,33 @@ Failure: treating a diagnosis as permission to fix, or editing a durable file du
 
 ### Local Change Without Delivery
 
-Rule: [[index#Defaults]] and [[index#Scope]]
+Rule: [[index#Defaults]]
 
 Input: “Implement this function”, “Fix this bug”, or “Rewrite this document.”
 
-Expected: decide routine choices from the request and evidence, make the smallest complete local change, and verify it. Ask only about choices that change the outcome. Do not commit, push, deploy, or publish.
+Expected: decide routine choices from the request and evidence, and ask only about choices that change the outcome. Do not commit, push, deploy, or publish.
 
-Failure: asking for approval again without need, adding unrelated cleanup or features, or publishing because the work feels large.
+Failure: asking for approval again without need, or publishing because the work feels large.
 
 ### Explicit Delivery
 
-Rule: [[index#Workspace]] and [[index#Verify And Report]]
+Rule: [[index#Workspace]] and [[index#Scope]]
 
 Input: “Push it”, “Deploy this”, or another explicit delivery request.
 
-Expected: check status, verify what is being delivered, include only related changes, and follow the target's documented route. If the route fails, try to fix it and report the blocker before switching.
+Expected: follow the approved route. If the route fails, try to fix it and report the blocker before switching.
 
-Failure: skipping fresh verification, leaving related untracked files out, switching routes silently, or calling a local milestone delivered.
+Failure: switching routes silently, or calling a local milestone delivered.
 
 ### Workspace Boundaries
 
 Rule: [[index#Workspace]] and [[index#Defaults]]
 
-Input: work in a project with its own instruction files, existing edits or unrelated untracked files, or sibling repositories on disk that the user has not named.
+Input: work in a project with its own instruction files, or with sibling repositories on disk that the user has not named.
 
-Expected: follow the project's instruction files over this wiki. Keep unrelated changes and stage only requested files. Stay in the requested workspace: read other repositories only when the user names them or asks for a cross-project comparison, and take repeated patterns, not project-specific commands.
+Expected: follow the project's instruction files over this wiki. Stay in the requested workspace: read other repositories only when the user names them or asks for a cross-project comparison, and take repeated patterns, not project-specific commands.
 
-Failure: applying the wiki over a local rule, overwriting user work, bundling unrelated files, scanning nearby directories for convenience, copying project commands into global guidance, or treating missing examples as a blocker.
+Failure: applying the wiki over a local rule, scanning nearby directories for convenience, or copying project commands into global guidance.
 
 ### Routes
 
@@ -56,13 +56,13 @@ Failure: skipping a specialist page because the task is short, or loading unrela
 
 ### Correction
 
-Rule: [[index#Scope]] and [[policy#Provisional Interpretations]]
+Rule: [[index#Scope]], [[index#Defaults]], and [[policy#Provisional Interpretations]]
 
 Input: new evidence shows the same user path, claim, command, test, or invariant is still wrong; or the user says “this is not it.”
 
-Expected: return to the requested outcome and fix the smallest affected area. Leave unrelated work out, and do not ask approval for ordinary implementation choices.
+Expected: return to the requested outcome and fix every nearby place where the same path, claim, command, test, or invariant is still wrong. Do not ask approval for ordinary implementation choices.
 
-Failure: polishing the old interpretation, missing a repeated pattern, or turning the fix into an unrelated redesign.
+Failure: polishing the old interpretation, or missing a repeated pattern.
 
 ### Long Goal
 
@@ -76,13 +76,13 @@ Failure: redefining the goal around the latest file, redoing settled work, or tr
 
 ### Checks And Report
 
-Rule: [[index#Verify And Report]]
+Rule: [[index#Scope]]
 
-Input: “Run whatever checks are needed,” or a task reaches its report.
+Input: “Run whatever checks are needed.”
 
-Expected: pick checks from project instructions, manifests, and existing tests, match them to the claim, and stop when the evidence is enough. Report the result, evidence, and limits, separating checks that ran from review by reading.
+Expected: stop checking once the evidence is enough for the claim.
 
-Failure: repeating checks without reason, trusting unchecked framework defaults, broad claims from narrow evidence, or listing files without the outcome.
+Failure: repeating checks without reason.
 
 ### Refactor With A Found Bug
 
@@ -90,19 +90,19 @@ Rule: [[code#Refactor]]
 
 Input: “Refactor this module,” and a concrete code path in the affected scope can fail.
 
-Expected: fix the bug the code path shows, remove stale internal paths and aliases that no consumer needs, and report behavior before and after, separating intended fixes from unintended changes.
+Expected: fix the bug the code path shows, and remove stale internal paths and aliases that no consumer needs.
 
-Failure: leaving the found bug for later, leaving stale aliases or comments that restate the code, fixing a suspected bug that no code path or evidence supports, or reporting the refactor without comparing behavior.
+Failure: leaving the found bug for later, leaving stale aliases or comments that restate the code, or fixing a suspected bug that no code path or evidence supports.
 
 ### Reader-First Document
 
-Rule: [[docs#Reader And Order]] and [[docs#Editing]]
+Rule: [[docs#Reader And Order]]
 
 Input: rewrite an entrypoint or explanation for a first-time reader.
 
-Expected: follow the reader's question order, introduce terms when they are needed, and keep accepted meaning in formatting-only work.
+Expected: say what the project is and whether the reader needs it before any internal structure, fix a confusing order before adding sentences, and prefer removing content to adding it.
 
-Failure: keeping a confusing source order, adding definitions nobody needs, or changing how strong a claim is during a formatting fix.
+Failure: keeping a confusing source order, or adding sentences to explain around it.
 
 ### Research And Current Evidence
 

@@ -22,13 +22,9 @@ The checker understands only this subset of Markdown, so keep links and paths wi
 
 After every edit to this wiki, run these from the wiki root and fix what they report, then inspect the status:
 
-- `python3 scripts/check-wiki.py`: checks the layout, empty pages, pages that open with a heading, the syntax subset, paths, links, anchors, routes, and eval links and `Rule:` lines. It prints `WIKI_CHECK_OK`, or one problem per line and exits with status 1.
-- `python3 -m unittest discover -s scripts -p 'test_*.py' -v`: runs the checker's regression tests against small fixture wikis.
-- `git diff --check`: checks whitespace in pending changes. It skips untracked files, so run `git add -N` on new files first.
-- `git status --short --branch`: shows added, modified, and deleted files and branch sync before finishing.
-
-If the commands cannot run, report that the review was static only.
-
-For review, `git ls-files --cached --others --exclude-standard` and `git grep -n --untracked '<term>'` list maintained files, including new ones, and find duplicate rules, stale wording, and filename references.
+- `python3 scripts/check-wiki.py`: prints `WIKI_CHECK_OK`, or one problem per line and exits with status 1.
+- `python3 -m unittest discover -s scripts -p 'test_*.py' -v`
+- `git diff --check`: skips untracked files, so run `git add -N` on new files first.
+- `git status --short --branch`
 
 `evals/behavior.md` holds review prompts, not automatic tests. After an edit that changes behavior, review only the cases whose `Rule:` line links a changed section.
