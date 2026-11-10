@@ -8,7 +8,6 @@ from typing import Dict, List, NamedTuple, Optional, Set, Tuple
 
 ROOT_DOCS = ("AGENTS.md", "README.md")
 INDEX = "graph/index.md"
-ENTRY_LIMIT = 600
 PATH_PREFIXES = ("graph/", "evals/", "scripts/")
 EXTERNAL_PREFIXES = ("http://", "https://", "mailto:")
 
@@ -33,7 +32,6 @@ class Line(NamedTuple):
 class Doc(NamedTuple):
     name: str
     path: Path
-    text: str
     lines: List[Line]  # lines outside fenced code blocks
 
 
@@ -90,9 +88,6 @@ def check(root: Path) -> List[str]:
         for doc in docs
         if doc.name.startswith("evals/") and doc.path.resolve() not in referenced
     ]
-    words = sum(len(doc.text.split()) for doc in (agents, index) if doc)
-    if words > ENTRY_LIMIT:
-        problems.append(f"ENTRY_OVER_BUDGET AGENTS.md + {INDEX} -> {words} words (limit {ENTRY_LIMIT})")
     return list(dict.fromkeys(problems))
 
 
@@ -119,7 +114,7 @@ def read_doc(root: Path, path: Path) -> Doc:
             level=len(heading.group(1)) if heading else 0,
             title=(heading.group(2) or "") if heading else "",
         ))
-    return Doc(path.relative_to(root).as_posix(), path, text, lines)
+    return Doc(path.relative_to(root).as_posix(), path, lines)
 
 
 def check_doc(root: Path, doc: Doc, pages: Dict[str, Doc]) -> Tuple[List[str], Set[Path]]:

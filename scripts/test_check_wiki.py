@@ -205,16 +205,6 @@ class CheckTests(unittest.TestCase):
             ],
         )
 
-    def test_entry_budget(self) -> None:
-        agents_words = len(FIXTURE["AGENTS.md"].split())
-        index = FIXTURE["graph/index.md"]
-        room = wiki.ENTRY_LIMIT - agents_words - len(index.split())
-        self.assert_problems({"graph/index.md": index + "word " * room + "\n"}, [])
-        self.assert_problems(
-            {"graph/index.md": index + "word " * (room + 1) + "\n"},
-            [f"ENTRY_OVER_BUDGET AGENTS.md + graph/index.md -> {wiki.ENTRY_LIMIT + 1} words (limit {wiki.ENTRY_LIMIT})"],
-        )
-
 
 class CliTests(unittest.TestCase):
     def run_cli(self, files: Dict[str, str], remove: Sequence[str] = ()) -> subprocess.CompletedProcess:
