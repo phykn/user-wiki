@@ -50,19 +50,19 @@ Rule: [[index#Route]]
 
 Input: a short one-off request such as a document edit or a code review without a workspace.
 
-Expected: enter through `graph/index.md`, directly or through `AGENTS.md`, and read every matching route: a document edit reads [[docs]], a code review reads [[code]]. Only a one-off with no workspace and no matching route stops at the defaults.
+Expected: enter through `graph/index.md`, directly or through `AGENTS.md`, and read every matching route: a document edit reads [[docs]], a code review reads [[code]]. Only a task that matches no route stops at `graph/index.md`.
 
 Failure: skipping a specialist page because the task is short, or loading unrelated pages.
 
 ### Correction
 
-Rule: [[index#Scope]], [[index#Defaults]], and [[policy#Provisional Interpretations]]
+Rule: [[index#Scope]] and [[index#Defaults]]
 
-Input: new evidence shows the same user path, claim, command, test, or invariant is still wrong; or the user says “this is not it.”
+Input: new evidence shows the same user path, claim, command, test, or invariant is still wrong.
 
-Expected: return to the requested outcome and fix every nearby place where the same path, claim, command, test, or invariant is still wrong. Do not ask approval for ordinary implementation choices.
+Expected: fix every nearby place where the same path, claim, command, test, or invariant is still wrong. Do not ask approval for ordinary implementation choices.
 
-Failure: polishing the old interpretation, or missing a repeated pattern.
+Failure: missing a repeated pattern, or asking approval for an ordinary choice.
 
 ### Long Goal
 
@@ -86,7 +86,7 @@ Failure: repeating checks without reason.
 
 ### Refactor With A Found Bug
 
-Rule: [[code#Refactor]]
+Rule: [[code#Refactor]] and [[code#Names And Comments]]
 
 Input: “Refactor this module,” and a concrete code path in the affected scope can fail.
 
@@ -120,7 +120,7 @@ Rule: [[policy#Confirmation]], [[policy#Placement]], [[maintenance#Structure]], 
 
 Input: a session suggests a reusable preference.
 
-Expected: tell an explicit save or future-facing confirmation apart from a one-task correction. Save only confirmed cross-project guidance, in the one page that owns it, and run the checks. Otherwise propose it, or record a decision-relevant interpretation under provisional interpretations.
+Expected: tell an explicit save or future-facing confirmation apart from a one-task correction. Save only confirmed cross-project guidance, in the one page that owns it, and run the checks. Otherwise propose it in chat.
 
 Failure: turning a casual phrase into a permanent rule, putting it in more than one page, leaving conflicting old wording, creating a root-level index file, or skipping the checks.
 
