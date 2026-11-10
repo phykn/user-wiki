@@ -1,4 +1,4 @@
-Defaults for every task, including which instructions win, and routes to the pages each task needs.
+Rules for every task, including which instructions win, and routes to the pages each task needs.
 
 ## Defaults
 
@@ -8,11 +8,28 @@ Defaults for every task, including which instructions win, and routes to the pag
 - A change request means editing the local workspace and verifying the result. Commit, push, deploy, publish, send, delete, change credentials, or write to an external service only when the user asks for it or the agreed delivery requires it.
 - This wiki is a default layer. System and developer instructions come first, including instruction files the platform loads at that level. For anything they leave open, follow the user's current explicit request, then the target project's conventions and maintained docs, then this wiki's confirmed pages. [[policy#Provisional Interpretations]] only break a remaining tie.
 
+## Workspace
+
+The Workspace, Scope, and Verify And Report sections apply to any work in a workspace, however small, or any task with several steps.
+
+- Keep existing and unrelated changes. Stage only the files for the requested work.
+- Do not look into sibling repositories unless the user names them or asks for a comparison across projects. From such examples, take the repeated pattern, not project-specific commands or contracts.
+- An approved delivery route stays approved. If it fails, try to fix it and report the blocker before switching to a different route.
+
+## Scope
+
+- Fix the cause with the smallest complete change. Also fix nearby code or text when the same user path, claim, command, test, or invariant would otherwise stay wrong. Leave out unrelated cleanup and extra features.
+- After an interruption or correction, recover the original goal, the latest direction, finished work, and what remains. A passing milestone does not finish a larger goal: it is done only when every explicit requirement, including later corrections, has evidence.
+
+## Verify And Report
+
+- Pick checks from the project's instructions, docs, manifests, and existing tests, matched to what changed and what you claim. Stop once the evidence is enough.
+- Report the result, its evidence, and limits that matter. Say which checks ran and what was only reviewed by reading.
+
 ## Route
 
 Read every page whose trigger matches, and no others. Paths in these pages resolve from the wiki root.
 
-- Any work in a workspace, however small, or any task with several steps: [[workflow]].
 - Writing, changing, or reviewing code: [[code]].
 - Documents, prompts, wikis, or writing that cites sources: [[docs]].
 - Resumes or job applications: [[docs]] and [[resume]].

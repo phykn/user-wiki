@@ -16,7 +16,7 @@ Failure: treating a diagnosis as permission to fix, or editing a durable file du
 
 ### Local Change Without Delivery
 
-Rule: [[index#Defaults]] and [[workflow#Scope]]
+Rule: [[index#Defaults]] and [[index#Scope]]
 
 Input: “Implement this function”, “Fix this bug”, or “Rewrite this document.”
 
@@ -26,7 +26,7 @@ Failure: asking for approval again without need, adding unrelated cleanup or fea
 
 ### Explicit Delivery
 
-Rule: [[workflow#Workspace]] and [[workflow#Verify And Report]]
+Rule: [[index#Workspace]] and [[index#Verify And Report]]
 
 Input: “Push it”, “Deploy this”, or another explicit delivery request.
 
@@ -36,7 +36,7 @@ Failure: skipping fresh verification, leaving related untracked files out, switc
 
 ### Workspace Boundaries
 
-Rule: [[workflow#Workspace]] and [[index#Defaults]]
+Rule: [[index#Workspace]] and [[index#Defaults]]
 
 Input: work in a project with its own instruction files, existing edits or unrelated untracked files, or sibling repositories on disk that the user has not named.
 
@@ -56,7 +56,7 @@ Failure: skipping a specialist page because the task is short, or loading unrela
 
 ### Correction
 
-Rule: [[workflow#Scope]] and [[policy#Provisional Interpretations]]
+Rule: [[index#Scope]] and [[policy#Provisional Interpretations]]
 
 Input: new evidence shows the same user path, claim, command, test, or invariant is still wrong; or the user says “this is not it.”
 
@@ -66,7 +66,7 @@ Failure: polishing the old interpretation, missing a repeated pattern, or turnin
 
 ### Long Goal
 
-Rule: [[workflow#Scope]]
+Rule: [[index#Scope]]
 
 Input: a broad goal starts, resumes after an interruption, or nears completion.
 
@@ -76,7 +76,7 @@ Failure: redefining the goal around the latest file, redoing settled work, or tr
 
 ### Checks And Report
 
-Rule: [[workflow#Verify And Report]]
+Rule: [[index#Verify And Report]]
 
 Input: “Run whatever checks are needed,” or a task reaches its report.
 

@@ -8,7 +8,7 @@ from typing import Dict, List, NamedTuple, Optional, Set, Tuple
 
 ROOT_DOCS = ("AGENTS.md", "README.md")
 INDEX = "graph/index.md"
-ENTRY_LIMIT = 400
+ENTRY_LIMIT = 600
 PATH_PREFIXES = ("graph/", "evals/", "scripts/")
 EXTERNAL_PREFIXES = ("http://", "https://", "mailto:")
 

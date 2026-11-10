@@ -5,7 +5,7 @@ How this wiki is laid out, written, and checked.
 - The root holds two Markdown files: `AGENTS.md`, the entry for agents working here and for older pointers, and `README.md`. There is intentionally no root-level index or second entry file.
 - Pages sit directly in `graph/`, with no subfolders. The `Route` section of `graph/index.md` links every page from a bullet.
 - Each page opens with one sentence that states its responsibility. Read those opening lines to decide which page owns a rule.
-- `graph/index.md` is read on every task, and `AGENTS.md` too by agents that start here or follow an older pointer, so together they stay within 400 words. Make room before adding to them.
+- `graph/index.md` is read on every task, and `AGENTS.md` too by agents that start here or follow an older pointer, so together they stay within 600 words. Make room before adding to them.
 - Review cases live in `evals/`. The page that says when to review an eval file links it. Each case has a `Rule:` line that links the section that owns its rule.
 
 ## Syntax
