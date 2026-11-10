@@ -8,9 +8,7 @@ Save durable guidance only when the user:
 - confirms a rule you proposed; or
 - says existing wiki content is stale or wrong.
 
-A direct statement framed as a preference for future work across projects counts as confirmation. A correction for one task, casual wording, or your own inference does not.
-
-Propose an inference in chat without editing any durable file.
+A direct statement framed as a preference for future work across projects counts as confirmation. A correction for one task, casual wording, or your own inference does not: propose such a rule in chat without editing any durable file.
 
 ## Placement
 

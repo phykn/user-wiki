@@ -1,4 +1,4 @@
-Confirmed preferences for documents, research, wikis, prompts, and work instructions.
+Confirmed preferences for documents, prompts, wikis, and writing that cites sources.
 
 ## Reader And Order
 
@@ -13,14 +13,14 @@ Confirmed preferences for documents, research, wikis, prompts, and work instruct
 
 ## Evidence
 
-- From an example, take the structure that transfers, not its domain details.
 - State dates, scope, and uncertainty where they change the conclusion.
 - Keep source lists apart from interpretation.
 
 ## Pages And Files
 
 - Prefer short noun filenames without redundant type prefixes or names that look like duplicates.
-- In a process that produces files, make the output file and the next input clear. Keep runtime work files apart from rules.
+- In a process that produces files, make the output file and the next input clear.
+- Keep runtime work files apart from rules.
 
 ## Document Kinds
 

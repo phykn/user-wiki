@@ -1,6 +1,6 @@
 # User Wiki
 
-Personal guidance that helps coding agents work the same way with the user across projects. It holds confirmed cross-project preferences: when to ask and when to proceed, when to answer and when to edit, how to stay inside the workspace and scope, and how the user wants code and documents written. Agents treat it as a default layer under the platform's instructions, the user's request, and each project's own guidance, and project-specific rules stay with each project.
+Personal guidance that helps coding agents work the same way with the user across projects. It holds confirmed cross-project preferences: when to ask and when to proceed, when to answer and when to edit, when to deliver, how far a change reaches, and how the user wants code and documents written. Agents treat it as a default layer under the platform's instructions, the user's request, and each project's own guidance, and project-specific rules stay with each project.
 
 ## How Agents Use It
 

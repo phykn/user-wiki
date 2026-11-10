@@ -10,7 +10,7 @@ Rule: [[index#Defaults]]
 
 Input: “Review this”, “Explain this failure”, or “Tell me the current status.”
 
-Expected: inspect the evidence and answer with defects, cause, or status. No edits, commits, or messages.
+Expected: answer with defects, cause, or status. No edits, commits, or messages.
 
 Failure: treating a diagnosis as permission to fix, or editing a durable file during a review.
 
@@ -26,7 +26,7 @@ Failure: asking for approval again without need, or publishing because the work 
 
 ### Explicit Delivery
 
-Rule: [[index#Workspace]] and [[index#Scope]]
+Rule: [[index#Defaults]] and [[index#Scope]]
 
 Input: “Push it”, “Deploy this”, or another explicit delivery request.
 
@@ -36,7 +36,7 @@ Failure: switching routes silently, or calling a local milestone delivered.
 
 ### Workspace Boundaries
 
-Rule: [[index#Workspace]] and [[index#Defaults]]
+Rule: [[index#Scope]] and [[index#Defaults]]
 
 Input: work in a project with its own instruction files, or with sibling repositories on disk that the user has not named.
 
@@ -50,7 +50,7 @@ Rule: [[index#Route]]
 
 Input: a short one-off request such as a document edit or a code review without a workspace.
 
-Expected: enter through `graph/index.md`, directly or through `AGENTS.md`, and read every matching route: a document edit reads [[docs]], a code review reads [[code]]. Only a task that matches no route stops at `graph/index.md`.
+Expected: read every matching route: a document edit reads [[docs]], a code review reads [[code]]. Only a task that matches no route stops at `graph/index.md`.
 
 Failure: skipping a specialist page because the task is short, or loading unrelated pages.
 
@@ -66,23 +66,13 @@ Failure: missing a repeated pattern, or asking approval for an ordinary choice.
 
 ### Long Goal
 
-Rule: [[index#Scope]]
+Rule: [[index#Scope]] and [[index#Defaults]]
 
-Input: a broad goal starts, resumes after an interruption, or nears completion.
+Input: a broad goal resumes after an interruption or correction, or nears completion.
 
-Expected: recover the final goal, the current verifiable step, later corrections, and constraints. Report a milestone as a milestone, and close the goal only when every explicit requirement has evidence.
+Expected: recover the original goal, the latest direction, finished work, and what remains. Close the goal only when every explicit requirement has evidence, and stop checking once the evidence is enough.
 
-Failure: redefining the goal around the latest file, redoing settled work, or treating one narrow passing check as completion.
-
-### Checks And Report
-
-Rule: [[index#Scope]]
-
-Input: “Run whatever checks are needed.”
-
-Expected: stop checking once the evidence is enough for the claim.
-
-Failure: repeating checks without reason.
+Failure: redefining the goal around the latest file, redoing settled work, treating one narrow passing check as completion, or repeating checks without reason.
 
 ### Refactor With A Found Bug
 
@@ -104,7 +94,7 @@ Expected: say what the project is and whether the reader needs it before any int
 
 Failure: keeping a confusing source order, or adding sentences to explain around it.
 
-### Research And Current Evidence
+### Evidence And Problem Summary
 
 Rule: [[docs#Evidence]] and [[docs#Document Kinds]]
 
@@ -132,7 +122,7 @@ Input: “Install my user wiki” or “Update the wiki,” where a checkout may
 
 Expected: use the given path, the existing checkout, or the platform's configured location, and ask before inventing one. Inspect the status, update only by fast-forward, run the checker when Python 3 is available, and make the user-level guidance hold the current pointer while preserving its other content. Report the path, result, check, pointer state, and untouched local changes.
 
-Failure: inventing a location without asking, overwriting local changes, forcing an update that cannot fast-forward, copying wiki prose beyond the pointer into the user-level guidance, or leaving an older pointer beside the new one.
+Failure: inventing a location without asking, overwriting local changes, forcing an update that cannot fast-forward, or leaving an older pointer beside the new one.
 
 ### Apply Elsewhere
 

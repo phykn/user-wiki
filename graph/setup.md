@@ -27,5 +27,4 @@ When the user asks to apply this wiki elsewhere:
 1. Read all applicable instruction files from the target root to each path in scope, plus maintained entrypoints.
 2. Treat the wiki as defaults, not prose to copy. Preserve target-local rules.
 3. Extend an existing maintained agent-guidance entrypoint where possible, and change other maintained guidance only where future behavior requires it. If no applicable agent entrypoint exists, an explicit apply request authorizes creating the platform-standard one after checking target conventions; do not create a parallel entrypoint.
-4. Propose any newly inferred cross-project preference instead of editing this source wiki, unless the user also asked to save it.
-5. Report target changes, verification, and whether the source wiki changed or has a proposed update.
+4. Report target changes, verification, and whether the source wiki changed or has a proposed update.
