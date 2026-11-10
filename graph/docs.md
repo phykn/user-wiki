@@ -1,9 +1,8 @@
 Confirmed preferences for documents, prompts, wikis, and writing that cites sources.
 
-## Reader And Order
+## Order And Length
 
-- A README or first screen explains what the project is, why it matters, and whether the reader needs it, before any internal structure.
-- When an explanation is confusing, fix its order before adding sentences. Write procedures in the order they run.
+- When an explanation is confusing, fix its order before adding sentences.
 - Prefer removing content to adding it. Add only what the reader needs to understand, judge, or act, and keep necessary meaning.
 
 ## Editing
@@ -11,9 +10,8 @@ Confirmed preferences for documents, prompts, wikis, and writing that cites sour
 - Do not repeat what a filename, heading, nearby sentence, or responsible page already says. Give each bullet a distinct role.
 - Replace conflicting wording instead of adding a correction beside it.
 
-## Evidence
+## Sources
 
-- State dates, scope, and uncertainty where they change the conclusion.
 - Keep source lists apart from interpretation.
 
 ## Pages And Files

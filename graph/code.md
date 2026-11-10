@@ -19,8 +19,6 @@ Confirmed preferences for writing and refactoring code.
 
 - Keep local variable names short and conventional, such as `cfg`, `vol`, `idx`, and `img`. Keep descriptive names for public APIs and domain concepts.
 - Use singular and plural names consistently, such as `prob` for one value and `probs` for a collection.
-- Use the same name and public call shape for the same operation across related classes and modules.
-- Show purpose through names and structure. Keep comments short and limited to why: a constraint, workaround, or decision the code cannot show.
 - Write no file-top docstrings or comments that restate the code, and leave no commented-out code or placeholder TODOs. When refactoring, also delete existing comments and docstrings that restate the code; if code reads a docstring, such as `__doc__` for CLI help, move its text to that use.
 
 ## Refactor

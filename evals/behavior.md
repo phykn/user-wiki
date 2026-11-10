@@ -84,25 +84,25 @@ Expected: fix the bug the code path shows, and remove stale internal paths and a
 
 Failure: leaving the found bug for later, leaving stale aliases or comments that restate the code, or fixing a suspected bug that no code path or evidence supports.
 
-### Reader-First Document
+### Confusing Document
 
-Rule: [[docs#Reader And Order]]
+Rule: [[docs#Order And Length]]
 
-Input: rewrite an entrypoint or explanation for a first-time reader.
+Input: rewrite an explanation that readers find confusing.
 
-Expected: say what the project is and whether the reader needs it before any internal structure, fix a confusing order before adding sentences, and prefer removing content to adding it.
+Expected: fix the order before adding sentences, and prefer removing content to adding it.
 
 Failure: keeping a confusing source order, or adding sentences to explain around it.
 
-### Evidence And Problem Summary
+### Problem Summary
 
-Rule: [[docs#Evidence]] and [[docs#Document Kinds]]
+Rule: [[docs#Document Kinds]]
 
-Input: review a claim backed by sources, or summarize a problem.
+Input: summarize a problem.
 
-Expected: state dates, scope, and uncertainty where they change the conclusion, and say what exists, what is needed, and why the gap is hard to close.
+Expected: say what exists, what is needed, and why the gap is hard to close.
 
-Failure: a generic summary, or unsupported certainty.
+Failure: a generic summary.
 
 ### Saving A Preference
 
