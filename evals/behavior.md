@@ -86,7 +86,7 @@ Failure: repeating checks without reason, trusting unchecked framework defaults,
 
 ### Refactor With A Found Bug
 
-Rule: [[code#Refactor]] and [[code#Verify]]
+Rule: [[code#Refactor]]
 
 Input: “Refactor this module,” and a concrete code path in the affected scope can fail.
 
@@ -96,7 +96,7 @@ Failure: leaving the found bug for later, leaving stale aliases or comments that
 
 ### Reader-First Document
 
-Rule: [[docs#Reader And Order]] and [[docs#Editing Boundaries]]
+Rule: [[docs#Reader And Order]] and [[docs#Editing]]
 
 Input: rewrite an entrypoint or explanation for a first-time reader.
 
@@ -106,7 +106,7 @@ Failure: keeping a confusing source order, adding definitions nobody needs, or c
 
 ### Research And Current Evidence
 
-Rule: [[docs#Evidence]]
+Rule: [[docs#Evidence]] and [[docs#Document Kinds]]
 
 Input: review a claim backed by sources, or summarize a problem.
 
@@ -126,7 +126,7 @@ Failure: deleting information just to shorten sentences, using vague flow wordin
 
 ### Saving A Preference
 
-Rule: [[policy#Confirmation]], [[policy#Placement]], [[maintenance#Structure]], [[maintenance#Check]], and [[docs#Check]]
+Rule: [[policy#Confirmation]], [[policy#Placement]], [[maintenance#Structure]], [[maintenance#Check]], and [[docs#Editing]]
 
 Input: a session suggests a reusable preference.
 

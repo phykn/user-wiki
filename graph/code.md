@@ -30,7 +30,4 @@ Confirmed preferences for writing, refactoring, and verifying code.
 - When refactoring is requested, also fix potential bugs supported by concrete code paths or evidence in the affected scope.
 - Remove stale internal paths and aliases unless a real consumer needs compatibility.
 - When refactoring, remove comments and docstrings that restate the code. If code reads a docstring, such as `__doc__` for CLI help, move its text to that use.
-
-## Verify
-
 - For refactoring, compare behavior before and after, distinguishing intentional bug fixes from unintended changes.

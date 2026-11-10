@@ -10,35 +10,29 @@ Write for the reader's next question or decision.
 - Name concrete objects, actions, and outputs in easy words that do not depend on hidden context.
 - Prefer removing content to adding it. Add only what the reader needs to understand, judge, or act, and keep necessary meaning.
 
-## Names And Duplication
+## Editing
 
-- Prefer short noun filenames without redundant type prefixes or names that look like duplicates.
 - Do not repeat what a filename, heading, nearby sentence, or responsible page already says. Give each bullet a distinct role.
-
-## Editing Boundaries
-
 - A formatting-only edit keeps accepted claims, names, technical scope, and meaning.
 - Do not bring in a technique from another document unless the task needs it.
+- Replace conflicting wording instead of adding a correction beside it.
 
 ## Evidence
 
 - From an example, take the structure that transfers, not its domain details.
 - State dates, scope, and uncertainty where they change the conclusion.
-- A problem summary states what exists, what is needed, and why the gap is hard to close.
-
-## Document Graph
-
-- Entry pages decide which page to read for which task. Links in other pages only point to a dependency or the page that owns a rule.
-- Keep a page separate only when its own responsibility and route make guidance easier to find.
-
-## Files, Sources, And Records
-
-- In a process that produces files, make the output file and the next input clear. Keep runtime work files apart from rules.
 - Keep input names in summaries and filenames, and keep source lists apart from interpretation.
 - When text copied from a browser or form lacks a value, mark it text-unverified unless the visible page shows it is empty.
+
+## Pages And Files
+
+- Prefer short noun filenames without redundant type prefixes or names that look like duplicates.
+- Entry pages decide which page to read for which task. Links in other pages only point to a dependency or the page that owns a rule.
+- Keep a page separate only when its own responsibility and route make guidance easier to find.
+- In a process that produces files, make the output file and the next input clear. Keep runtime work files apart from rules.
+
+## Document Kinds
+
+- A problem summary states what exists, what is needed, and why the gap is hard to close.
 - A reusable process record stores the order of questions, the criteria for judgment, and how the next action is chosen.
 - Write a long-term goal as an operating contract with success criteria, non-goals, and signals that show progress.
-
-## Check
-
-Replace conflicting wording instead of adding a correction beside it.
