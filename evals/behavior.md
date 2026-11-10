@@ -1,6 +1,6 @@
 Manual review cases for agent behavior under this wiki.
 
-[[maintenance#Review]] says when to review these cases. Add a case only for a reusable failure that no case covers, and merge overlapping cases instead of growing the list.
+[[maintenance#Check]] says when to review these cases. Add a case only for a reusable failure that no case covers, and merge overlapping cases instead of growing the list.
 
 ## Cases
 

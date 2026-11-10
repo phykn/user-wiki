@@ -30,7 +30,6 @@ After every edit to this wiki, run these from the wiki root and fix what they re
 
 If the commands cannot run, report that the review was static only.
 
-## Review
+For review, `git ls-files --cached --others --exclude-standard` and `git grep -n --untracked '<term>'` list maintained files, including new ones, and find duplicate rules, stale wording, and filename references.
 
-- `git ls-files --cached --others --exclude-standard` and `git grep -n --untracked '<term>'`: list maintained files, including new ones, and find duplicate rules, stale wording, and filename references.
-- `evals/behavior.md` holds review prompts, not automatic tests. After an edit that changes behavior, review only the cases whose `Rule:` line links a changed section.
+`evals/behavior.md` holds review prompts, not automatic tests. After an edit that changes behavior, review only the cases whose `Rule:` line links a changed section.

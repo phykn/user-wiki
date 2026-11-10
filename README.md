@@ -4,7 +4,7 @@ Personal guidance that helps coding agents work the same way with the user acros
 
 ## How Agents Use It
 
-An installed checkout is named in the platform's user-level agent guidance, which tells agents to read `graph/index.md` at the start of every task. That page holds the defaults every task follows and routes each kind of task to the few pages it needs. Agents working inside this repository start at `AGENTS.md`, which leads to the same page.
+An installed checkout is named in the platform's user-level agent guidance, which tells agents to read `graph/index.md` at the start of every task. That page holds the rules every task follows and routes each kind of task to the few pages it needs. Agents working inside this repository start at `AGENTS.md`, which leads to the same page.
 
 ## Install, Update, Or Apply
 
@@ -20,4 +20,4 @@ python3 -m unittest discover -s scripts -p 'test_*.py' -v
 git diff --check
 ```
 
-The checker prints `WIKI_CHECK_OK`, or one problem per line and exits with status 1. `graph/maintenance.md` describes the layout, the Markdown subset the checker reads, and the review steps.
+The checker prints `WIKI_CHECK_OK`, or one problem per line and exits with status 1. `graph/maintenance.md` describes the layout, the Markdown subset the checker reads, and what to run and review after an edit.
