@@ -10,6 +10,7 @@ Confirmed preferences for writing, refactoring, reviewing, and testing code.
 - Delete features whose benefit is unclear or negative.
 - Delete code kept only for tests, and change the tests to fit the code.
 - When the last use of a dependency goes, remove it from the dependency list too.
+- However much is cut, keep validation of outside input, security checks, and handling that prevents data loss.
 
 ## Structure
 
