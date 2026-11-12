@@ -76,11 +76,11 @@ Failure: redefining the goal around the latest file, redoing settled work, treat
 
 ### Refactor With A Found Bug
 
-Rule: [[code#Refactor]] and [[code#Names And Comments]]
+Rule: [[code#Refactor]] and [[code#Names, Types, And Comments]]
 
 Input: “Refactor this module,” and a concrete code path in the affected scope can fail.
 
-Expected: fix the bug the code path shows, and remove stale internal paths and aliases that no consumer needs.
+Expected: fix the bug the code path shows, and remove legacy compatibility code and stale aliases the user did not ask to keep.
 
 Failure: leaving the found bug for later, leaving stale aliases or comments that restate the code, or fixing a suspected bug that no code path or evidence supports.
 
