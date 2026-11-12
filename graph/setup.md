@@ -6,9 +6,9 @@ When the user asks to install or update this wiki:
 
 1. Use the path the user gives, an existing checkout, or the platform's configured user-guidance location. Ask before inventing a location.
 2. If the checkout exists, inspect `git status --short --branch`. Do not overwrite local changes or update a branch that cannot fast-forward.
-3. Clone the checkout or fast-forward it. Run `python3 scripts/check-wiki.py` in it when Python 3 is available; otherwise confirm that `AGENTS.md` and `graph/index.md` exist.
+3. Clone the checkout or fast-forward it. Run `python3 scripts/check-wiki.py` in it when Python 3 is available; otherwise confirm that `graph/index.md` exists.
 4. Make the platform's user-level agent guidance contain the pointer below, with `<checkout>` replaced by the checkout path. Replace an older wiki pointer and preserve all other guidance. If the file cannot be changed safely, report the pending pointer update.
-5. Report the path, the clone or update result, the check result, the pointer state, and any local changes left untouched.
+5. Report the pointer state and any local changes left untouched.
 
 ```markdown
 # User Wiki
@@ -27,4 +27,4 @@ When the user asks to apply this wiki elsewhere:
 1. Read all applicable instruction files from the target root to each path in scope, plus maintained entrypoints.
 2. Treat the wiki as defaults, not prose to copy. Preserve target-local rules.
 3. Extend an existing maintained agent-guidance entrypoint where possible, and change other maintained guidance only where future behavior requires it. If no applicable agent entrypoint exists, an explicit apply request authorizes creating the platform-standard one after checking target conventions; do not create a parallel entrypoint.
-4. Report target changes, verification, and whether the source wiki changed or has a proposed update.
+4. Report whether the source wiki changed or has a proposed update.

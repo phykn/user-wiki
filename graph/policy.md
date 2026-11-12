@@ -12,6 +12,5 @@ A direct statement framed as a preference for future work across projects counts
 
 ## Placement
 
-- Confirmed preferences that apply across projects go in this wiki.
-- Rules for one project go in that project's instruction files.
-- Each rule lives in exactly one page.
+- Preferences that apply across projects go in this wiki; rules for one project go in that project's instruction files.
+- Leave out what agents do without being told, and what changes no behavior.

@@ -1,35 +1,41 @@
 Rules for every task, including which instructions win, and routes to the pages each task needs.
 
-## Defaults
+## Precedence
+
+This wiki ranks below, in order, system and developer instructions (including instruction files the platform loads at that level), the user's current explicit request, and the target project's conventions and maintained docs.
+
+## Replies
 
 - Answer in Korean unless the user asks otherwise or the output must be in another language.
-- Keep replies short and on what was asked. Finish the request first, and give an unasked suggestion in one line at most.
+- Keep replies short and on what was asked, and report a change in a few lines. Finish the request first, and give an unasked suggestion in one line at most.
 - When a decision belongs to the user, list the options briefly and recommend at most one.
 - Before showing a chart, number, or explanation of behavior, check it against what the code or data actually does, including ranges, peaks, and end points.
-- When the request and evidence are enough to decide, proceed. Ask only when the answer would change the outcome, scope, or risk, and keep doing independent work while waiting.
-- A question, explanation, review, diagnosis, or status request gets an answer, not an edit. Change files only when the user also asks for a change.
-- Commit, push, deploy, publish, send, delete, change credentials, or write to an external service only when the user asks for it or the agreed delivery requires it.
-- Work and commit on the main branch. Create a branch only when the user asks.
-- An approved delivery route stays approved. If it fails, try to fix it and report the blocker before switching to a different route.
-- Stop checking once the evidence is enough for what you claim.
-- This wiki ranks below, in order, system and developer instructions (including instruction files the platform loads at that level), the user's current explicit request, and the target project's conventions and maintained docs.
 
-## Scope
+## Acting
 
+- A question, explanation, review, diagnosis, or status request gets an answer, not an edit.
+- In a review, the user sets the scope, such as one folder, file, or function, and says when to move to the next.
+- Recommend deleting what is not needed. Being cheap to keep is no reason to keep it.
 - Do not look into sibling repositories unless the user names them or asks for a comparison across projects.
-- From any example, take the repeated pattern, not project-specific commands, contracts, or domain details.
-- When the same user path, claim, command, test, or invariant would otherwise stay wrong, fix the nearby code or text too.
-- After an interruption or correction, recover the original goal, the latest direction, finished work, and what remains. A passing milestone does not finish a larger goal: it is done only when every explicit requirement, including later corrections, has evidence.
+
+## Delivery
+
+- Say which files you will delete before deleting them, and ask first when a deletion cannot be undone.
+- Delete temporary files when the work ends.
+- Work and commit on the main branch unless the user asks for a branch.
+
+## Completion
+
+- Stop checking once the evidence is enough for what you claim.
+- When you rename something or change a config key, update every caller, test, document, instruction file, and config file that names it.
 
 ## Route
 
 Read every page whose trigger matches, and no others. Paths in these pages resolve from the wiki root.
 
 - Writing, changing, reviewing, or testing code: [[code]].
-- Documents, prompts, wikis, or writing that cites sources: [[docs]].
+- Documents, prompts, or wikis: [[docs]].
 - Saving or changing durable guidance, or deciding what belongs in this wiki: [[policy]].
 - Editing or checking this wiki: [[maintenance]] and [[docs]].
 - Installing this wiki or updating an installed checkout: [[setup]].
-- Applying this wiki to another workspace: [[setup]] and [[policy]].
-
-A task that matches no route, such as a time check or a short translation, needs no other page.
+- Applying this wiki to another project's agent guidance: [[setup]] and [[policy]].

@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
-from __future__ import annotations
-
 import re
 import sys
+from collections import namedtuple
 from pathlib import Path
-from typing import Dict, List, NamedTuple, Optional, Set, Tuple
 
-ROOT_DOCS = ("AGENTS.md", "README.md")
+ROOT_DOCS = ("README.md",)
 INDEX = "graph/index.md"
-PATH_PREFIXES = ("graph/", "evals/", "scripts/")
+PATH_PREFIXES = ("graph/", "scripts/")
 EXTERNAL_PREFIXES = ("http://", "https://", "mailto:")
 
 FENCE_RE = re.compile(r"`{3,}|~{3,}")
@@ -21,27 +19,19 @@ REF_DEF_RE = re.compile(r" {0,3}\[[^\[\]\n]+\]:")
 BULLET_RE = re.compile(r"[ \t]*[-*+][ \t]")
 
 
-class Line(NamedTuple):
-    raw: str
-    plain: str  # the line with inline code blanked out
-    codes: List[str]
-    level: int  # heading level, 0 for other lines
-    title: str
+# plain is the line with inline code blanked out; level is 0 for a line that is not a heading
+Line = namedtuple("Line", "raw plain codes level title")
+# lines holds only the lines outside fenced code blocks
+Doc = namedtuple("Doc", "name path lines")
 
 
-class Doc(NamedTuple):
-    name: str
-    path: Path
-    lines: List[Line]  # lines outside fenced code blocks
-
-
-def main(root: Path) -> int:
+def main(root):
     problems = check(root)
     print("\n".join(problems) if problems else "WIKI_CHECK_OK")
     return 1 if problems else 0
 
 
-def check(root: Path) -> List[str]:
+def check(root):
     root = root.resolve()
     graph = root / "graph"
     problems = [f"MISSING_DOC {name}" for name in (*ROOT_DOCS, INDEX) if not (root / name).is_file()]
@@ -53,20 +43,13 @@ def check(root: Path) -> List[str]:
     ]
 
     paths = [root / name for name in ROOT_DOCS]
-    paths += sorted(graph.glob("*.md")) + sorted((root / "evals").rglob("*.md"))
+    paths += sorted(graph.glob("*.md"))
     docs = [read_doc(root, path) for path in paths if path.is_file()]
     pages = {doc.path.stem: doc for doc in docs if doc.name.startswith("graph/")}
-    referenced: Set[Path] = set()
     for doc in docs:
-        doc_problems, refs = check_doc(root, doc, pages)
-        problems += doc_problems
-        if not doc.name.startswith("evals/"):
-            referenced |= refs
+        problems += check_doc(root, doc, pages)
 
-    by_name = {doc.name: doc for doc in docs}
-    agents, index = by_name.get("AGENTS.md"), by_name.get(INDEX)
-    if agents and not any(INDEX in line_tokens(line) for line in agents.lines):
-        problems.append(f"MISSING_ENTRY_REF AGENTS.md -> {INDEX}")
+    index = pages.get("index")
     if index:
         route = route_lines(index)
         if route is None:
@@ -83,17 +66,12 @@ def check(root: Path) -> List[str]:
                 for stem, doc in sorted(pages.items())
                 if stem != "index" and stem not in routed
             ]
-    problems += [
-        f"UNROUTED_EVAL {doc.name}"
-        for doc in docs
-        if doc.name.startswith("evals/") and doc.path.resolve() not in referenced
-    ]
     return list(dict.fromkeys(problems))
 
 
-def read_doc(root: Path, path: Path) -> Doc:
-    text = path.read_text(encoding="utf-8-sig")
-    lines: List[Line] = []
+def read_doc(root, path):
+    text = path.read_text(encoding="utf-8")
+    lines = []
     fence = ""
     for raw in text.splitlines():
         stripped = raw[CONTAINER_RE.match(raw).end():]
@@ -117,12 +95,11 @@ def read_doc(root: Path, path: Path) -> Doc:
     return Doc(path.relative_to(root).as_posix(), path, lines)
 
 
-def check_doc(root: Path, doc: Doc, pages: Dict[str, Doc]) -> Tuple[List[str], Set[Path]]:
-    problems: List[str] = []
-    unsupported: List[str] = []
-    broken: List[str] = []
-    links: List[str] = []
-    refs: Set[Path] = set()
+def check_doc(root, doc, pages):
+    problems = []
+    unsupported = []
+    broken = []
+    links = []
     body = [line for line in doc.lines if line.raw.strip()]
     if all(line.level for line in body):
         problems.append(f"EMPTY_DOC {doc.name}")
@@ -137,13 +114,11 @@ def check_doc(root: Path, doc: Doc, pages: Dict[str, Doc]) -> Tuple[List[str], S
             found.append("<!--")
         unsupported += [f"UNSUPPORTED_SYNTAX {doc.name} -> {item}" for item in found]
 
-        for token in line_tokens(line):
+        for token in (token for code in line.codes for token in code.split()):
             if not token.startswith(PATH_PREFIXES) or any(char in token for char in "*?["):
                 continue
             target = (root / token).resolve()
-            if root in target.parents and target.exists():
-                refs.add(target)
-            else:
+            if root not in target.parents or not target.exists():
                 broken.append(f"BROKEN_PATH {doc.name} -> {token}")
 
         for match in WIKILINK_RE.finditer(line.plain):
@@ -156,26 +131,11 @@ def check_doc(root: Path, doc: Doc, pages: Dict[str, Doc]) -> Tuple[List[str], S
             }:
                 links.append(f"BROKEN_ANCHOR {doc.name} -> {page}#{title}")
 
-    cases = case_problems(doc) if doc.name.startswith("evals/") else []
-    return problems + unsupported + broken + links + cases, refs
+    return problems + unsupported + broken + links
 
 
-def case_problems(doc: Doc) -> List[str]:
-    problems: List[str] = []
-    case: Optional[str] = None
-    linked = False
-    for line in doc.lines + [Line("", "", [], 1, "")]:
-        if 0 < line.level <= 3:
-            if case is not None and not linked:
-                problems.append(f"CASE_WITHOUT_RULE {doc.name} -> {case}")
-            case, linked = (line.title if line.level == 3 else None), False
-        elif case is not None and line.plain.startswith("Rule:"):
-            linked = linked or any(split_link(m.group(1))[1] for m in WIKILINK_RE.finditer(line.plain))
-    return problems
-
-
-def route_lines(doc: Doc) -> Optional[List[Line]]:
-    section: Optional[List[Line]] = None
+def route_lines(doc):
+    section = None
     for line in doc.lines:
         if 0 < line.level <= 2:
             if section is not None:
@@ -187,13 +147,9 @@ def route_lines(doc: Doc) -> Optional[List[Line]]:
     return section
 
 
-def split_link(inner: str) -> Tuple[str, Optional[str]]:
+def split_link(inner):
     page, sep, title = inner.split("|", 1)[0].partition("#")
     return page.strip(), (title.strip() if sep else None)
-
-
-def line_tokens(line: Line) -> List[str]:
-    return [token for code in line.codes for token in code.split()]
 
 
 if __name__ == "__main__":

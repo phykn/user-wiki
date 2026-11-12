@@ -1,34 +1,32 @@
-Confirmed preferences for documents, prompts, wikis, and writing that cites sources.
+Confirmed preferences for documents, prompts, and wikis.
 
 ## Order And Length
 
+- Delete whatever changes neither the meaning nor what the reader does. Add only what the reader needs to understand, judge, or act.
+- Put what matters most first.
 - When an explanation is confusing, fix its order before adding sentences.
-- Prefer removing content to adding it. Add only what the reader needs to understand, judge, or act, and keep necessary meaning.
 
 ## Editing
 
-- Do not repeat what a filename, heading, nearby sentence, or responsible page already says. Give each bullet a distinct role.
+- Do not repeat what a filename, heading, nearby sentence, or responsible page already says.
 - Replace conflicting wording instead of adding a correction beside it.
-- Check every explanation and example in a document against the actual code and data, and use real filenames in examples.
-
-## Sources
-
-- Keep source lists apart from interpretation.
-
-## Pages And Files
-
-- Prefer short noun filenames without redundant type prefixes or names that look like duplicates.
-- In a process that produces files, make the output file and the next input clear.
-- Keep runtime work files apart from rules.
-- Keep a project's agent instruction file in step with the current code, as a short list per module.
+- When asked to fix one part, change only that and what depends on it. Propose anything further instead of doing it.
+- Use real filenames in examples.
 
 ## READMEs
 
 - Write a README like a GitHub front page: a centered title, a one-line summary, badges, and a short feature list, then install and usage steps in the order users run them.
-- Keep it short: command blocks with a line or two each. Leave out detailed settings tables, collapsible blocks, and project layout, and leave values to the config file.
+- Keep it short: command blocks with a line or two each. Leave out project layout, detailed settings tables, collapsible blocks, and any explanation a user does not need to run the project, and leave values to the config file.
 - Do not reference local files that readers do not have.
 - End with numbered references in paper style: authors, title, venue, and year, with code or data links.
-- Divide a dataset README into layout, a class table, and how to rebuild the data. Recount every number from the actual files.
+- Divide a dataset README into layout, a class table, and how to rebuild the data.
+
+## Pages And Files
+
+- Prefer short noun filenames without redundant type prefixes or names that look like duplicates.
+- Keep planning documents, such as a PRD, spec, or task list, out of the git remote. The code, the README, and the agent instruction file are the reference.
+- Keep a `docs/` folder only as local notes, out of the git remote.
+- Keep a project's agent instruction file in step with the current code, as a short list per module.
 
 ## Document Kinds
 

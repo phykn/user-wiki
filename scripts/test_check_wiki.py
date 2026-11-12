@@ -1,14 +1,10 @@
 #!/usr/bin/env python3
-from __future__ import annotations
-
+import contextlib
 import importlib.util
-import shutil
-import subprocess
-import sys
+import io
 import tempfile
 import unittest
 from pathlib import Path
-from typing import Dict, List, Sequence
 
 SCRIPT = Path(__file__).resolve().with_name("check-wiki.py")
 SPEC = importlib.util.spec_from_file_location("check_wiki", SCRIPT)
@@ -16,21 +12,19 @@ wiki = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(wiki)
 
 FIXTURE = {
-    "AGENTS.md": "## Agents\n\nRead `graph/index.md` next.\n",
     "README.md": "# README\n\nA small wiki.\n",
     "graph/index.md": "Entry page.\n\n## Route\n\n- Maintenance: [[maintenance]].\n",
-    "graph/maintenance.md": "How the wiki is checked.\n\n## Check\n\nReview `evals/cases.md`.\n",
-    "evals/cases.md": "Review cases.\n\n### First Case\n\nRule: [[maintenance#Check]]\n",
+    "graph/maintenance.md": "How the wiki is checked.\n\n## Check\n\nRun the checker.\n",
 }
 
 
-def write(root: Path, path: str, text: str) -> None:
+def write(root, path, text):
     target = root / path
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(text, encoding="utf-8")
 
 
-def make_wiki(root: Path, files: Dict[str, str], remove: Sequence[str] = ()) -> None:
+def make_wiki(root, files, remove=()):
     for path, text in {**FIXTURE, **files}.items():
         write(root, path, text)
     for path in remove:
@@ -38,49 +32,47 @@ def make_wiki(root: Path, files: Dict[str, str], remove: Sequence[str] = ()) -> 
 
 
 class CheckTests(unittest.TestCase):
-    def assert_problems(self, files: Dict[str, str], expected: List[str], remove: Sequence[str] = ()) -> None:
+    def assert_problems(self, files, expected, remove=()):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "wiki"
             make_wiki(root, files, remove)
             write(Path(tmp), "outside.md", "Outside the wiki.\n")
             self.assertEqual(wiki.check(root), expected)
 
-    def test_valid_fixture(self) -> None:
+    def test_valid_fixture(self):
         self.assert_problems({}, [])
 
-    def test_missing_docs(self) -> None:
+    def test_missing_docs(self):
         self.assert_problems(
             {},
-            ["MISSING_DOC README.md", "MISSING_DOC graph/index.md", "BROKEN_PATH AGENTS.md -> graph/index.md"],
+            ["MISSING_DOC README.md", "MISSING_DOC graph/index.md"],
             remove=["README.md", "graph/index.md"],
         )
 
-    def test_root_holds_only_agents_and_readme(self) -> None:
+    def test_root_holds_only_readme(self):
         self.assert_problems(
             {"index.md": "Wrong entry.\n", "CLAUDE.md": "Second entry.\n"},
             ["UNEXPECTED_DOC CLAUDE.md", "UNEXPECTED_DOC index.md"],
         )
 
-    def test_nested_graph_doc(self) -> None:
+    def test_nested_graph_doc(self):
         self.assert_problems({"graph/old/page.md": "Old page.\n"}, ["NESTED_GRAPH_DOC graph/old/page.md"])
 
-    def test_empty_doc(self) -> None:
+    def test_empty_doc(self):
         for text in ("# Empty\n", "# Empty\n\n```\n[[missing]]\n```\n"):
             with self.subTest(text=text):
-                self.assert_problems({"evals/cases.md": text}, ["EMPTY_DOC evals/cases.md"])
+                self.assert_problems({"README.md": text}, ["EMPTY_DOC README.md"])
 
-    def test_hashtag_line_is_body(self) -> None:
+    def test_hashtag_line_is_body(self):
         self.assert_problems({"README.md": "#todo\n"}, [])
 
-    def test_page_must_open_with_a_sentence(self) -> None:
-        for bom in ("", "\ufeff"):
-            with self.subTest(bom=bool(bom)):
-                self.assert_problems(
-                    {"graph/maintenance.md": bom + "# Maintenance\n\nReview `evals/cases.md`.\n\n## Check\n"},
-                    ["MISSING_SUMMARY graph/maintenance.md"],
-                )
+    def test_page_must_open_with_a_sentence(self):
+        self.assert_problems(
+            {"graph/maintenance.md": "# Maintenance\n\nRun the checker.\n\n## Check\n"},
+            ["MISSING_SUMMARY graph/maintenance.md"],
+        )
 
-    def test_unsupported_syntax(self) -> None:
+    def test_unsupported_syntax(self):
         self.assert_problems(
             {"README.md": "# README\n\n[Setup](graph/maintenance.md)\n\n[g]: graph/maintenance.md\n\n<!-- note -->\n"},
             [
@@ -90,12 +82,12 @@ class CheckTests(unittest.TestCase):
             ],
         )
 
-    def test_external_links_are_allowed(self) -> None:
+    def test_external_links_are_allowed(self):
         self.assert_problems(
             {"README.md": "See [the site](https://example.com \"Site\") or [mail](mailto:a@example.com).\n"}, []
         )
 
-    def test_code_is_not_read_for_links_or_syntax(self) -> None:
+    def test_code_is_not_read_for_links_or_syntax(self):
         for text in (
             "Example: `[[missing]]`, `<!--`, and `[x](y.md)`.\n",
             "Example: ``a ` [[missing]] b``.\n",
@@ -106,7 +98,7 @@ class CheckTests(unittest.TestCase):
             with self.subTest(text=text):
                 self.assert_problems({"README.md": "Examples.\n\n" + text}, [])
 
-    def test_fences_inside_lists_and_quotes(self) -> None:
+    def test_fences_inside_lists_and_quotes(self):
         self.assert_problems(
             {
                 "README.md": "Examples.\n\n- ```text\n  [[missing]]\n  ```\n\n> ```\n> [[missing]]\n> ```\n\n"
@@ -115,12 +107,12 @@ class CheckTests(unittest.TestCase):
             ["BROKEN_LINK README.md -> gone"],
         )
 
-    def test_unmatched_backticks_do_not_hide_links(self) -> None:
+    def test_unmatched_backticks_do_not_hide_links(self):
         for text in ("Literal ` and [[missing]].\n", "```inline``` and [[missing]].\n"):
             with self.subTest(text=text):
                 self.assert_problems({"README.md": text}, ["BROKEN_LINK README.md -> missing"])
 
-    def test_broken_paths(self) -> None:
+    def test_broken_paths(self):
         self.assert_problems(
             {
                 "graph/maintenance.md": FIXTURE["graph/maintenance.md"]
@@ -134,7 +126,7 @@ class CheckTests(unittest.TestCase):
             ],
         )
 
-    def test_wikilinks_and_anchors(self) -> None:
+    def test_wikilinks_and_anchors(self):
         self.assert_problems(
             {
                 "README.md": "# README\n\n## Local\n\n"
@@ -148,24 +140,18 @@ class CheckTests(unittest.TestCase):
             ],
         )
 
-    def test_heading_closing_marks_are_ignored(self) -> None:
+    def test_heading_closing_marks_are_ignored(self):
         self.assert_problems(
-            {"graph/maintenance.md": "How the wiki is checked.\n\n## Check ##\n\nReview `evals/cases.md`.\n"}, []
+            {"graph/maintenance.md": "How the wiki is checked.\n\n## Check ##\n\nRun the checker.\n"}, []
         )
 
-    def test_agents_must_reference_the_index(self) -> None:
-        self.assert_problems(
-            {"AGENTS.md": "## Agents\n\nThe plain words graph/index.md are not a reference.\n"},
-            ["MISSING_ENTRY_REF AGENTS.md -> graph/index.md"],
-        )
-
-    def test_index_needs_a_route_section(self) -> None:
+    def test_index_needs_a_route_section(self):
         self.assert_problems(
             {"graph/index.md": "Entry page.\n\n## Routes\n\n- [[maintenance]]\n"},
             ["MISSING_ROUTE_SECTION graph/index.md"],
         )
 
-    def test_only_route_bullets_register_pages(self) -> None:
+    def test_only_route_bullets_register_pages(self):
         for route in (
             "- Maintenance: [[maintenance]].\nExtra: [[extra]].\n",
             "- Maintenance: [[maintenance]].\n- Extra: `[[extra]]`.\n",
@@ -177,61 +163,31 @@ class CheckTests(unittest.TestCase):
                     ["UNROUTED_PAGE graph/extra.md"],
                 )
 
-    def test_route_bullets_accept_all_markers_and_anchors(self) -> None:
+    def test_route_bullets_accept_all_markers_and_anchors(self):
         for marker in ("-", "*", "+"):
             with self.subTest(marker=marker):
                 self.assert_problems(
                     {"graph/index.md": f"Entry page.\n\n## Route\n\n{marker} Check: [[maintenance#Check]].\n"}, []
                 )
 
-    def test_unrouted_eval(self) -> None:
-        self.assert_problems(
-            {"evals/other.md": "Other cases.\n\n### Case\n\nRule: [[maintenance#Check]]\n"},
-            ["UNROUTED_EVAL evals/other.md"],
-        )
 
-    def test_eval_cases_need_a_rule_link(self) -> None:
-        self.assert_problems(
-            {
-                "evals/cases.md": "Review cases.\n\n### First Case\n\nRule: none.\n\n"
-                "### Page Only\n\nRule: [[maintenance]]\n\n"
-                "### Link Elsewhere\n\nRule: the check.\n\nExpected: follow [[maintenance#Check]].\n\n"
-                "### Second Case\n\n#### Detail\n\nRule: [[maintenance#Check]]\n"
-            },
-            [
-                "CASE_WITHOUT_RULE evals/cases.md -> First Case",
-                "CASE_WITHOUT_RULE evals/cases.md -> Page Only",
-                "CASE_WITHOUT_RULE evals/cases.md -> Link Elsewhere",
-            ],
-        )
-
-
-class CliTests(unittest.TestCase):
-    def run_cli(self, files: Dict[str, str], remove: Sequence[str] = ()) -> subprocess.CompletedProcess:
+class MainTests(unittest.TestCase):
+    def run_main(self, files, remove=()):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "wiki"
             make_wiki(root, files, remove)
-            (root / "scripts").mkdir()
-            shutil.copy2(SCRIPT, root / "scripts" / SCRIPT.name)
-            return subprocess.run(
-                [sys.executable, str(root / "scripts" / SCRIPT.name)],
-                cwd=tmp,
-                capture_output=True,
-                text=True,
-            )
+            out = io.StringIO()
+            with contextlib.redirect_stdout(out):
+                code = wiki.main(root)
+            return code, out.getvalue()
 
-    def test_success_from_another_directory(self) -> None:
-        result = self.run_cli({})
-        self.assertEqual((result.returncode, result.stdout, result.stderr), (0, "WIKI_CHECK_OK\n", ""))
+    def test_success(self):
+        self.assertEqual(self.run_main({}), (0, "WIKI_CHECK_OK\n"))
 
-    def test_failure_lines_are_ordered_and_unique(self) -> None:
-        result = self.run_cli({"README.md": "See [[missing]] and [[missing]].\n"}, remove=["graph/index.md"])
-        self.assertEqual(result.returncode, 1)
-        self.assertEqual(
-            result.stdout.splitlines(),
-            ["MISSING_DOC graph/index.md", "BROKEN_PATH AGENTS.md -> graph/index.md", "BROKEN_LINK README.md -> missing"],
-        )
-        self.assertEqual(result.stderr, "")
+    def test_failure_lines_are_ordered_and_unique(self):
+        code, out = self.run_main({"README.md": "See [[missing]] and [[missing]].\n"}, remove=["graph/index.md"])
+        self.assertEqual(code, 1)
+        self.assertEqual(out.splitlines(), ["MISSING_DOC graph/index.md", "BROKEN_LINK README.md -> missing"])
 
 
 if __name__ == "__main__":
