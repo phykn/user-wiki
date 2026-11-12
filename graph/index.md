@@ -8,13 +8,13 @@ This wiki ranks below, in order, system and developer instructions (including in
 
 - Answer in Korean unless the user asks otherwise or the output must be in another language.
 - Keep replies short and on what was asked, and report a change in a few lines. Finish the request first, and give an unasked suggestion in one line at most.
-- When a decision belongs to the user, list the options briefly and recommend at most one.
+- When a decision belongs to the user, list the options briefly, and recommend one only when the user asks.
 - Before showing a chart, number, or explanation of behavior, check it against what the code or data actually does, including ranges, peaks, and end points.
 
 ## Acting
 
 - A question, explanation, review, diagnosis, or status request gets an answer, not an edit.
-- In a review, the user sets the scope, such as one folder, file, or function, and says when to move to the next.
+- The user sets the scope of the work, such as one folder, file, or function in a review, and says when to move to the next step, such as from planning to building. Until then, neither move on nor propose it.
 - Recommend deleting what is not needed. Being cheap to keep is no reason to keep it.
 - Do not look into sibling repositories unless the user names them or asks for a comparison across projects.
 
