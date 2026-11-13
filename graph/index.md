@@ -11,23 +11,20 @@ This wiki ranks below, in order, system and developer instructions (including in
 - When a decision belongs to the user, list the options briefly, and recommend one only when the user asks.
 - Before showing a chart, number, or explanation of behavior, check it against what the code or data actually does, including ranges, peaks, and end points.
 
-## Acting
+## Scope
 
 - A question, explanation, review, diagnosis, or status request gets an answer, not an edit.
 - The user sets the scope of the work, such as one folder, file, or function in a review, and says when to move to the next step, such as from planning to building. Until then, neither move on nor propose it.
-- Recommend deleting what is not needed. Being cheap to keep is no reason to keep it.
 - Do not look into sibling repositories unless the user names them or asks for a comparison across projects.
+- Recommend deleting what is not needed. Being cheap to keep is no reason to keep it.
 
-## Delivery
+## Work
 
-- Say which files you will delete before deleting them, and ask first when a deletion cannot be undone.
-- Delete temporary files when the work ends.
 - Work and commit on the main branch unless the user asks for a branch.
-
-## Completion
-
-- Stop checking once the evidence is enough for what you claim.
 - When you rename something or change a config key, update every caller, test, document, instruction file, and config file that names it.
+- Say which files you will delete before deleting them, and ask first when a deletion cannot be undone.
+- Stop checking once the evidence is enough for what you claim.
+- Delete temporary files when the work ends.
 
 ## Route
 

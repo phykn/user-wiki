@@ -1,5 +1,24 @@
 Confirmed preferences for writing, refactoring, reviewing, and testing code.
 
+## Structure
+
+- Keep the main path linear and visible.
+- Divide folders and files along clear boundaries, so each one's role is evident from where it sits. Move code the main program does not use, such as one-off tools, into a separate scripts folder.
+- Keep behavior, including one-use behavior, with the data, class, or lifecycle that owns it. Avoid routing unrelated concerns through shared config, metadata, or distant utilities.
+- Keep functions and methods in the order a reader encounters them during execution, with similar ones next to each other.
+- Group many functions that share state into a class, and split a long method into one method per step.
+- Keep every default in one config file. Overlay user settings on it and validate the result strictly, once.
+- Return what callers need in one result, such as `{"logits", "probs", "classes"}`, so no caller recomputes it.
+- Make broad coordinated changes when the structural benefit justifies them.
+
+## Names, Types, And Comments
+
+- Start function names with a verb that says what the function does. Match paired names, such as `write_split_csv` and `read_split_csv`, and give a family one prefix, such as `apply_gamma` and `apply_blur`.
+- Keep local variable names short and conventional, such as `cfg`, `vol`, `idx`, and `img`. Keep descriptive names for public APIs and domain concepts.
+- Use singular and plural names consistently, such as `prob` for one value and `probs` for a collection.
+- Write no type hints or type aliases.
+- Comment rarely: only a why the code cannot show, in one line. Write no file-top docstrings or comments that restate the code, and leave no commented-out code or placeholder TODOs. When refactoring, also delete existing comments and docstrings that restate the code; if code reads a docstring, such as `__doc__` for CLI help, move its text to that use.
+
 ## Deletion
 
 - Write only what the task needs.
@@ -12,25 +31,6 @@ Confirmed preferences for writing, refactoring, reviewing, and testing code.
 - When the last use of a dependency goes, remove it from the dependency list too.
 - However much is cut, keep validation of outside input, security checks, and handling that prevents data loss.
 
-## Structure
-
-- Divide folders and files along clear boundaries, so each one's role is evident from where it sits. Move code the main program does not use, such as one-off tools, into a separate scripts folder.
-- Make broad coordinated changes when the structural benefit justifies them.
-- Keep behavior, including one-use behavior, with the data, class, or lifecycle that owns it. Avoid routing unrelated concerns through shared config, metadata, or distant utilities.
-- Keep the main path linear and visible.
-- Keep functions and methods in the order a reader encounters them during execution, with similar ones next to each other.
-- Group many functions that share state into a class, and split a long method into one method per step.
-- Keep every default in one config file. Overlay user settings on it and validate the result strictly, once.
-- Return what callers need in one result, such as `{"logits", "probs", "classes"}`, so no caller recomputes it.
-
-## Names, Types, And Comments
-
-- Write no type hints or type aliases.
-- Comment rarely: only a why the code cannot show, in one line. Write no file-top docstrings or comments that restate the code, and leave no commented-out code or placeholder TODOs. When refactoring, also delete existing comments and docstrings that restate the code; if code reads a docstring, such as `__doc__` for CLI help, move its text to that use.
-- Start function names with a verb that says what the function does. Match paired names, such as `write_split_csv` and `read_split_csv`, and give a family one prefix, such as `apply_gamma` and `apply_blur`.
-- Keep local variable names short and conventional, such as `cfg`, `vol`, `idx`, and `img`. Keep descriptive names for public APIs and domain concepts.
-- Use singular and plural names consistently, such as `prob` for one value and `probs` for a collection.
-
 ## Fixes And Error Handling
 
 - When generated output is wrong, fix the source data, prompt, or contract first, before adding a layer that corrects the output.
@@ -42,8 +42,6 @@ Confirmed preferences for writing, refactoring, reviewing, and testing code.
 - When refactoring is requested, also fix potential bugs supported by concrete code paths or evidence in the affected scope.
 - Build as if from scratch: delete legacy compatibility code, such as old formats, format versions, shims, and stale aliases, together with its tests.
 - Compare outputs numerically before and after. If float32 results differ, recompare in float64 to tell rounding from a real change.
-
-## Review Walkthrough
 
 When the user asks to clean up code file by file:
 

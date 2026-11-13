@@ -1,19 +1,4 @@
-# Local Obsidian vault state
-.obsidian/
-
-# OS and editor noise
 .DS_Store
-Thumbs.db
-desktop.ini
-*.tmp
-*.bak
-
-# Python cache
-__pycache__/
-*.py[cod]
-
-# Local virtual environment
+.obsidian/
 .venv/
-
-# Local tool state
-.serena/
+__pycache__/

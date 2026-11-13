@@ -29,7 +29,7 @@ To update it or apply it to another project, ask the same way. The agent follows
 ## Check
 
 ```sh
-python3 scripts/check-wiki.py
+python3 scripts/check.py
 ```
 
 Prints `WIKI_CHECK_OK`, or one problem per line.
